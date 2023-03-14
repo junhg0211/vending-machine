@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.NumberFormat;
 import java.util.LinkedList;
 
@@ -107,6 +109,13 @@ public class VendingMachine {
         Inventory inventory;
         String INVENTORY_PATH = "res/inventory.json";
 
+        // res 폴더가 없으면 만든다.
+        try {
+            Files.createDirectories(Path.of("res"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
             FileReader reader = new FileReader(INVENTORY_PATH);
             Gson gson = new Gson();
@@ -120,7 +129,6 @@ public class VendingMachine {
                 gson.toJson(inventory, writer);
                 writer.close();
             } catch (IOException ex) {
-                // 작성 중에 오류가 발생하면 오류를 띄우고 프로그램을 종료한다.
                 throw new RuntimeException(ex);
             }
         }
