@@ -76,6 +76,7 @@ public class VendingMachine {
 
         Inventory inventory = getInventory();
 
+        // 메뉴 목록 만들기
         EmptyBorder nameLabelBorder = new EmptyBorder(0, 8, 0, 0);
         for (int i = 0; i < 5; i++) {
             JButton button = new JButton("구매");
@@ -84,15 +85,18 @@ public class VendingMachine {
             Product juice = inventory.getJuices().get(i);
             Kind kind = juice.getKind();
 
+            // 메뉴 이름
             String name = kind.getName();
             JLabel nameLabel = new JLabel(name);
             nameLabel.setBorder(nameLabelBorder);
             menuPanel.add(nameLabel);
 
+            // 메뉴 남은 수량
             String left = Integer.toString(juice.getAmount());
             JLabel leftLabel = new JLabel(left);
             menuPanel.add(leftLabel);
 
+            // 메뉴 가격
             String price = numberFormat.format(kind.getPrice());
             JLabel priceLabel = new JLabel(price, SwingConstants.RIGHT);
             menuPanel.add(priceLabel);
@@ -172,7 +176,6 @@ public class VendingMachine {
         consolePanel.add(customerPanel, BorderLayout.PAGE_START);
 
         // 메타 패널
-
         JPanel metaPanel = new JPanel();
         metaPanel.setLayout(new BorderLayout());
         { // 관리자 콘솔 버튼
@@ -191,6 +194,9 @@ public class VendingMachine {
     }
 }
 
+/**
+ * 하나의 상품 대한 인벤토리 슬롯
+ */
 class Inventory {
     private LinkedList<Product> juices;
 
@@ -255,6 +261,9 @@ class Inventory {
     }
 }
 
+/**
+ * 상품에 대한 정보
+ */
 class Product {
     private Kind kind;
     private int amount;
@@ -276,6 +285,9 @@ class Product {
     }
 }
 
+/**
+ * 상품 종류
+ */
 class Kind {
     private String name;
     private int price;
