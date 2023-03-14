@@ -126,6 +126,7 @@ public class VendingMachine {
         }
         { // 프로그램 종료 버튼
             JButton quitButton = new JButton("종료");
+            quitButton.addActionListener(e -> System.exit(0));
             metaPanel.add(quitButton, BorderLayout.PAGE_END);
         }
 
