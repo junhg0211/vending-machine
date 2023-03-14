@@ -2,13 +2,21 @@ package org.shtelo.sch.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.LinkedList;
 
 public class VendingMachine {
+
     private final NumberFormat numberFormat;
 
     public VendingMachine() {
@@ -62,24 +70,62 @@ public class VendingMachine {
      */
     private void makeMenu(JPanel panel) {
         JPanel menuPanel = new JPanel();
-        menuPanel.setLayout(new GridLayout(5, 3));
+        menuPanel.setLayout(new GridLayout(5, 4));
+
+        Inventory inventory = getInventory();
 
         EmptyBorder nameLabelBorder = new EmptyBorder(0, 8, 0, 0);
         for (int i = 0; i < 5; i++) {
             JButton button = new JButton("구매");
             menuPanel.add(button);
 
-            String name = String.format("%d번 음료", i+1);
+            Product juice = inventory.getJuices().get(i);
+            Kind kind = juice.getKind();
+
+            String name = kind.getName();
             JLabel nameLabel = new JLabel(name);
             nameLabel.setBorder(nameLabelBorder);
             menuPanel.add(nameLabel);
 
-            String price = numberFormat.format(1000);
+            String left = Integer.toString(juice.getAmount());
+            JLabel leftLabel = new JLabel(left);
+            menuPanel.add(leftLabel);
+
+            String price = numberFormat.format(kind.getPrice());
             JLabel priceLabel = new JLabel(price, SwingConstants.RIGHT);
             menuPanel.add(priceLabel);
         }
 
         panel.add(menuPanel, BorderLayout.CENTER);
+    }
+
+    /**
+     * 파일에 저장되어있는 인벤토리를 볼러옵니다.
+     * 만약 파일이 존재하지 않는다면 코드에 설정된 기본값으로 파일을 생성하고 불러옵니다.
+     */
+    private Inventory getInventory() {
+        Inventory inventory;
+        String INVENTORY_PATH = "res/inventory.json";
+
+        try {
+            FileReader reader = new FileReader(INVENTORY_PATH);
+            Gson gson = new Gson();
+            inventory = gson.fromJson(reader, Inventory.class);
+        } catch (FileNotFoundException e) {
+            // 파일이 없으면 기본값으로 만든다
+            inventory = Inventory.getDefault();
+            try {
+                FileWriter writer = new FileWriter(INVENTORY_PATH);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(inventory, writer);
+                writer.close();
+            } catch (IOException ex) {
+                // 작성 중에 오류가 발생하면 오류를 띄우고 프로그램을 종료한다.
+                throw new RuntimeException(ex);
+            }
+        }
+
+        return inventory;
     }
 
     /**
@@ -134,5 +180,111 @@ public class VendingMachine {
         consolePanel.add(metaPanel, BorderLayout.PAGE_END);
 
         panel.add(consolePanel, BorderLayout.EAST);
+    }
+}
+
+class Inventory {
+    private LinkedList<Product> juices;
+
+    public static Inventory getDefault() {
+        Inventory inventory = new Inventory();
+
+        LinkedList<Product> juices = new LinkedList<>();
+
+        Product product;
+        Kind kind;
+
+        product = new Product();
+        product.setAmount(5);
+        kind = new Kind();
+        kind.setName("물");
+        kind.setPrice(450);
+        product.setKind(kind);
+        juices.add(product);
+
+        product = new Product();
+        product.setAmount(5);
+        kind = new Kind();
+        kind.setName("커피");
+        kind.setPrice(500);
+        product.setKind(kind);
+        juices.add(product);
+
+        product = new Product();
+        product.setAmount(5);
+        kind = new Kind();
+        kind.setName("이온음료");
+        kind.setPrice(550);
+        product.setKind(kind);
+        juices.add(product);
+
+        product = new Product();
+        product.setAmount(5);
+        kind = new Kind();
+        kind.setName("고급커피");
+        kind.setPrice(700);
+        product.setKind(kind);
+        juices.add(product);
+
+        product = new Product();
+        product.setAmount(5);
+        kind = new Kind();
+        kind.setName("탄산음료");
+        kind.setPrice(750);
+        product.setKind(kind);
+        juices.add(product);
+
+        inventory.setJuices(juices);
+        return inventory;
+    }
+
+    public java.util.List<Product> getJuices() {
+        return this.juices;
+    }
+
+    public void setJuices(LinkedList<Product> juices) {
+        this.juices = juices;
+    }
+}
+
+class Product {
+    private Kind kind;
+    private int amount;
+
+    public Kind getKind() {
+        return this.kind;
+    }
+
+    public void setKind(Kind kind) {
+        this.kind = kind;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getAmount() {
+        return this.amount;
+    }
+}
+
+class Kind {
+    private String name;
+    private int price;
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return this.price;
     }
 }
