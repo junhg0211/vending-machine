@@ -2,6 +2,7 @@ package org.shtelo.sch.vending_project.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import org.shtelo.sch.vending_project.util.Josa;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Wallet;
@@ -19,6 +20,9 @@ public class VendingMachine {
     private final Wallet wallet;
     private int cash;
     private JLabel cashAmountLabel;
+    private Inventory inventory;
+    private final JLabel[] leftLabels = new JLabel[5];
+    private final JButton[] buyButtons = new JButton[5];
 
     public VendingMachine() {
         numberFormat = NumberFormat.getInstance();
@@ -82,13 +86,16 @@ public class VendingMachine {
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new GridLayout(5, 4));
 
-        Inventory inventory = Inventory.getInventory();
+        inventory = Inventory.getInventory();
 
         // 메뉴 목록 만들기
         EmptyBorder nameLabelBorder = new EmptyBorder(0, 8, 0, 0);
         for (int i = 0; i < 5; i++) {
-            JButton button = new JButton("구매");
-            menuPanel.add(button);
+            // 구매 버튼
+            buyButtons[i] = new JButton("구매");
+            int finalI = i;
+            buyButtons[i].addActionListener(e -> processBuy(finalI));
+            menuPanel.add(buyButtons[i]);
 
             Product juice = inventory.getJuices().get(i);
             Kind kind = juice.getKind();
@@ -101,8 +108,8 @@ public class VendingMachine {
 
             // 메뉴 남은 수량
             String left = Integer.toString(juice.getAmount());
-            JLabel leftLabel = new JLabel(left);
-            menuPanel.add(leftLabel);
+            leftLabels[i] = new JLabel(left);
+            menuPanel.add(leftLabels[i]);
 
             // 메뉴 가격
             String price = numberFormat.format(kind.getPrice());
@@ -112,6 +119,43 @@ public class VendingMachine {
 
         metaPanel.add(menuPanel, BorderLayout.PAGE_START);
         panel.add(metaPanel, BorderLayout.WEST);
+    }
+
+    /**
+     * 음료 구매를 처리합니다.
+     * @param juiceIndex 구매할 음료수의 인덱스 번호
+     */
+    private void processBuy(int juiceIndex) {
+        Product product = inventory.getJuices().get(juiceIndex);
+        Kind kind = product.getKind();
+        String name = kind.getName();
+        int price = kind.getPrice();
+        int amount = product.getAmount();
+
+        if (amount <= 0) {
+            JOptionPane.showMessageDialog(frame, "해당 상품은 매진되었습니다.", "오류", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (cash < price) {
+            JOptionPane.showMessageDialog(frame, "잔액이 부족합니다.", "오류", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 거스름돈 라벨 업데이트
+        updateCash(cash - price);
+
+        // 매대에 남은 상품 개수 업데이트
+        product.setAmount(amount - 1);
+        leftLabels[juiceIndex].setText(String.format("%d", product.getAmount()));
+        if (product.getAmount() == 0) {
+            buyButtons[juiceIndex].setEnabled(false);
+        }
+
+        String message = String.format(
+                "%s%c 1개 구매했습니다.%n가격: %s원",
+                name, Josa.eulReul(name), numberFormat.format(price));
+        JOptionPane.showMessageDialog(frame, message, "정보", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

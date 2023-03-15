@@ -1,4 +1,4 @@
-package org.shtelo.sch.vending_project;
+package org.shtelo.sch.vending_project.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

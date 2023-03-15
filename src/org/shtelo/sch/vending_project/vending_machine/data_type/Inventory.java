@@ -2,7 +2,7 @@ package org.shtelo.sch.vending_project.vending_machine.data_type;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.shtelo.sch.vending_project.Util;
+import org.shtelo.sch.vending_project.util.Util;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
