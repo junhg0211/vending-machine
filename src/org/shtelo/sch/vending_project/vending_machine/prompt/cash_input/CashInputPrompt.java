@@ -15,7 +15,7 @@ public class CashInputPrompt {
     private ArrayList<JSpinner> spinners;
     private JFrame frame;
 
-    private final int[] cashKinds = new int[]{10, 50, 100, 500, 1000, 5000};
+    private final int[] cashKinds = new int[]{10, 50, 100, 500, 1000};
 
     public CashInputPrompt(VendingMachine machine) {
         this.machine = machine;
@@ -83,7 +83,7 @@ public class CashInputPrompt {
      */
     private void insertCash() {
         int amount = 0;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             amount += cashKinds[i] * (int) spinners.get(i).getValue();
         }
 
@@ -93,8 +93,7 @@ public class CashInputPrompt {
             (int) spinners.get(1).getValue(),
             (int) spinners.get(2).getValue(),
             (int) spinners.get(3).getValue(),
-            (int) spinners.get(4).getValue(),
-            (int) spinners.get(5).getValue()
+            (int) spinners.get(4).getValue()
         );
         closeWindow();
     }
@@ -112,11 +111,11 @@ public class CashInputPrompt {
      */
     private void makeCashSelect(JPanel panel) {
         JPanel cashSelectPanel = new JPanel();
-        cashSelectPanel.setLayout(new GridLayout(6, 2));
+        cashSelectPanel.setLayout(new GridLayout(5, 2));
 
         // 투입단위별 투입량을 조절하는 스피너를 제시
         spinners = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             spinners.add(makeCashSelectSpinner(cashSelectPanel, cashKinds[i]));
         }
 

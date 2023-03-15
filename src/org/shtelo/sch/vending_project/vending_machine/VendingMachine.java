@@ -167,7 +167,6 @@ public class VendingMachine {
 
         String text = String.format(
                 "거스름을 처리했습니다.%n" +
-                "5,000원: %d장%n" +
                 "1,000원: %d장%n" +
                 "500원: %d개%n" +
                 "100원: %d개%n" +
@@ -175,12 +174,12 @@ public class VendingMachine {
                 "10원: %d개%n%n" +
                 "거스르지 못한 돈: %s원%n" +
                 "거스른 돈: %s원",
-                result[5], result[4], result[3], result[2], result[1], result[0],
-                numberFormat.format(result[6]), numberFormat.format(cash - result[6]));
+                result[4], result[3], result[2], result[1], result[0],
+                numberFormat.format(result[5]), numberFormat.format(cash - result[5]));
 
         JOptionPane.showMessageDialog(frame, text);
 
-        updateCash(result[6]);
+        updateCash(result[5]);
     }
 
     public JFrame getFrame() {

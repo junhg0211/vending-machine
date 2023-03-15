@@ -15,7 +15,6 @@ public class Wallet {
     private int hundreds;
     private int fiveHundreds;
     private int thousands;
-    private int fiveThousands;
 
     Wallet() {
         this.tens = 5;
@@ -23,7 +22,6 @@ public class Wallet {
         this.hundreds = 5;
         this.fiveHundreds = 5;
         this.thousands = 5;
-        this.fiveThousands = 5;
     }
 
     /**
@@ -63,36 +61,30 @@ public class Wallet {
         return new Wallet();
     }
 
-    public void insertCash(int tens, int fifties, int hundreds, int fiveHundreds, int thousands, int fiveThousands) {
+    public void insertCash(int tens, int fifties, int hundreds, int fiveHundreds, int thousands) {
         this.tens += tens;
         this.fifties += fifties;
         this.hundreds += hundreds;
         this.fiveHundreds += fiveHundreds;
         this.thousands += thousands;
-        this.fiveThousands += fiveThousands;
 
         System.out.println(this);
     }
 
     public String toString() {
         return String.format(
-            "<Wallet %d, %d, %d, %d, %d, %d>",
-            tens, fifties, hundreds, fiveHundreds, thousands, fiveThousands);
+            "<Wallet %d, %d, %d, %d, %d>",
+            tens, fifties, hundreds, fiveHundreds, thousands);
     }
 
     /**
      * `amount` 만큼의 잔돈을 `wallet` 에서 거슬러줍니다.
-     * 출력되는 배열에는 10, 50, 100, ..., 5000의 순서로 6가지 화폐권의 개수가 표시됩니다.
-     * 만약 모종의 이유로 잔돈을 거를 수 없다면 출력되는 배열의 6번 인덱스에 처리하지 못한 잔돈의 액수를 기록합니다.
+     * 출력되는 배열에는 10, 50, 100, ..., 1000의 순서로 5가지 화폐권의 개수가 표시됩니다.
+     * 만약 모종의 이유로 잔돈을 거를 수 없다면 출력되는 배열의 5번 인덱스에 처리하지 못한 잔돈의 액수를 기록합니다.
      */
     public int[] change(int amount) {
-        int[] changes = new int[7];
+        int[] changes = new int[6];
 
-        while (amount >= 5000 && fiveThousands > 0) {
-            changes[5]++;
-            fiveThousands--;
-            amount -= 5000;
-        }
         while (amount >= 1000 && thousands > 0) {
             changes[4]++;
             thousands--;
@@ -118,7 +110,7 @@ public class Wallet {
             tens--;
             amount -= 10;
         }
-        changes[6] = amount;
+        changes[5] = amount;
 
         System.out.println(this);
 
