@@ -122,6 +122,7 @@ public class VendingMachine {
         }
         { // 거스름돈 버튼
             JButton changeButton = new JButton("거스름");
+            changeButton.addActionListener(e -> changeCash());
             customerPanel.add(changeButton, BorderLayout.CENTER);
         }
         { // 투입금 표시 창
@@ -157,6 +158,24 @@ public class VendingMachine {
         panel.add(consolePanel, BorderLayout.EAST);
     }
 
+    private void changeCash() {
+        int[] result = wallet.change(cash);
+
+        String text = String.format(
+                "거스름을 처리했습니다.%n" +
+                "5,000원: %d장%n" +
+                "1,000원: %d장%n" +
+                "500원: %d개%n" +
+                "100원: %d개%n" +
+                "50원: %d개%n" +
+                "10원: %d개%n" +
+                "거스르지 못한 돈: %s원",
+                result[5], result[4], result[3], result[2], result[1], result[0], numberFormat.format(result[6]));
+        JOptionPane.showMessageDialog(frame, text);
+
+        updateCash(result[6]);
+    }
+
     public JFrame getFrame() {
         return frame;
     }
@@ -165,14 +184,14 @@ public class VendingMachine {
      * `amount` 만큼의 현금을 자판기에 투입한 것으로 처리합니다.
      */
     public void insertCash(int amount) {
-        cash += amount;
-        updateCash();
+        updateCash(cash + amount);
     }
 
     /**
      * 투입한 금액의 표시 액수를 cash 변수에 따라서 변경합니다.
      */
-    private void updateCash() {
+    private void updateCash(int amount) {
+        cash = amount;
         String text = numberFormat.format(cash);
         cashAmountLabel.setText(text);
     }
