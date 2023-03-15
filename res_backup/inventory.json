@@ -5,35 +5,35 @@
         "name": "물",
         "price": 450
       },
-      "amount": 5
+      "amount": 3
     },
     {
       "kind": {
         "name": "커피",
         "price": 500
       },
-      "amount": 5
+      "amount": 3
     },
     {
       "kind": {
         "name": "이온음료",
         "price": 550
       },
-      "amount": 5
+      "amount": 3
     },
     {
       "kind": {
         "name": "고급커피",
         "price": 700
       },
-      "amount": 5
+      "amount": 3
     },
     {
       "kind": {
         "name": "탄산음료",
         "price": 750
       },
-      "amount": 5
+      "amount": 3
     }
   ]
 }

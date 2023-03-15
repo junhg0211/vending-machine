@@ -58,7 +58,7 @@ public class Inventory {
         Kind kind;
 
         product = new Product();
-        product.setAmount(5);
+        product.setAmount(3);
         kind = new Kind();
         kind.setName("물");
         kind.setPrice(450);
@@ -66,7 +66,7 @@ public class Inventory {
         juices.add(product);
 
         product = new Product();
-        product.setAmount(5);
+        product.setAmount(3);
         kind = new Kind();
         kind.setName("커피");
         kind.setPrice(500);
@@ -74,7 +74,7 @@ public class Inventory {
         juices.add(product);
 
         product = new Product();
-        product.setAmount(5);
+        product.setAmount(3);
         kind = new Kind();
         kind.setName("이온음료");
         kind.setPrice(550);
@@ -82,7 +82,7 @@ public class Inventory {
         juices.add(product);
 
         product = new Product();
-        product.setAmount(5);
+        product.setAmount(3);
         kind = new Kind();
         kind.setName("고급커피");
         kind.setPrice(700);
@@ -90,7 +90,7 @@ public class Inventory {
         juices.add(product);
 
         product = new Product();
-        product.setAmount(5);
+        product.setAmount(3);
         kind = new Kind();
         kind.setName("탄산음료");
         kind.setPrice(750);
