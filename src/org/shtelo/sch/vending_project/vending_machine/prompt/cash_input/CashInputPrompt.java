@@ -1,4 +1,4 @@
-package org.shtelo.sch.vending_project.vending_machine.cash_input_prompt;
+package org.shtelo.sch.vending_project.vending_machine.prompt.cash_input;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;

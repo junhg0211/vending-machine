@@ -2,7 +2,11 @@ package org.shtelo.sch.vending_project.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import org.shtelo.sch.vending_project.vending_machine.cash_input_prompt.CashInputPrompt;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Wallet;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Kind;
+import org.shtelo.sch.vending_project.vending_machine.prompt.cash_input.CashInputPrompt;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

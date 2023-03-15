@@ -1,4 +1,4 @@
-package org.shtelo.sch.vending_project.vending_machine;
+package org.shtelo.sch.vending_project.vending_machine.data_type;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,7 +20,7 @@ public class Inventory {
      * 파일에 저장되어있는 인벤토리를 불러옵니다.
      * 만약 파일이 존재하지 않는다면 코드에 설정된 기본값으로 파일을 생성하고 불러옵니다.
      */
-    static Inventory getInventory() {
+    public static Inventory getInventory() {
         Inventory inventory;
         String INVENTORY_PATH = "res/inventory.json";
 

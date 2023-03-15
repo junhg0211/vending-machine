@@ -1,9 +1,9 @@
-package org.shtelo.sch.vending_project.vending_machine;
+package org.shtelo.sch.vending_project.vending_machine.data_type;
 
 /**
  * 상품 종류
  */
-class Kind {
+public class Kind {
     private String name;
     private int price;
 
