@@ -1,5 +1,13 @@
 package org.shtelo.sch.vending_project.vending_machine;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.shtelo.sch.vending_project.Util;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -7,6 +15,39 @@ import java.util.LinkedList;
  */
 public class Inventory {
     private LinkedList<Product> juices;
+
+    /**
+     * 파일에 저장되어있는 인벤토리를 불러옵니다.
+     * 만약 파일이 존재하지 않는다면 코드에 설정된 기본값으로 파일을 생성하고 불러옵니다.
+     */
+    static Inventory getInventory() {
+        Inventory inventory;
+        String INVENTORY_PATH = "res/inventory.json";
+
+        Util.assumeResFolder();
+
+        try {
+            FileReader reader = new FileReader(INVENTORY_PATH);
+            Gson gson = new Gson();
+            inventory = gson.fromJson(reader, Inventory.class);
+            reader.close();
+        } catch (FileNotFoundException e) {
+            // 파일이 없으면 기본값으로 만든다
+            inventory = Inventory.getDefault();
+            try {
+                FileWriter writer = new FileWriter(INVENTORY_PATH);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(inventory, writer);
+                writer.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return inventory;
+    }
 
     public static Inventory getDefault() {
         Inventory inventory = new Inventory();

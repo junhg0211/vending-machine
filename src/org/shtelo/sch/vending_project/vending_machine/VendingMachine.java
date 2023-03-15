@@ -2,26 +2,21 @@ package org.shtelo.sch.vending_project.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.text.NumberFormat;
 
 public class VendingMachine {
 
     private final NumberFormat numberFormat;
+    private final Wallet wallet;
 
     public VendingMachine() {
         numberFormat = NumberFormat.getInstance();
+
+        wallet = Wallet.getWallet();
 
         buildWindow(); // 화면 띄우기
     }
@@ -73,7 +68,7 @@ public class VendingMachine {
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new GridLayout(5, 4));
 
-        Inventory inventory = getInventory();
+        Inventory inventory = Inventory.getInventory();
 
         // 메뉴 목록 만들기
         EmptyBorder nameLabelBorder = new EmptyBorder(0, 8, 0, 0);
@@ -102,41 +97,6 @@ public class VendingMachine {
         }
 
         panel.add(menuPanel, BorderLayout.CENTER);
-    }
-
-    /**
-     * 파일에 저장되어있는 인벤토리를 볼러옵니다.
-     * 만약 파일이 존재하지 않는다면 코드에 설정된 기본값으로 파일을 생성하고 불러옵니다.
-     */
-    private Inventory getInventory() {
-        Inventory inventory;
-        String INVENTORY_PATH = "res/inventory.json";
-
-        // res 폴더가 없으면 만든다.
-        try {
-            Files.createDirectories(Path.of("res"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            FileReader reader = new FileReader(INVENTORY_PATH);
-            Gson gson = new Gson();
-            inventory = gson.fromJson(reader, Inventory.class);
-        } catch (FileNotFoundException e) {
-            // 파일이 없으면 기본값으로 만든다
-            inventory = Inventory.getDefault();
-            try {
-                FileWriter writer = new FileWriter(INVENTORY_PATH);
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                gson.toJson(inventory, writer);
-                writer.close();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-
-        return inventory;
     }
 
     /**
