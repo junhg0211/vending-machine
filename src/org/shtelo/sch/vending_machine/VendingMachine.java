@@ -41,7 +41,7 @@ public class VendingMachine {
         frame.setTitle("20223519 - 자판기");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(600, 400));
-        frame.setMinimumSize(new Dimension(400, 300));
+        frame.setMinimumSize(new Dimension(500, 300));
         frame.setLocationRelativeTo(null);
 
         // 페이지 프레임 여백
