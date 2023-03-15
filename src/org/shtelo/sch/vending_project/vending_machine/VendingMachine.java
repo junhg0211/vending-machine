@@ -4,9 +4,9 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import org.shtelo.sch.vending_project.util.Josa;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Kind;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Wallet;
-import org.shtelo.sch.vending_project.vending_machine.data_type.Kind;
 import org.shtelo.sch.vending_project.vending_machine.prompt.cash_input.CashInputPrompt;
 
 import javax.swing.*;
@@ -142,20 +142,26 @@ public class VendingMachine {
             return;
         }
 
-        // 거스름돈 라벨 업데이트
         updateCash(cash - price);
-
-        // 매대에 남은 상품 개수 업데이트
-        product.setAmount(amount - 1);
-        leftLabels[juiceIndex].setText(String.format("%d", product.getAmount()));
-        if (product.getAmount() == 0) {
-            buyButtons[juiceIndex].setEnabled(false);
-        }
+        updateLeftProductAmount(juiceIndex, amount-1);
 
         String message = String.format(
                 "%s%c 1개 구매했습니다.%n가격: %s원",
                 name, Josa.eulReul(name), numberFormat.format(price));
         JOptionPane.showMessageDialog(frame, message, "정보", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * 남은 상품 개수를 업데이트하도록 처리합니다.
+     * <code>inventory</code>와 매대에 있는 남은 수량을 업데이트합니다.
+     * @param index 업데이트할 상품의 인덱스
+     * @param amount 업데이트된 상품의 남은 수량
+     */
+    private void updateLeftProductAmount(int index, int amount) {
+        Product product = inventory.getJuices().get(index);
+        product.setAmount(amount);
+        leftLabels[index].setText(String.format("%d", amount));
+        buyButtons[index].setEnabled(amount > 0);
     }
 
     /**
