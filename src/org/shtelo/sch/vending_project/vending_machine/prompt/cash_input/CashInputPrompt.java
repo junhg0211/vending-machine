@@ -10,6 +10,10 @@ import java.awt.event.WindowEvent;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+/**
+ * 현급 투입을 위한 프롬프트 클래스입니다.
+ * 얼마만큼의 현금을 투입할 것인지 물어보고 현급 투입 계산을 처리합니다.
+ */
 public class CashInputPrompt {
     private final VendingMachine machine;
     private ArrayList<JSpinner> spinners;
@@ -23,6 +27,9 @@ public class CashInputPrompt {
         buildWindow();
     }
 
+    /**
+     * 현금 투입 프롬프트의 화면을 만들고 띄웁니다.
+     */
     private void buildWindow() {
         // 자판기 화면 프레임 제작
         frame = new JFrame();
@@ -45,6 +52,7 @@ public class CashInputPrompt {
 
     /**
      * 화면 가장 위에 타이틀을 표시합니다.
+     * @param panel 타이틀을 표시할 <code>JPanel</code> 객체
      */
     private void makeTitle(JPanel panel) {
         JLabel titleLabel = new JLabel("현금 투입");
@@ -53,7 +61,8 @@ public class CashInputPrompt {
     }
 
     /**
-     * 확인, 취소 등의 메타 투입적 작업을 수행할 수 있는 부분
+     * 확인, 취소 등의 메타 투입적 작업을 수행할 수 있는 부분을 추가합니다.
+     * @param panel 메타 작업을 수행하는 부분을 추가할 <code>JPanel</code> 객체
      */
     private void makeConsole(JPanel panel) {
         JPanel consolePanel = new JPanel();
@@ -100,7 +109,7 @@ public class CashInputPrompt {
 
     /**
      * 아무 작업을 수행하지 않고 창을 종료합니다.
-     * 취소 버튼이 눌렸을 때에 실행됨.
+     * 취소 버튼이 눌렸을 때에 실행됩니다.
      */
     private void closeWindow() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -108,6 +117,7 @@ public class CashInputPrompt {
 
     /**
      * 어떤 화폐를 얼마만큼 투입할지 결정할 수 있는 스피너 부분
+     * @param panel 스피너 부분을 추가할 <code>JPanel</code> 객체
      */
     private void makeCashSelect(JPanel panel) {
         // GridLayout 세로 늘어남 방지

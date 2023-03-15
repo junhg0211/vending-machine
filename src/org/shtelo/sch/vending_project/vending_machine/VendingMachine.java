@@ -62,6 +62,7 @@ public class VendingMachine {
 
     /**
      * 자판기 상단에 타이틀을 추가합니다.
+     * @param panel 타이틀을 추가할 <code>JPanel</code> 객체
      */
     private void makeTitle(JPanel panel) {
         JLabel titleLabel = new JLabel("20223519 Java 자판기");
@@ -71,6 +72,7 @@ public class VendingMachine {
 
     /**
      * 자판기의 메뉴 선택 부분을 추가합니다.
+     * @param panel 메뉴 선택 부분을 추가할 <code>JPanel</code> 객체
      */
     private void makeMenu(JPanel panel) {
         // menuPanel의 내용이 화면에 꽉 차게 표시되지 않도록 메타패널을 만들어 menuPanel을 배치한다.
@@ -167,6 +169,9 @@ public class VendingMachine {
         panel.add(consolePanel, BorderLayout.EAST);
     }
 
+    /**
+     * 기계에 있는 거스름을 사용자에게 돌려주는 작업을 수행합니다.
+     */
     private void changeCash() {
         int[] result = wallet.change(cash);
 
@@ -192,14 +197,16 @@ public class VendingMachine {
     }
 
     /**
-     * `amount` 만큼의 현금을 자판기에 투입한 것으로 처리합니다.
+     * 현금을 자판기에 투입한 것으로 처리합니다.
+     * @param amount 투입할 현금의 액수
      */
     public void insertCash(int amount) {
         updateCash(cash + amount);
     }
 
     /**
-     * 투입한 금액의 표시 액수를 cash 변수에 따라서 변경합니다.
+     * 투입한 금액의 표시 액수를 <code>cash</code> 변수에 따라서 변경합니다.
+     * @param amount 투입된 금액으로 표시할 액수
      */
     private void updateCash(int amount) {
         cash = amount;
