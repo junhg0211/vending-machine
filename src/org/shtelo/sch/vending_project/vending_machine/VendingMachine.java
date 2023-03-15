@@ -1,4 +1,4 @@
-package org.shtelo.sch.vending_machine;
+package org.shtelo.sch.vending_project.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.NumberFormat;
-import java.util.LinkedList;
 
 public class VendingMachine {
 
@@ -191,120 +190,5 @@ public class VendingMachine {
         consolePanel.add(metaPanel, BorderLayout.PAGE_END);
 
         panel.add(consolePanel, BorderLayout.EAST);
-    }
-}
-
-/**
- * 하나의 상품 대한 인벤토리 슬롯
- */
-class Inventory {
-    private LinkedList<Product> juices;
-
-    public static Inventory getDefault() {
-        Inventory inventory = new Inventory();
-
-        LinkedList<Product> juices = new LinkedList<>();
-
-        Product product;
-        Kind kind;
-
-        product = new Product();
-        product.setAmount(5);
-        kind = new Kind();
-        kind.setName("물");
-        kind.setPrice(450);
-        product.setKind(kind);
-        juices.add(product);
-
-        product = new Product();
-        product.setAmount(5);
-        kind = new Kind();
-        kind.setName("커피");
-        kind.setPrice(500);
-        product.setKind(kind);
-        juices.add(product);
-
-        product = new Product();
-        product.setAmount(5);
-        kind = new Kind();
-        kind.setName("이온음료");
-        kind.setPrice(550);
-        product.setKind(kind);
-        juices.add(product);
-
-        product = new Product();
-        product.setAmount(5);
-        kind = new Kind();
-        kind.setName("고급커피");
-        kind.setPrice(700);
-        product.setKind(kind);
-        juices.add(product);
-
-        product = new Product();
-        product.setAmount(5);
-        kind = new Kind();
-        kind.setName("탄산음료");
-        kind.setPrice(750);
-        product.setKind(kind);
-        juices.add(product);
-
-        inventory.setJuices(juices);
-        return inventory;
-    }
-
-    public java.util.List<Product> getJuices() {
-        return this.juices;
-    }
-
-    public void setJuices(LinkedList<Product> juices) {
-        this.juices = juices;
-    }
-}
-
-/**
- * 상품에 대한 정보
- */
-class Product {
-    private Kind kind;
-    private int amount;
-
-    public Kind getKind() {
-        return this.kind;
-    }
-
-    public void setKind(Kind kind) {
-        this.kind = kind;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public int getAmount() {
-        return this.amount;
-    }
-}
-
-/**
- * 상품 종류
- */
-class Kind {
-    private String name;
-    private int price;
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getPrice() {
-        return this.price;
     }
 }
