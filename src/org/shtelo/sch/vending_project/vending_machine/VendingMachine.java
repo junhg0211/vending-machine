@@ -73,6 +73,10 @@ public class VendingMachine {
      * 자판기의 메뉴 선택 부분을 추가합니다.
      */
     private void makeMenu(JPanel panel) {
+        // menuPanel의 내용이 화면에 꽉 차게 표시되지 않도록 메타패널을 만들어 menuPanel을 배치한다.
+        JPanel metaPanel = new JPanel();
+        metaPanel.setLayout(new BorderLayout());
+
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new GridLayout(5, 4));
 
@@ -104,7 +108,8 @@ public class VendingMachine {
             menuPanel.add(priceLabel);
         }
 
-        panel.add(menuPanel, BorderLayout.CENTER);
+        metaPanel.add(menuPanel, BorderLayout.PAGE_START);
+        panel.add(metaPanel, BorderLayout.WEST);
     }
 
     /**

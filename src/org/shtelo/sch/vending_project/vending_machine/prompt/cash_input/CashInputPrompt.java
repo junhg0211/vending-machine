@@ -110,6 +110,10 @@ public class CashInputPrompt {
      * 어떤 화폐를 얼마만큼 투입할지 결정할 수 있는 스피너 부분
      */
     private void makeCashSelect(JPanel panel) {
+        // GridLayout 세로 늘어남 방지
+        JPanel metaPanel = new JPanel();
+        metaPanel.setLayout(new BorderLayout());
+
         JPanel cashSelectPanel = new JPanel();
         cashSelectPanel.setLayout(new GridLayout(5, 2));
 
@@ -119,7 +123,8 @@ public class CashInputPrompt {
             spinners.add(makeCashSelectSpinner(cashSelectPanel, cashKinds[i]));
         }
 
-        panel.add(cashSelectPanel, BorderLayout.CENTER);
+        metaPanel.add(cashSelectPanel, BorderLayout.PAGE_START);
+        panel.add(metaPanel, BorderLayout.CENTER);
     }
 
     /**
