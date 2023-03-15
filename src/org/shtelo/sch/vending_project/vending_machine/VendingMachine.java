@@ -172,9 +172,12 @@ public class VendingMachine {
                 "500원: %d개%n" +
                 "100원: %d개%n" +
                 "50원: %d개%n" +
-                "10원: %d개%n" +
-                "거스르지 못한 돈: %s원",
-                result[5], result[4], result[3], result[2], result[1], result[0], numberFormat.format(result[6]));
+                "10원: %d개%n%n" +
+                "거스르지 못한 돈: %s원%n" +
+                "거스른 돈: %s원",
+                result[5], result[4], result[3], result[2], result[1], result[0],
+                numberFormat.format(result[6]), numberFormat.format(cash - result[6]));
+
         JOptionPane.showMessageDialog(frame, text);
 
         updateCash(result[6]);
