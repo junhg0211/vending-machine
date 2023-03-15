@@ -62,4 +62,21 @@ public class Wallet {
     private static Wallet getDefault() {
         return new Wallet();
     }
+
+    public void insertCash(int tens, int fifties, int hundreds, int fiveHundreds, int thousands, int fiveThousands) {
+        this.tens += tens;
+        this.fifties += fifties;
+        this.hundreds += hundreds;
+        this.fiveHundreds += fiveHundreds;
+        this.thousands += thousands;
+        this.fiveThousands += fiveThousands;
+
+        System.out.println(this);
+    }
+
+    public String toString() {
+        return String.format(
+            "<Wallet %d, %d, %d, %d, %d, %d>",
+            tens, fifties, hundreds,fiveHundreds, thousands, fiveThousands);
+    }
 }

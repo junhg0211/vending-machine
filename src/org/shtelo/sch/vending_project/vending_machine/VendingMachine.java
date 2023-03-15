@@ -2,6 +2,7 @@ package org.shtelo.sch.vending_project.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import org.shtelo.sch.vending_project.vending_machine.cash_input_prompt.CashInputPrompt;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,14 +10,17 @@ import java.awt.*;
 import java.text.NumberFormat;
 
 public class VendingMachine {
-
+    private JFrame frame;
     private final NumberFormat numberFormat;
     private final Wallet wallet;
+    private int cash;
+    private JLabel cashAmountLabel;
 
     public VendingMachine() {
         numberFormat = NumberFormat.getInstance();
 
         wallet = Wallet.getWallet();
+        cash = 0;
 
         buildWindow(); // 화면 띄우기
     }
@@ -31,7 +35,7 @@ public class VendingMachine {
         } catch (UnsupportedLookAndFeelException ignored) {}
 
         // 자판기 화면 프레임 제작
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle("20223519 - 자판기");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(600, 400));
@@ -113,6 +117,7 @@ public class VendingMachine {
 
         { // 현금 투입 버튼
             JButton cashButton = new JButton("현금 투입");
+            cashButton.addActionListener(e -> new CashInputPrompt(this));
             customerPanel.add(cashButton, BorderLayout.PAGE_START);
         }
         { // 거스름돈 버튼
@@ -126,7 +131,7 @@ public class VendingMachine {
             JLabel cashLabel = new JLabel("투입금: ", SwingConstants.LEFT);
             cashPanel.add(cashLabel);
 
-            JLabel cashAmountLabel = new JLabel("0", SwingConstants.RIGHT);
+            cashAmountLabel = new JLabel("0", SwingConstants.RIGHT);
             cashPanel.add(cashAmountLabel);
 
             customerPanel.add(cashPanel, BorderLayout.PAGE_END);
@@ -150,5 +155,29 @@ public class VendingMachine {
         consolePanel.add(metaPanel, BorderLayout.PAGE_END);
 
         panel.add(consolePanel, BorderLayout.EAST);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    /**
+     * `amount` 만큼의 현금을 자판기에 투입한 것으로 처리합니다.
+     */
+    public void insertCash(int amount) {
+        cash += amount;
+        updateCash();
+    }
+
+    /**
+     * 투입한 금액의 표시 액수를 cash 변수에 따라서 변경합니다.
+     */
+    private void updateCash() {
+        String text = numberFormat.format(cash);
+        cashAmountLabel.setText(text);
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 }
