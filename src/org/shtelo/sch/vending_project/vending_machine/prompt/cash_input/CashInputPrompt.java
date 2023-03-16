@@ -37,7 +37,6 @@ public class CashInputPrompt {
         dialog.setTitle("20223519 - 자판기 - 현급 투입");
         dialog.setMinimumSize(new Dimension(400, 300));
         dialog.setLocationRelativeTo(machine.getFrame());
-        dialog.setAlwaysOnTop(true);
 
         // 페이지 프레임 여백
         JPanel panel = new JPanel();
