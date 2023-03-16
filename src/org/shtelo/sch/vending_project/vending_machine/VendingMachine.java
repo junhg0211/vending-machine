@@ -189,7 +189,6 @@ public class VendingMachine {
 
         { // 현금 투입 버튼
             JButton cashButton = new JButton("현금 투입");
-//            cashButton.addActionListener(e -> new CashInputPrompt(this));
             cashButton.addActionListener(e -> new CashInputPrompt(this));
             customerPanel.add(cashButton, BorderLayout.PAGE_START);
         }
