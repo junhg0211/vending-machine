@@ -35,7 +35,7 @@ public class CashInputPrompt {
 
         // 자판기 화면 프레임 제작
         dialog.setTitle("20223519 - 자판기 - 현급 투입");
-        dialog.setMinimumSize(new Dimension(400, 200));
+        dialog.setMinimumSize(new Dimension(400, 300));
         dialog.setLocationRelativeTo(machine.getFrame());
         dialog.setAlwaysOnTop(true);
 
