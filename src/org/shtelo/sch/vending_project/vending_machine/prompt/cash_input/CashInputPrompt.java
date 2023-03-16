@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CashInputPrompt {
     private final VendingMachine machine;
     private ArrayList<JSpinner> spinners;
-    private JFrame frame;
+    private JDialog dialog;
 
     private final int[] cashKinds = new int[]{10, 50, 100, 500, 1000};
 
@@ -31,11 +31,13 @@ public class CashInputPrompt {
      * 현금 투입 프롬프트의 화면을 만들고 띄웁니다.
      */
     private void buildWindow() {
+        dialog = new JDialog(this.machine.getFrame());
+
         // 자판기 화면 프레임 제작
-        frame = new JFrame();
-        frame.setTitle("20223519 - 자판기 - 현급 투입");
-        frame.setMinimumSize(new Dimension(400, 200));
-        frame.setLocationRelativeTo(machine.getFrame());
+        dialog.setTitle("20223519 - 자판기 - 현급 투입");
+        dialog.setMinimumSize(new Dimension(400, 200));
+        dialog.setLocationRelativeTo(machine.getFrame());
+        dialog.setAlwaysOnTop(true);
 
         // 페이지 프레임 여백
         JPanel panel = new JPanel();
@@ -46,8 +48,8 @@ public class CashInputPrompt {
         makeCashSelect(panel);
         makeConsole(panel);
 
-        frame.add(panel);
-        frame.setVisible(true);
+        dialog.add(panel);
+        dialog.setVisible(true);
     }
 
     /**
@@ -112,7 +114,7 @@ public class CashInputPrompt {
      * 취소 버튼이 눌렸을 때에 실행됩니다.
      */
     private void closeWindow() {
-        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+        dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
     }
 
     /**
