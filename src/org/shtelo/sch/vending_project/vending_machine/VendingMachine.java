@@ -7,6 +7,7 @@ import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Kind;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Wallet;
+import org.shtelo.sch.vending_project.vending_machine.subwindow.AdminPrompt;
 import org.shtelo.sch.vending_project.vending_machine.subwindow.CashInputPrompt;
 
 import javax.swing.*;
@@ -217,6 +218,7 @@ public class VendingMachine {
         metaPanel.setLayout(new BorderLayout());
         { // 관리자 콘솔 버튼
             JButton adminButton = new JButton("관리자 콘솔");
+            adminButton.addActionListener(e -> new AdminPrompt());
             metaPanel.add(adminButton, BorderLayout.PAGE_START);
         }
         { // 프로그램 종료 버튼
