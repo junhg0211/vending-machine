@@ -66,6 +66,7 @@ public class AdminPrompt {
 
         // 로그인 버튼
         JButton loginButton = new JButton("로그인");
+        frame.getRootPane().setDefaultButton(loginButton);
         metaPanel.add(loginButton);
 
         panel.add(metaPanel, BorderLayout.PAGE_END);

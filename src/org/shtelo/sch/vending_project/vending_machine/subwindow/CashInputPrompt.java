@@ -80,6 +80,7 @@ public class CashInputPrompt {
         { // 투입 버튼
             JButton insertButton = new JButton("투입");
             insertButton.addActionListener(e -> insertCash());
+            dialog.getRootPane().setDefaultButton(insertButton);
             buttonPanel.add(insertButton);
         }
 
