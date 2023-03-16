@@ -84,21 +84,29 @@ public class VendingMachine {
         metaPanel.setLayout(new BorderLayout());
 
         JPanel menuPanel = new JPanel();
-        menuPanel.setLayout(new GridLayout(5, 4));
+        menuPanel.setLayout(new GridLayout(6, 4));
+
+        menuPanel.add(new JLabel("구매", JLabel.CENTER));
+        menuPanel.add(new JLabel("메뉴", JLabel.CENTER));
+        menuPanel.add(new JLabel("남은 수량", JLabel.CENTER));
+        menuPanel.add(new JLabel("가격 [원]", JLabel.CENTER));
 
         inventory = Inventory.getInventory();
 
         // 메뉴 목록 만들기
         EmptyBorder nameLabelBorder = new EmptyBorder(0, 8, 0, 0);
         for (int i = 0; i < 5; i++) {
+            Product juice = inventory.getJuices().get(i);
+            Kind kind = juice.getKind();
+            int left = juice.getAmount();
+            String leftString = Integer.toString(left);
+
             // 구매 버튼
             buyButtons[i] = new JButton("구매");
             int finalI = i;
             buyButtons[i].addActionListener(e -> processBuy(finalI));
+            buyButtons[i].setEnabled(left > 0);
             menuPanel.add(buyButtons[i]);
-
-            Product juice = inventory.getJuices().get(i);
-            Kind kind = juice.getKind();
 
             // 메뉴 이름
             String name = kind.getName();
@@ -107,8 +115,7 @@ public class VendingMachine {
             menuPanel.add(nameLabel);
 
             // 메뉴 남은 수량
-            String left = Integer.toString(juice.getAmount());
-            leftLabels[i] = new JLabel(left);
+            leftLabels[i] = new JLabel(leftString);
             menuPanel.add(leftLabels[i]);
 
             // 메뉴 가격
@@ -118,7 +125,7 @@ public class VendingMachine {
         }
 
         metaPanel.add(menuPanel, BorderLayout.PAGE_START);
-        panel.add(metaPanel, BorderLayout.WEST);
+        panel.add(metaPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -144,6 +151,8 @@ public class VendingMachine {
 
         updateCash(cash - price);
         updateLeftProductAmount(juiceIndex, amount-1);
+
+        inventory.save();
 
         String message = String.format(
                 "%s%c 1개 구매했습니다.%n가격: %s원",
