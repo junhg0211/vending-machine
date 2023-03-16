@@ -23,6 +23,7 @@ public class VendingMachine {
     private Inventory inventory;
     private final JLabel[] leftLabels = new JLabel[5];
     private final JButton[] buyButtons = new JButton[5];
+    private int cashThousands = 0;
 
     public VendingMachine() {
         numberFormat = NumberFormat.getInstance();
@@ -149,6 +150,7 @@ public class VendingMachine {
             return;
         }
 
+        cashThousands = 0;
         updateCash(cash - price);
         updateLeftProductAmount(juiceIndex, amount-1);
 
@@ -276,5 +278,17 @@ public class VendingMachine {
 
     public Wallet getWallet() {
         return wallet;
+    }
+
+    public int getCash() {
+        return this.cash;
+    }
+
+    public int getCashThousands() {
+        return cashThousands;
+    }
+
+    public void setCashThousands(int cashThousands) {
+        this.cashThousands = cashThousands;
     }
 }

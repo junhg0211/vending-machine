@@ -97,7 +97,21 @@ public class CashInputPrompt {
             amount += cashKinds[i] * (int) spinners.get(i).getValue();
         }
 
+        if (machine.getCash() + amount > 5000) {
+            JOptionPane.showMessageDialog(dialog, "현금은 5,000원을 초과하여 투입할 수 없습니다.");
+            return;
+        }
+
+        int totalThousands = machine.getCashThousands() + (int) spinners.get(4).getValue();
+        if (totalThousands > 3) {
+            JOptionPane.showMessageDialog(dialog, "1,000원권 지폐는 한 거래에 3장까지만 투입할 수 있습니다.");
+            return;
+        }
+
+        // 가드를 모두 통과함 => 실패 조건이 없음
+        // 화폐 투입을 처리
         machine.insertCash(amount);
+        machine.setCashThousands(totalThousands);
         machine.getWallet().insertCash(
             (int) spinners.get(0).getValue(),
             (int) spinners.get(1).getValue(),
