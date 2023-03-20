@@ -4,12 +4,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.WindowEvent;
-import java.io.File;
+import java.io.*;
 
 public class AdminPrompt {
-    private JFrame parent;
-    private JFrame frame;
+    private final JFrame parent;
+    private JDialog dialog;
     public static final String PASSWORD_PATH = "res/password.txt";
+    private JPasswordField passwordField;
 
     public AdminPrompt(JFrame parent) {
         this.parent = parent;
@@ -19,7 +20,7 @@ public class AdminPrompt {
         // 비밀번호가 초기설정되어있다면 관리자 로그인을 위한 창을 열고
         // 비밀번호가 설정되어있지 않다면 비밀번호 설정을 위한 창을 연다.
         if (file.exists())
-            makeWindow();
+            makeLoginDialog();
         else
             makePasswordDialog();
     }
@@ -27,11 +28,11 @@ public class AdminPrompt {
     /**
      * 비밀번호 입력을 위한 창을 엽니다.
      */
-    private void makeWindow() {
-        frame = new JFrame();
-        frame.setTitle("20223519 - 자판기 - 관리자 콘솔 로그인");
-        frame.setMinimumSize(new Dimension(400, 150));
-        frame.setLocationRelativeTo(null);
+    private void makeLoginDialog() {
+        dialog = new JDialog(parent);
+        dialog.setTitle("20223519 - 자판기 - 관리자 콘솔 로그인");
+        dialog.setMinimumSize(new Dimension(400, 150));
+        dialog.setLocationRelativeTo(null);
 
         // 모서리 여백을 위한 서브콘테이너 제시
         JPanel panel = new JPanel();
@@ -42,8 +43,8 @@ public class AdminPrompt {
         makeEntry(panel);
         makeConsole(panel);
 
-        frame.add(panel);
-        frame.setVisible(true);
+        dialog.add(panel);
+        dialog.setVisible(true);
     }
 
     /**
@@ -68,7 +69,7 @@ public class AdminPrompt {
         entryPanel.add(passwordLabel, BorderLayout.WEST);
 
         // 비밀번호 입력 필드
-        JPasswordField passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
         entryPanel.add(passwordField, BorderLayout.CENTER);
 
         panel.add(entryPanel, BorderLayout.PAGE_START);
@@ -84,14 +85,43 @@ public class AdminPrompt {
 
         // 취소 버튼
         JButton cancelButton = new JButton("취소");
-        cancelButton.addActionListener(e -> frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING)));
+        cancelButton.addActionListener(e -> dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING)));
         metaPanel.add(cancelButton);
 
         // 로그인 버튼
         JButton loginButton = new JButton("로그인");
-        frame.getRootPane().setDefaultButton(loginButton);
+        loginButton.addActionListener(e -> confirmLogin());
+        dialog.getRootPane().setDefaultButton(loginButton);
         metaPanel.add(loginButton);
 
         panel.add(metaPanel, BorderLayout.PAGE_END);
+    }
+
+    /**
+     * 입력한 비밀번호로 로그인을 진행합니다.
+     */
+    private void confirmLogin() {
+        String password = String.valueOf(passwordField.getPassword());
+
+        File file = new File(PASSWORD_PATH);
+        String correct;
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fileReader);
+
+            correct = reader.readLine();
+
+            reader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (!password.equals(correct)) {
+            JOptionPane.showMessageDialog(dialog, "비밀번호가 틀립니다.");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(dialog, "로그인 성공~");
     }
 }
