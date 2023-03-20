@@ -4,14 +4,29 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class AdminPrompt {
+    private JFrame parent;
     private JFrame frame;
+    public static final String PASSWORD_PATH = "res/password.txt";
 
-    public AdminPrompt() {
-        makeWindow();
+    public AdminPrompt(JFrame parent) {
+        this.parent = parent;
+
+        File file = new File(PASSWORD_PATH);
+
+        // 비밀번호가 초기설정되어있다면 관리자 로그인을 위한 창을 열고
+        // 비밀번호가 설정되어있지 않다면 비밀번호 설정을 위한 창을 연다.
+        if (file.exists())
+            makeWindow();
+        else
+            makePasswordDialog();
     }
 
+    /**
+     * 비밀번호 입력을 위한 창을 엽니다.
+     */
     private void makeWindow() {
         frame = new JFrame();
         frame.setTitle("20223519 - 자판기 - 관리자 콘솔 로그인");
@@ -29,6 +44,14 @@ public class AdminPrompt {
 
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    /**
+     * 비밀번호 초기 설정을 위한 창을 엽니다.
+     */
+    private void makePasswordDialog() {
+        JOptionPane.showMessageDialog(parent, "비밀번호가 설정되어있지 않습니다.\n비밀번호 설정을 위한 창으로 이동합니다.");
+        String password = new PasswordDialog(parent).getPassword();
     }
 
     /**

@@ -80,6 +80,7 @@ public class VendingMachine {
      * 자판기의 메뉴 선택 부분을 추가합니다.
      * @param panel 메뉴 선택 부분을 추가할 <code>JPanel</code> 객체
      */
+    @SuppressWarnings("SpellCheckingInspection")
     private void makeMenu(JPanel panel) {
         // menuPanel의 내용이 화면에 꽉 차게 표시되지 않도록 메타패널을 만들어 menuPanel을 배치한다.
         JPanel metaPanel = new JPanel();
@@ -218,7 +219,7 @@ public class VendingMachine {
         metaPanel.setLayout(new BorderLayout());
         { // 관리자 콘솔 버튼
             JButton adminButton = new JButton("관리자 콘솔");
-            adminButton.addActionListener(e -> new AdminPrompt());
+            adminButton.addActionListener(e -> new AdminPrompt(frame));
             metaPanel.add(adminButton, BorderLayout.PAGE_START);
         }
         { // 프로그램 종료 버튼
