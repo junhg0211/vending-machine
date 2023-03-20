@@ -11,9 +11,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class PasswordDialog {
     private final JFrame parent;
@@ -21,15 +18,10 @@ public class PasswordDialog {
     private JPasswordField passwordField, rePasswordField;
     private JLabel conditionLabel;
     private JButton confirmButton;
-    private String password;
 
     PasswordDialog(JFrame parent) {
         this.parent = parent;
-    }
-
-    public String getPassword() {
         makeDialog();
-        return password;
     }
 
     private void makeDialog() {
@@ -163,7 +155,7 @@ public class PasswordDialog {
      * 비밀번호를 확정하고 창을 닫습니다.
      */
     private void confirmPassword() {
-        password = String.valueOf(passwordField.getPassword());
+        String password = String.valueOf(passwordField.getPassword());
 
         // 비밀번호를 암호화
         String encrypted = Util.encrypt(password);

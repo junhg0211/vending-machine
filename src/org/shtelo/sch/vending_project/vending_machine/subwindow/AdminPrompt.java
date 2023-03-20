@@ -52,7 +52,7 @@ public class AdminPrompt {
      */
     private void makePasswordDialog() {
         JOptionPane.showMessageDialog(parent, "비밀번호가 설정되어있지 않습니다.\n비밀번호 설정을 위한 창으로 이동합니다.");
-        String password = new PasswordDialog(parent).getPassword();
+        new PasswordDialog(parent);
     }
 
     /**
