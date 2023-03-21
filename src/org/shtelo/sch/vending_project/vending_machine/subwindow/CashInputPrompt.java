@@ -1,6 +1,7 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 
 import javax.swing.*;
@@ -120,6 +121,15 @@ public class CashInputPrompt {
             (int) spinners.get(3).getValue(),
             (int) spinners.get(4).getValue()
         );
+
+        Log.writeLog(Log.INSERT_CASH, String.format(
+                "%d원 투입. 거스름 버퍼에 %d원 남음 (10*%d, 50*%d, 100*%d, 500*%d, 1000*%d)",
+                amount, machine.getCash(),
+                (int) spinners.get(0).getValue(),
+                (int) spinners.get(1).getValue(),
+                (int) spinners.get(2).getValue(),
+                (int) spinners.get(3).getValue(),
+                (int) spinners.get(4).getValue()));
         closeWindow();
     }
 

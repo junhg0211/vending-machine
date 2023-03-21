@@ -3,6 +3,7 @@ package org.shtelo.sch.vending_project.vending_machine;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import org.shtelo.sch.vending_project.util.Josa;
+import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Kind;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
@@ -158,6 +159,7 @@ public class VendingMachine {
 
         inventory.save();
 
+        Log.writeLog(Log.SOLD, String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, cash));
         String message = String.format(
                 "%s%c 1개 구매했습니다.%n가격: %s원",
                 name, Josa.eulReul(name), numberFormat.format(price));

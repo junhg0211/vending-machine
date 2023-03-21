@@ -70,8 +70,6 @@ public class Wallet {
         this.thousands += thousands;
 
         save();
-
-        System.out.println(this);
     }
 
     public String toString() {
