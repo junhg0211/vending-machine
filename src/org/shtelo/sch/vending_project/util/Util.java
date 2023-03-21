@@ -18,6 +18,11 @@ public class Util {
         }
     }
 
+    /**
+     * 문자열에 숫자가 포함되어있는지 여부를 확인합니다.
+     * @param string 포함 여부를 확인할 문자열
+     * @return 숫자 포함 여부
+     */
     public static boolean hasNumber(String string) {
         for (int i = 0; i < string.length(); i++) {
             if ("0123456789".indexOf(string.charAt(i)) != -1) {
@@ -27,6 +32,11 @@ public class Util {
         return false;
     }
 
+    /**
+     * 문자열에 키보드에서 입력할 수 있는 특수문자가 포함되어있는지 여부를 확인합니다.
+     * @param string 포함 여부를 확인할 문자열
+     * @return 특수문자 포함 여부
+     */
     public static boolean hasSpecialCharacter(String string) {
         for (int i = 0; i < string.length(); i++) {
             if ("!@#$%^&*()_+|-=\\,.<>/?'\"[]{};:".indexOf(string.charAt(i)) != -1) {
