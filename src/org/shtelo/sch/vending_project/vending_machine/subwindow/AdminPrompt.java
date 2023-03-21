@@ -1,5 +1,6 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
+import org.shtelo.sch.vending_project.util.Util;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 
 import javax.swing.*;
@@ -108,7 +109,9 @@ public class AdminPrompt {
      * 입력한 비밀번호로 로그인을 진행합니다.
      */
     private void confirmLogin() {
-        String password = String.valueOf(passwordField.getPassword());
+        String password;
+        password = String.valueOf(passwordField.getPassword());
+        password = Util.encrypt(password);
 
         File file = new File(PASSWORD_PATH);
         String correct;
