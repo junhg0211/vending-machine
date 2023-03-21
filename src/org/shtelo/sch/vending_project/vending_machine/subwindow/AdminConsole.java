@@ -1,19 +1,27 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
+import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 /**
  * 관리자 콘솔
  */
 public class AdminConsole {
-    private final JFrame parent;
+    private final VendingMachine machine;
     private JFrame frame;
 
-    AdminConsole(JFrame parent) {
-        this.parent = parent;
+    AdminConsole(VendingMachine machine) {
+        this.machine = machine;
 
         makeWindow();
     }
@@ -21,7 +29,7 @@ public class AdminConsole {
     private void makeWindow() {
         frame = new JFrame();
         frame.setMinimumSize(new Dimension(500, 600));
-        frame.setLocationRelativeTo(parent);
+        frame.setLocationRelativeTo(machine.getFrame());
         frame.setTitle("20223519 - 자판기 - 관리자 콘솔");
 
         // 가장자리 margin을 위한 패널
@@ -66,9 +74,60 @@ public class AdminConsole {
      */
     private void makeInventoryManager(JTabbedPane pane) {
         JPanel panel = new JPanel();
+        panel.setBorder(new EmptyBorder(8, 8, 8, 8));
         panel.setLayout(new BorderLayout());
 
-        panel.add(new JLabel("상품 관리 패널"));
+        // 저장 버튼
+        JPanel consolePanel = new JPanel();
+        consolePanel.setLayout(new BorderLayout());
+
+        JButton saveButton = new JButton("저장");
+        saveButton.setEnabled(false);
+        saveButton.addActionListener(e -> {
+            System.out.println("재고 저장");
+            saveButton.setEnabled(false);
+        });
+
+        consolePanel.add(saveButton, BorderLayout.EAST);
+        panel.add(consolePanel, BorderLayout.PAGE_END);
+
+        // 재고 표
+        JPanel table = new JPanel();
+        table.setLayout(new GridLayout(5, 3));
+
+        DocumentListener documentListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) { saveButton.setEnabled(true); }
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) { saveButton.setEnabled(true); }
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) { saveButton.setEnabled(true); }
+        };
+        ChangeListener changeListener = e -> saveButton.setEnabled(true);
+
+        Inventory inventory = machine.getInventory();
+        List<Product> juices = inventory.getJuices();
+        for (int i = 0; i < 5; i++) {
+            Product product = juices.get(i);
+
+            String name = product.getKind().getName();
+            int amount = product.getAmount();
+
+            JTextField nameField = new JTextField();
+            nameField.getDocument().addDocumentListener(documentListener);
+            nameField.setText(name);
+            table.add(nameField);
+
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, null, 1);
+            JSpinner countSpinner = new JSpinner(spinnerModel);
+            countSpinner.addChangeListener(changeListener);
+            countSpinner.setValue(amount);
+            table.add(countSpinner);
+
+            table.add(new JLabel("개 남음", JLabel.LEFT));
+        }
+
+        panel.add(table, BorderLayout.PAGE_START);
 
         pane.addTab("상품", panel);
     }

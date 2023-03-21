@@ -219,7 +219,7 @@ public class VendingMachine {
         metaPanel.setLayout(new BorderLayout());
         { // 관리자 콘솔 버튼
             JButton adminButton = new JButton("관리자 콘솔");
-            adminButton.addActionListener(e -> new AdminPrompt(frame));
+            adminButton.addActionListener(e -> new AdminPrompt(this));
             metaPanel.add(adminButton, BorderLayout.PAGE_START);
         }
         { // 프로그램 종료 버튼
@@ -292,5 +292,9 @@ public class VendingMachine {
 
     public void setCashThousands(int cashThousands) {
         this.cashThousands = cashThousands;
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
     }
 }

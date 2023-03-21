@@ -1,5 +1,7 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
+import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -10,13 +12,15 @@ import java.io.*;
  * 관리자 로그인을 위한 프롬프트
  */
 public class AdminPrompt {
+    private final VendingMachine machine;
     private final JFrame parent;
     private JDialog dialog;
     public static final String PASSWORD_PATH = "res/password.txt";
     private JPasswordField passwordField;
 
-    public AdminPrompt(JFrame parent) {
-        this.parent = parent;
+    public AdminPrompt(VendingMachine machine) {
+        this.machine = machine;
+        this.parent = machine.getFrame();
 
         File file = new File(PASSWORD_PATH);
 
@@ -126,6 +130,6 @@ public class AdminPrompt {
         }
 
         dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
-        new AdminConsole(parent);
+        new AdminConsole(machine);
     }
 }
