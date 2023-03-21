@@ -24,7 +24,7 @@ public class Inventory {
     public static Inventory getInventory() {
         Inventory inventory;
 
-        Util.assumeResFolder();
+        Util.ensureResFolder();
 
         try {
             FileReader reader = new FileReader(INVENTORY_PATH);

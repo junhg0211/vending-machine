@@ -31,7 +31,7 @@ public class Wallet {
      */
     public static Wallet getWallet() {
         Wallet wallet;
-        Util.assumeResFolder();
+        Util.ensureResFolder();
 
         try {
             FileReader reader = new FileReader(WALLET_PATH);

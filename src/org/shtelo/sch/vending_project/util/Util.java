@@ -10,7 +10,7 @@ public class Util {
     /**
      * res 폴더가 없다면 폴더를 만듭니다.
      */
-    public static void assumeResFolder() {
+    public static void ensureResFolder() {
         try {
             Files.createDirectories(Path.of("res"));
         } catch (IOException e) {
