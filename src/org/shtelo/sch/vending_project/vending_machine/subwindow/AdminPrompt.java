@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.*;
 
+/**
+ * 관리자 로그인을 위한 프롬프트
+ */
 public class AdminPrompt {
     private final JFrame parent;
     private JDialog dialog;

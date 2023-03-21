@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * 비밀번호 초기 설정을 위한 다이얼로그
+ */
 public class PasswordDialog {
     private final JFrame parent;
     private JDialog dialog;
@@ -27,7 +30,7 @@ public class PasswordDialog {
     private void makeDialog() {
         dialog = new JDialog(parent);
         dialog.setTitle("20223519 - 자판기 - 관리자 콘솔 로그인");
-        dialog.setMinimumSize(new Dimension(400, 150));
+        dialog.setMinimumSize(new Dimension(500, 150));
         dialog.setLayout(new BorderLayout());
         dialog.setLocationRelativeTo(parent);
 
