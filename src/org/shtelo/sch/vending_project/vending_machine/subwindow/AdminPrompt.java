@@ -125,6 +125,7 @@ public class AdminPrompt {
             return;
         }
 
-        JOptionPane.showMessageDialog(dialog, "로그인 성공~");
+        dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
+        new AdminConsole(parent);
     }
 }
