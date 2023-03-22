@@ -159,8 +159,12 @@ public class VendingMachine {
 
         inventory.save();
 
-        Log.writeLog(Log.SOLD, String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, cash));
-        String message = String.format(
+        String message;
+
+        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, cash);
+        Log.writeLog(Log.SOLD, message);
+
+        message = String.format(
                 "%s%c 1개 구매했습니다.%n가격: %s원",
                 name, Josa.eulReul(name), numberFormat.format(price));
         JOptionPane.showMessageDialog(frame, message, "정보", JOptionPane.INFORMATION_MESSAGE);
@@ -172,11 +176,18 @@ public class VendingMachine {
      * @param index 업데이트할 상품의 인덱스
      * @param amount 업데이트된 상품의 남은 수량
      */
-    private void updateLeftProductAmount(int index, int amount) {
+    public int updateLeftProductAmount(int index, int amount) {
         Product product = inventory.getJuices().get(index);
+
+        if (product.getAmount() == amount) {
+            return 1;
+        }
+
         product.setAmount(amount);
         leftLabels[index].setText(String.format("%d", amount));
         buyButtons[index].setEnabled(amount > 0);
+
+        return 0;
     }
 
     /**

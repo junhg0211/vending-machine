@@ -14,6 +14,7 @@ public class Log {
     private static final DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     public static final String SOLD = "상품판매";
     public static final String INSERT_CASH = "현금투입";
+    public static final String REFILL_PRODUCT = "재고보충";
 
     /**
      * 로그 디렉토리가 없다면 생성합니다.

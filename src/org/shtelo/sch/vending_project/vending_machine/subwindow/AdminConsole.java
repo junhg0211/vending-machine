@@ -1,5 +1,6 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
+import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
@@ -11,6 +12,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ import java.util.List;
 public class AdminConsole {
     private final VendingMachine machine;
     private JFrame frame;
+    private final ArrayList<JSpinner> spinners = new ArrayList<>();
 
     AdminConsole(VendingMachine machine) {
         this.machine = machine;
@@ -84,7 +87,17 @@ public class AdminConsole {
         JButton saveButton = new JButton("저장");
         saveButton.setEnabled(false);
         saveButton.addActionListener(e -> {
-            System.out.println("재고 저장");
+            List<Product> juices = machine.getInventory().getJuices();
+            // 재고 목록 수정
+            for (int i = 0; i < 5; i++) {
+                int amount = (int) spinners.get(i).getValue();
+                if (machine.updateLeftProductAmount(i, amount) == 0) {
+                    String message = String.format(
+                            "%s의 재고를 %d개로 설정하였습니다", juices.get(i).getKind().getName(), amount);
+                    Log.writeLog(Log.REFILL_PRODUCT, message);
+                }
+            }
+
             saveButton.setEnabled(false);
         });
 
@@ -123,6 +136,7 @@ public class AdminConsole {
             countSpinner.addChangeListener(changeListener);
             countSpinner.setValue(amount);
             table.add(countSpinner);
+            spinners.add(countSpinner);
 
             table.add(new JLabel("개 남음", JLabel.LEFT));
         }
