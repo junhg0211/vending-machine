@@ -1,7 +1,5 @@
 package org.shtelo.sch.vending_project.vending_machine;
 
-import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import org.shtelo.sch.vending_project.util.Josa;
 import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
@@ -17,14 +15,20 @@ import java.awt.*;
 import java.text.NumberFormat;
 
 public class VendingMachine {
-    private JFrame frame;
     private final NumberFormat numberFormat;
     private final Wallet wallet;
-    private int cash;
-    private JLabel cashAmountLabel;
-    private Inventory inventory;
     private final JLabel[] leftLabels = new JLabel[5];
     private final JButton[] buyButtons = new JButton[5];
+    private JButton cashButton;
+    private JButton changeButton;
+    private JButton adminButton;
+    private JPanel menuPanel;
+    private JButton quitButton;
+    private JPanel contentPanel;
+    private JLabel cashAmountLabel;
+    private JFrame frame;
+    private int cash;
+    private Inventory inventory;
     private int cashThousands = 0;
 
     public VendingMachine() {
@@ -40,11 +44,6 @@ public class VendingMachine {
      * 자판기 화면을 만들고 띄웁니다.
      */
     private void buildWindow() {
-        // Swing 테마 변경
-        try {
-            UIManager.setLookAndFeel(new FlatMacLightLaf());
-        } catch (UnsupportedLookAndFeelException ignored) {}
-
         // 자판기 화면 프레임 제작
         frame = new JFrame();
         frame.setTitle("20223519 - 자판기");
@@ -53,50 +52,20 @@ public class VendingMachine {
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setLocationRelativeTo(null);
 
-        // 페이지 프레임 여백
-        JPanel panel = new JPanel();
-        panel.setBorder(new EmptyBorder(8, 8, 8, 8));
-        panel.setLayout(new BorderLayout());
+        makeMenu();
+        makeConsole();
 
-        // 페이지 내용 추가
-        makeTitle(panel);
-        makeMenu(panel);
-        makeConsole(panel);
-
-        frame.add(panel);
+        frame.add(contentPanel);
         frame.setVisible(true);
     }
 
     /**
-     * 자판기 상단에 타이틀을 추가합니다.
-     * @param panel 타이틀을 추가할 <code>JPanel</code> 객체
-     */
-    private void makeTitle(JPanel panel) {
-        JLabel titleLabel = new JLabel("20223519 Java 자판기");
-        titleLabel.putClientProperty(FlatClientProperties.STYLE_CLASS, "h1");
-        panel.add(titleLabel, BorderLayout.PAGE_START);
-    }
-
-    /**
      * 자판기의 메뉴 선택 부분을 추가합니다.
-     * @param panel 메뉴 선택 부분을 추가할 <code>JPanel</code> 객체
      */
-    @SuppressWarnings("SpellCheckingInspection")
-    private void makeMenu(JPanel panel) {
-        // menuPanel의 내용이 화면에 꽉 차게 표시되지 않도록 메타패널을 만들어 menuPanel을 배치한다.
-        JPanel metaPanel = new JPanel();
-        metaPanel.setLayout(new BorderLayout());
-
-        JPanel menuPanel = new JPanel();
+    private void makeMenu() {
         menuPanel.setLayout(new GridLayout(6, 4));
 
-        menuPanel.add(new JLabel("구매", JLabel.CENTER));
-        menuPanel.add(new JLabel("메뉴", JLabel.CENTER));
-        menuPanel.add(new JLabel("남은 수량", JLabel.CENTER));
-        menuPanel.add(new JLabel("가격 [원]", JLabel.CENTER));
-
         inventory = Inventory.getInventory();
-
         // 메뉴 목록 만들기
         EmptyBorder nameLabelBorder = new EmptyBorder(0, 8, 0, 0);
         for (int i = 0; i < 5; i++) {
@@ -127,13 +96,11 @@ public class VendingMachine {
             JLabel priceLabel = new JLabel(price, SwingConstants.RIGHT);
             menuPanel.add(priceLabel);
         }
-
-        metaPanel.add(menuPanel, BorderLayout.PAGE_START);
-        panel.add(metaPanel, BorderLayout.CENTER);
     }
 
     /**
      * 음료 구매를 처리합니다.
+     *
      * @param juiceIndex 구매할 음료수의 인덱스 번호
      */
     private void processBuy(int juiceIndex) {
@@ -155,13 +122,13 @@ public class VendingMachine {
 
         cashThousands = 0;
         updateCash(cash - price);
-        updateLeftProductAmount(juiceIndex, amount-1);
+        updateLeftProductAmount(juiceIndex, amount - 1);
 
         inventory.save();
 
         String message;
 
-        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, cash);
+        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount - 1, cash);
         Log.writeLog(Log.SOLD, message);
 
         message = String.format(
@@ -173,7 +140,8 @@ public class VendingMachine {
     /**
      * 남은 상품 개수를 업데이트하도록 처리합니다.
      * <code>inventory</code>와 매대에 있는 남은 수량을 업데이트합니다.
-     * @param index 업데이트할 상품의 인덱스
+     *
+     * @param index  업데이트할 상품의 인덱스
      * @param amount 업데이트된 상품의 남은 수량
      */
     public int updateLeftProductAmount(int index, int amount) {
@@ -193,7 +161,7 @@ public class VendingMachine {
     /**
      * 자판기의 사용자 조작 메뉴를 추가합니다.
      */
-    private void makeConsole(JPanel panel) {
+    private void makeConsole() {
         JPanel consolePanel = new JPanel();
         consolePanel.setBorder(new EmptyBorder(0, 100, 0, 0));
         consolePanel.setLayout(new BorderLayout());
@@ -202,48 +170,12 @@ public class VendingMachine {
         JPanel customerPanel = new JPanel();
         customerPanel.setLayout(new BorderLayout());
 
-        { // 현금 투입 버튼
-            JButton cashButton = new JButton("현금 투입");
-            cashButton.addActionListener(e -> new CashInputPrompt(this));
-            customerPanel.add(cashButton, BorderLayout.PAGE_START);
-        }
-        { // 거스름돈 버튼
-            JButton changeButton = new JButton("거스름");
-            changeButton.addActionListener(e -> changeCash());
-            customerPanel.add(changeButton, BorderLayout.CENTER);
-        }
-        { // 투입금 표시 창
-            JPanel cashPanel = new JPanel();
-            cashPanel.setLayout(new GridLayout());
-
-            JLabel cashLabel = new JLabel("투입금: ", SwingConstants.LEFT);
-            cashPanel.add(cashLabel);
-
-            cashAmountLabel = new JLabel("0", SwingConstants.RIGHT);
-            cashPanel.add(cashAmountLabel);
-
-            customerPanel.add(cashPanel, BorderLayout.PAGE_END);
-        }
-
-        consolePanel.add(customerPanel, BorderLayout.PAGE_START);
+        cashButton.addActionListener(e -> new CashInputPrompt(this));
+        changeButton.addActionListener(e -> changeCash());
 
         // 메타 패널
-        JPanel metaPanel = new JPanel();
-        metaPanel.setLayout(new BorderLayout());
-        { // 관리자 콘솔 버튼
-            JButton adminButton = new JButton("관리자 콘솔");
-            adminButton.addActionListener(e -> new AdminPrompt(this));
-            metaPanel.add(adminButton, BorderLayout.PAGE_START);
-        }
-        { // 프로그램 종료 버튼
-            JButton quitButton = new JButton("종료");
-            quitButton.addActionListener(e -> System.exit(0));
-            metaPanel.add(quitButton, BorderLayout.PAGE_END);
-        }
-
-        consolePanel.add(metaPanel, BorderLayout.PAGE_END);
-
-        panel.add(consolePanel, BorderLayout.EAST);
+        adminButton.addActionListener(e -> new AdminPrompt(this));
+        quitButton.addActionListener(e -> System.exit(0));
     }
 
     /**
@@ -262,13 +194,13 @@ public class VendingMachine {
         Log.writeLog(Log.CHANGE_CASH, message);
         String text = String.format(
                 "거스름을 처리했습니다.%n" +
-                "1,000원: %d장%n" +
-                "500원: %d개%n" +
-                "100원: %d개%n" +
-                "50원: %d개%n" +
-                "10원: %d개%n%n" +
-                "거스르지 못한 돈: %s원%n" +
-                "거스른 돈: %s원",
+                        "1,000원: %d장%n" +
+                        "500원: %d개%n" +
+                        "100원: %d개%n" +
+                        "50원: %d개%n" +
+                        "10원: %d개%n%n" +
+                        "거스르지 못한 돈: %s원%n" +
+                        "거스른 돈: %s원",
                 result[4], result[3], result[2], result[1], result[0],
                 numberFormat.format(result[5]), numberFormat.format(cash - result[5]));
         JOptionPane.showMessageDialog(frame, text);
@@ -282,6 +214,7 @@ public class VendingMachine {
 
     /**
      * 현금을 자판기에 투입한 것으로 처리합니다.
+     *
      * @param amount 투입할 현금의 액수
      */
     public void insertCash(int amount) {
@@ -290,6 +223,7 @@ public class VendingMachine {
 
     /**
      * 투입한 금액의 표시 액수를 <code>cash</code> 변수에 따라서 변경합니다.
+     *
      * @param amount 투입된 금액으로 표시할 액수
      */
     private void updateCash(int amount) {
