@@ -12,6 +12,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class AdminConsole {
         frame.setMinimumSize(new Dimension(500, 600));
         frame.setLocationRelativeTo(machine.getFrame());
         frame.setTitle("20223519 - 자판기 - 관리자 콘솔");
+        frame.addWindowListener(new AdminCloseListener());
 
         // 가장자리 margin을 위한 패널
         JPanel panel = new JPanel();
@@ -187,5 +189,17 @@ public class AdminConsole {
         }
 
         panel.add(consolePanel, BorderLayout.PAGE_END);
+    }
+
+    private static class AdminCloseListener implements WindowListener {
+        @Override public void windowOpened(WindowEvent windowEvent) { }
+        @Override public void windowClosing(WindowEvent windowEvent) {
+            Log.writeLog(Log.ADMIN_LOGOUT, "관리자가 콘솔을 닫았습니다.");
+        }
+        @Override public void windowClosed(WindowEvent windowEvent) { }
+        @Override public void windowIconified(WindowEvent windowEvent) { }
+        @Override public void windowDeiconified(WindowEvent windowEvent) { }
+        @Override public void windowActivated(WindowEvent windowEvent) { }
+        @Override public void windowDeactivated(WindowEvent windowEvent) { }
     }
 }

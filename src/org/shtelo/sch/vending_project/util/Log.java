@@ -16,6 +16,8 @@ public class Log {
     public static final String INSERT_CASH = "현금투입";
     public static final String REFILL_PRODUCT = "재고보충";
     public static final String CHANGE_CASH = "잔돈반환";
+    public static final String ADMIN_LOGIN = "관리접속";
+    public static final String ADMIN_LOGOUT = "관리퇴장";
 
     /**
      * 로그 디렉토리가 없다면 생성합니다.

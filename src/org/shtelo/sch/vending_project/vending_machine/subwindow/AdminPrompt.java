@@ -1,5 +1,6 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
+import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.util.Util;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 
@@ -133,6 +134,7 @@ public class AdminPrompt {
             return;
         }
 
+        Log.writeLog(Log.ADMIN_LOGIN, "비밀번호를 사용하여 관리자 콘솔에 로그인하였습니다.");
         dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
         new AdminConsole(machine);
     }
