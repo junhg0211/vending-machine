@@ -252,6 +252,14 @@ public class VendingMachine {
     private void changeCash() {
         int[] result = wallet.change(cash);
 
+        String message = String.format(
+                "거스름돈을 처리했습니다. " +
+                        "10*%d, 50*%d, 100*%d, 500*%d, 1000*%d, 거스름돈 버퍼에 %d원 남음. " +
+                        "현금 버퍼에는 각각 %d, %d, %d, %d, %d개 남음",
+                result[0], result[1], result[2], result[3], result[4], result[5],
+                wallet.getTens(), wallet.getFifties(), wallet.getHundreds(),
+                wallet.getFiveHundreds(), wallet.getThousands());
+        Log.writeLog(Log.CHANGE_CASH, message);
         String text = String.format(
                 "거스름을 처리했습니다.%n" +
                 "1,000원: %d장%n" +
@@ -263,7 +271,6 @@ public class VendingMachine {
                 "거스른 돈: %s원",
                 result[4], result[3], result[2], result[1], result[0],
                 numberFormat.format(result[5]), numberFormat.format(cash - result[5]));
-
         JOptionPane.showMessageDialog(frame, text);
 
         updateCash(result[5]);

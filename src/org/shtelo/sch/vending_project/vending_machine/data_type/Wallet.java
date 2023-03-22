@@ -116,8 +116,6 @@ public class Wallet {
 
         save();
 
-        System.out.println(this);
-
         return changes;
     }
 
@@ -133,5 +131,25 @@ public class Wallet {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    public int getTens() {
+        return tens;
+    }
+
+    public int getFifties() {
+        return fifties;
+    }
+
+    public int getHundreds() {
+        return hundreds;
+    }
+
+    public int getFiveHundreds() {
+        return fiveHundreds;
+    }
+
+    public int getThousands() {
+        return thousands;
     }
 }
