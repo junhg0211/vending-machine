@@ -50,6 +50,7 @@ public class AdminConsole {
         makeInventoryManager(pane);
         makeCashInventoryManager(pane);
         makeLogInfo(pane);
+        makeMetaManager(pane);
 
         panel.add(pane);
 
@@ -172,6 +173,20 @@ public class AdminConsole {
         panel.add(new JLabel("로그"));
 
         pane.addTab("로그", panel);
+    }
+
+    /**
+     * 비밀번호 변경이나 서버 주소 변경 등 메타 관리적인 요소를 관리하는 조작판을 제작합니다.
+     * @param panel 메타 관리 조작판을 제작할 <code>JPanel</code> 객체
+     */
+    private void makeMetaManager(JTabbedPane panel) {
+        JPanel metaPanel = new JPanel();
+        metaPanel.setLayout(new BorderLayout());
+        metaPanel.setBorder(new EmptyBorder(8, 8, 8, 8));
+
+        metaPanel.add(new JLabel("메타"));
+
+        panel.addTab("메타", metaPanel);
     }
 
     /**
