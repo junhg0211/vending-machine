@@ -129,6 +129,7 @@ public class AdminPrompt {
 
         if (!password.equals(correct)) {
             JOptionPane.showMessageDialog(dialog, "비밀번호가 틀립니다.");
+            passwordField.setText("");
             return;
         }
 
