@@ -18,6 +18,7 @@ public class Log {
     public static final String CHANGE_CASH = "잔돈반환";
     public static final String ADMIN_LOGIN = "관리접속";
     public static final String ADMIN_LOGOUT = "관리퇴장";
+    public static final String ADMIN_FAIL = "관리오류";
 
     /**
      * 로그 디렉토리가 없다면 생성합니다.

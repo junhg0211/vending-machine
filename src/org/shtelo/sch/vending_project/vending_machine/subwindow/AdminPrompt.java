@@ -129,6 +129,7 @@ public class AdminPrompt {
         }
 
         if (!password.equals(correct)) {
+            Log.writeLog(Log.ADMIN_FAIL, "관리자 로그인 시도 중 비밀번호가 틀렸습니다.");
             JOptionPane.showMessageDialog(dialog, "비밀번호가 틀립니다.");
             passwordField.setText("");
             return;
