@@ -1,5 +1,6 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
@@ -181,10 +182,21 @@ public class AdminConsole {
      */
     private void makeMetaManager(JTabbedPane panel) {
         JPanel metaPanel = new JPanel();
-        metaPanel.setLayout(new BorderLayout());
+        metaPanel.setLayout(new BoxLayout(metaPanel, BoxLayout.Y_AXIS));
         metaPanel.setBorder(new EmptyBorder(8, 8, 8, 8));
 
-        metaPanel.add(new JLabel("메타"));
+        { // 관리자 비밀번호 변경 패널
+            JLabel header = new JLabel("관리자 비밀번호 변경");
+            header.putClientProperty(FlatClientProperties.STYLE_CLASS, "h4");
+            metaPanel.add(header);
+
+            JButton button = new JButton("비밀번호 변경...");
+            button.addActionListener(e -> {
+                Log.writeLog(Log.ADMIN_INFO, "관리자가 비밀번호 변경을 시도했습니다.");
+                new ChangePasswordPrompt(frame);
+            });
+            metaPanel.add(button);
+        }
 
         panel.addTab("메타", metaPanel);
     }

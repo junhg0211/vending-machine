@@ -19,6 +19,7 @@ public class Log {
     public static final String ADMIN_LOGIN = "관리접속";
     public static final String ADMIN_LOGOUT = "관리퇴장";
     public static final String ADMIN_FAIL = "관리오류";
+    public static final String ADMIN_INFO = "관리정보";
     private static String logFilename = null;
 
     /**

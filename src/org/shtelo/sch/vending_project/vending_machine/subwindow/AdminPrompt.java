@@ -1,6 +1,5 @@
 package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
-import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.util.Util;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 
@@ -8,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.WindowEvent;
-import java.io.*;
+import java.io.File;
 
 /**
  * 관리자 로그인을 위한 프롬프트
@@ -106,36 +105,15 @@ public class AdminPrompt {
         panel.add(metaPanel, BorderLayout.PAGE_END);
     }
 
-    /**
-     * 입력한 비밀번호로 로그인을 진행합니다.
-     */
     private void confirmLogin() {
-        String password;
-        password = String.valueOf(passwordField.getPassword());
-        password = Util.encrypt(password);
+        String message = Util.confirmLogin(passwordField);
 
-        File file = new File(PASSWORD_PATH);
-        String correct;
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fileReader);
-
-            correct = reader.readLine();
-
-            reader.close();
-            fileReader.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (!password.equals(correct)) {
-            Log.writeLog(Log.ADMIN_FAIL, "관리자 로그인 시도 중 비밀번호가 틀렸습니다.");
-            JOptionPane.showMessageDialog(dialog, "비밀번호가 틀립니다.");
+        if (!message.isEmpty()) {
+            JOptionPane.showMessageDialog(dialog, message);
             passwordField.setText("");
             return;
         }
 
-        Log.writeLog(Log.ADMIN_LOGIN, "비밀번호를 사용하여 관리자 콘솔에 로그인하였습니다.");
         dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
         new AdminConsole(machine);
     }
