@@ -25,6 +25,7 @@ public class Util {
 
     /**
      * 문자열에 숫자가 포함되어있는지 여부를 확인합니다.
+     *
      * @param string 포함 여부를 확인할 문자열
      * @return 숫자 포함 여부
      */
@@ -39,6 +40,7 @@ public class Util {
 
     /**
      * 문자열에 키보드에서 입력할 수 있는 특수문자가 포함되어있는지 여부를 확인합니다.
+     *
      * @param string 포함 여부를 확인할 문자열
      * @return 특수문자 포함 여부
      */
@@ -54,6 +56,7 @@ public class Util {
     /**
      * 문자열을 암호화하여 출력합니다.
      * 비밀번호 검증과 파일 저장에 활용합니다.
+     *
      * @param password 암호화할 비밀번호
      * @return 암호화된 비밀번호
      */
@@ -77,6 +80,7 @@ public class Util {
 
     /**
      * 바이트 문자열을 문자열로 변환합니다.
+     *
      * @param byteString 변환할 바이트 문자열
      * @return 변환된 문자열
      */
@@ -160,6 +164,7 @@ public class Util {
 
     /**
      * 비밀번호를 변경합니다.
+     *
      * @param password 변경할 비밀번호
      */
     public static void setPassword(String password) {
@@ -173,6 +178,8 @@ public class Util {
             writer = new FileWriter(file);
             writer.write(encrypted);
             writer.close();
-        } catch (IOException e) { throw new RuntimeException(e); }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

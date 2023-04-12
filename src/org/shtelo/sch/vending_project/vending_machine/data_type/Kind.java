@@ -15,11 +15,11 @@ public class Kind {
         this.name = name;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public int getPrice() {
         return this.price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

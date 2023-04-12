@@ -15,8 +15,8 @@ import java.awt.event.WindowEvent;
  * 비밀번호 변경을 위한 창
  */
 public class ChangePasswordPrompt {
-    private JDialog dialog;
     private final JFrame parent;
+    private JDialog dialog;
     private JPasswordField originalPasswordField, passwordField, rePasswordField;
     private JButton confirmButton;
     private JLabel conditionLabel;
@@ -51,6 +51,7 @@ public class ChangePasswordPrompt {
 
     /**
      * 패널에 타이틀을 추가합니다.
+     *
      * @param panel 타이틀을 추가할 <code>JPanel</code> 객체
      */
     private void makeTitle(JPanel panel) {
@@ -61,6 +62,7 @@ public class ChangePasswordPrompt {
 
     /**
      * 패널에 비밀번호 입력을 위한 표를 만듭니다.
+     *
      * @param panel 표를 추가할 <code>JPanel</code> 객체
      */
     private void makeTable(JPanel panel) {
@@ -80,10 +82,12 @@ public class ChangePasswordPrompt {
             public void insertUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
+
             @Override
             public void removeUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
@@ -111,6 +115,7 @@ public class ChangePasswordPrompt {
 
     /**
      * 확인 버튼 등 메타적인 조작 패널을 추가합니다.
+     *
      * @param panel 조작 패널을 추가할 <code>JPanel</code> 객체
      */
     private void makeConsole(JPanel panel) {

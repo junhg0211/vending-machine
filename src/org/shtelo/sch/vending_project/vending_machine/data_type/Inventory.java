@@ -14,8 +14,8 @@ import java.util.LinkedList;
  * 하나의 상품 대한 인벤토리 슬롯
  */
 public class Inventory {
-    private LinkedList<Product> juices;
     private static final String INVENTORY_PATH = "res/inventory.json";
+    private LinkedList<Product> juices;
 
     /**
      * 파일에 저장되어있는 인벤토리를 불러옵니다.
@@ -43,21 +43,8 @@ public class Inventory {
     }
 
     /**
-     * 기본 주소에 객체의 상태값을 저장합니다.
-     */
-    public void save() {
-        try {
-            FileWriter writer = new FileWriter(INVENTORY_PATH);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(this, writer);
-            writer.close();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
-    /**
      * <code>Inventory</code>의 기본값을 생성합니다.
+     *
      * @return Inventory 기본값
      */
     public static Inventory getDefault() {
@@ -110,6 +97,20 @@ public class Inventory {
 
         inventory.setJuices(juices);
         return inventory;
+    }
+
+    /**
+     * 기본 주소에 객체의 상태값을 저장합니다.
+     */
+    public void save() {
+        try {
+            FileWriter writer = new FileWriter(INVENTORY_PATH);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     public java.util.List<Product> getJuices() {

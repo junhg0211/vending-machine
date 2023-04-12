@@ -56,10 +56,12 @@ public class PasswordDialog {
             public void insertUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
+
             @Override
             public void removeUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
@@ -97,7 +99,7 @@ public class PasswordDialog {
         { // 비밀번호 입력 취소 버튼
             JButton cancelButton = new JButton("취소");
             cancelButton.addActionListener(
-                e -> dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING)));
+                    e -> dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING)));
             consolePanel.add(cancelButton);
         }
         { // 비밀번호 확정 버튼

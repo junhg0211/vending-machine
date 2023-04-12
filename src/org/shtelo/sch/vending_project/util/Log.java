@@ -9,9 +9,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Log {
-    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmmssSSS");
-    private static final DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     public static final String SOLD = "상품판매";
     public static final String INSERT_CASH = "현금투입";
     public static final String REFILL_PRODUCT = "재고보충";
@@ -20,6 +17,9 @@ public class Log {
     public static final String ADMIN_LOGOUT = "관리퇴장";
     public static final String ADMIN_FAIL = "관리오류";
     public static final String ADMIN_INFO = "관리정보";
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmmssSSS");
+    private static final DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     private static String logFilename = null;
 
     /**
@@ -57,6 +57,7 @@ public class Log {
 
     /**
      * 로그를 작성합니다. 모든 로그에 대한 일반적인 로깅 솔루션을 제공합니다.
+     *
      * @param message 로그로 남겨질 메시지
      */
     public static void writeLog(String type, String message) {

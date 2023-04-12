@@ -15,11 +15,11 @@ public class Product {
         this.kind = kind;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public int getAmount() {
         return this.amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

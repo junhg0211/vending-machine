@@ -23,10 +23,10 @@ import java.util.List;
  */
 public class AdminConsole {
     private final VendingMachine machine;
-    private JFrame frame;
     private final ArrayList<JSpinner> spinners = new ArrayList<>();
     private final ArrayList<JTextField> names = new ArrayList<>();
     private final JLabel[] cashAmountLabels = new JLabel[5];
+    private JFrame frame;
 
     AdminConsole(VendingMachine machine) {
         this.machine = machine;
@@ -67,6 +67,7 @@ public class AdminConsole {
 
     /**
      * 매출 정보 패널을 제작합니다.
+     *
      * @param pane 매출 정보 패널이 제작될 <code>JTabbedPane</code> 객체
      */
     private void makeSalesInfo(JTabbedPane pane) {
@@ -80,6 +81,7 @@ public class AdminConsole {
 
     /**
      * 재고·상품 관리 패널을 제작합니다.
+     *
      * @param pane 재고관리 패널이 제작될 <code>JTabbedPane</code> 객체
      */
     private void makeInventoryManager(JTabbedPane pane) {
@@ -126,11 +128,19 @@ public class AdminConsole {
 
         DocumentListener documentListener = new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent documentEvent) { saveButton.setEnabled(true); }
+            public void insertUpdate(DocumentEvent documentEvent) {
+                saveButton.setEnabled(true);
+            }
+
             @Override
-            public void removeUpdate(DocumentEvent documentEvent) { saveButton.setEnabled(true); }
+            public void removeUpdate(DocumentEvent documentEvent) {
+                saveButton.setEnabled(true);
+            }
+
             @Override
-            public void changedUpdate(DocumentEvent documentEvent) { saveButton.setEnabled(true); }
+            public void changedUpdate(DocumentEvent documentEvent) {
+                saveButton.setEnabled(true);
+            }
         };
         ChangeListener changeListener = e -> saveButton.setEnabled(true);
 
@@ -165,6 +175,7 @@ public class AdminConsole {
 
     /**
      * 현금 통 관리 패널을 제작합니다.
+     *
      * @param pane 현금 통 관리 패널이 만들어질 <code>JTabbedPane</code> 객체
      */
     private void makeCashInventoryManager(JTabbedPane pane) {
@@ -266,13 +277,13 @@ public class AdminConsole {
 
                 JOptionPane.showMessageDialog(frame, String.format(
                         "현금을 수금했습니다.%n" +
-                        "총 수금 금액: %d원%n" +
-                        "%n" +
-                        "1000원권 - %d장%n" +
-                        "500원권 - %d장%n" +
-                        "100원권 - %d장%n" +
-                        "50원권 - %d장%n" +
-                        "10원권 - %d장",
+                                "총 수금 금액: %d원%n" +
+                                "%n" +
+                                "1000원권 - %d장%n" +
+                                "500원권 - %d장%n" +
+                                "100원권 - %d장%n" +
+                                "50원권 - %d장%n" +
+                                "10원권 - %d장",
                         totalTaken, takenCashes[0], takenCashes[1], takenCashes[2], takenCashes[3], takenCashes[4]));
             });
             consolePanel.add(takeCashButton, BorderLayout.EAST);
@@ -288,6 +299,7 @@ public class AdminConsole {
 
     /**
      * 관리자 로그를 확인하는 패널을 제작합니다.
+     *
      * @param pane 관리자 로그 패널이 만들어질 <code>JTabbedPane</code> 객체
      */
     private void makeLogInfo(JTabbedPane pane) {
@@ -301,6 +313,7 @@ public class AdminConsole {
 
     /**
      * 비밀번호 변경이나 서버 주소 변경 등 메타 관리적인 요소를 관리하는 조작판을 제작합니다.
+     *
      * @param panel 메타 관리 조작판을 제작할 <code>JPanel</code> 객체
      */
     private void makeMetaManager(JTabbedPane panel) {
@@ -326,6 +339,7 @@ public class AdminConsole {
 
     /**
      * 관리자 패널 메타 조작을 위한 조작판을 제작합니다.
+     *
      * @param panel 메타 조작 패널을 제작할 <code>JPanel</code> 객체
      */
     private void makeConsole(JPanel panel) {
@@ -342,14 +356,33 @@ public class AdminConsole {
     }
 
     private static class AdminCloseListener implements WindowListener {
-        @Override public void windowOpened(WindowEvent windowEvent) { }
-        @Override public void windowClosing(WindowEvent windowEvent) {
+        @Override
+        public void windowOpened(WindowEvent windowEvent) {
+        }
+
+        @Override
+        public void windowClosing(WindowEvent windowEvent) {
             Log.writeLog(Log.ADMIN_LOGOUT, "관리자가 콘솔을 닫았습니다.");
         }
-        @Override public void windowClosed(WindowEvent windowEvent) { }
-        @Override public void windowIconified(WindowEvent windowEvent) { }
-        @Override public void windowDeiconified(WindowEvent windowEvent) { }
-        @Override public void windowActivated(WindowEvent windowEvent) { }
-        @Override public void windowDeactivated(WindowEvent windowEvent) { }
+
+        @Override
+        public void windowClosed(WindowEvent windowEvent) {
+        }
+
+        @Override
+        public void windowIconified(WindowEvent windowEvent) {
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent windowEvent) {
+        }
+
+        @Override
+        public void windowActivated(WindowEvent windowEvent) {
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent windowEvent) {
+        }
     }
 }

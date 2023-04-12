@@ -17,14 +17,14 @@ import java.awt.*;
 import java.text.NumberFormat;
 
 public class VendingMachine {
-    private JFrame frame;
     private final NumberFormat numberFormat;
     private final Wallet wallet;
-    private JLabel cashAmountLabel;
-    private Inventory inventory;
     private final JLabel[] leftLabels = new JLabel[5];
     private final JButton[] buyButtons = new JButton[5];
     private final JLabel[] nameLabels = new JLabel[5];
+    private JFrame frame;
+    private JLabel cashAmountLabel;
+    private Inventory inventory;
     private int cashThousands = 0;
 
     public VendingMachine() {
@@ -42,7 +42,8 @@ public class VendingMachine {
         // Swing 테마 변경
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
-        } catch (UnsupportedLookAndFeelException ignored) {}
+        } catch (UnsupportedLookAndFeelException ignored) {
+        }
 
         // 자판기 화면 프레임 제작
         frame = new JFrame();
@@ -68,6 +69,7 @@ public class VendingMachine {
 
     /**
      * 자판기 상단에 타이틀을 추가합니다.
+     *
      * @param panel 타이틀을 추가할 <code>JPanel</code> 객체
      */
     private void makeTitle(JPanel panel) {
@@ -78,6 +80,7 @@ public class VendingMachine {
 
     /**
      * 자판기의 메뉴 선택 부분을 추가합니다.
+     *
      * @param panel 메뉴 선택 부분을 추가할 <code>JPanel</code> 객체
      */
     @SuppressWarnings("SpellCheckingInspection")
@@ -134,6 +137,7 @@ public class VendingMachine {
 
     /**
      * 음료 구매를 처리합니다.
+     *
      * @param juiceIndex 구매할 음료수의 인덱스 번호
      */
     private void processBuy(int juiceIndex) {
@@ -155,13 +159,13 @@ public class VendingMachine {
 
         cashThousands = 0;
         updateCash(wallet.getCash() - price);
-        updateLeftProductAmount(juiceIndex, amount-1);
+        updateLeftProductAmount(juiceIndex, amount - 1);
 
         inventory.save();
 
         String message;
 
-        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, wallet.getCash());
+        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount - 1, wallet.getCash());
         Log.writeLog(Log.SOLD, message);
 
         message = String.format(
@@ -173,7 +177,8 @@ public class VendingMachine {
     /**
      * 남은 상품 개수를 업데이트하도록 처리합니다.
      * <code>inventory</code>와 매대에 있는 남은 수량을 업데이트합니다.
-     * @param index 업데이트할 상품의 인덱스
+     *
+     * @param index  업데이트할 상품의 인덱스
      * @param amount 업데이트된 상품의 남은 수량
      */
     public int updateLeftProductAmount(int index, int amount) {
@@ -263,13 +268,13 @@ public class VendingMachine {
         Log.writeLog(Log.CHANGE_CASH, message);
         String text = String.format(
                 "거스름을 처리했습니다.%n" +
-                "1,000원: %d장%n" +
-                "500원: %d개%n" +
-                "100원: %d개%n" +
-                "50원: %d개%n" +
-                "10원: %d개%n%n" +
-                "거스르지 못한 돈: %s원%n" +
-                "거스른 돈: %s원",
+                        "1,000원: %d장%n" +
+                        "500원: %d개%n" +
+                        "100원: %d개%n" +
+                        "50원: %d개%n" +
+                        "10원: %d개%n%n" +
+                        "거스르지 못한 돈: %s원%n" +
+                        "거스른 돈: %s원",
                 result[4], result[3], result[2], result[1], result[0],
                 numberFormat.format(result[5]), numberFormat.format(wallet.getCash() - result[5]));
         JOptionPane.showMessageDialog(frame, text);
@@ -283,6 +288,7 @@ public class VendingMachine {
 
     /**
      * 현금을 자판기에 투입한 것으로 처리합니다.
+     *
      * @param amount 투입할 현금의 액수
      */
     public void insertCash(int amount) {
@@ -291,6 +297,7 @@ public class VendingMachine {
 
     /**
      * 투입한 금액의 표시 액수를 <code>cash</code> 변수에 따라서 변경합니다.
+     *
      * @param amount 투입된 금액으로 표시할 액수
      */
     private void updateCash(int amount) {

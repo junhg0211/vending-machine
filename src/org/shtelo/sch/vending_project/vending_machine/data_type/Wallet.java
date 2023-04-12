@@ -10,13 +10,13 @@ import java.io.*;
  * 화폐 보관함 클래스
  */
 public class Wallet {
+    private static final String WALLET_PATH = "res/wallet.json";
     private int tens;
     private int fifties;
     private int hundreds;
     private int fiveHundreds;
     private int thousands;
     private int cash;
-    private static final String WALLET_PATH = "res/wallet.json";
 
     Wallet() {
         this.tens = 5;
@@ -58,11 +58,12 @@ public class Wallet {
     /**
      * 지갑에 파라미터에 해당하는 만큼의 화폐를 투입한 것으로 처리합니다.
      * 화폐를 투입한 후에는 기본 주소에 있는 파일에 상태값을 저장합니다.
-     * @param tens 10원짜리 화폐의 개수
-     * @param fifties 50원짜리 화폐의 개수
-     * @param hundreds 100원짜리 화폐의 개수
+     *
+     * @param tens         10원짜리 화폐의 개수
+     * @param fifties      50원짜리 화폐의 개수
+     * @param hundreds     100원짜리 화폐의 개수
      * @param fiveHundreds 500원짜리 화폐의 개수
-     * @param thousands 1000원짜리 화폐의 개수
+     * @param thousands    1000원짜리 화폐의 개수
      */
     public void insertCash(int tens, int fifties, int hundreds, int fiveHundreds, int thousands) {
         this.tens += tens;
@@ -76,8 +77,8 @@ public class Wallet {
 
     public String toString() {
         return String.format(
-            "<Wallet %d, %d, %d, %d, %d>",
-            tens, fifties, hundreds, fiveHundreds, thousands);
+                "<Wallet %d, %d, %d, %d, %d>",
+                tens, fifties, hundreds, fiveHundreds, thousands);
     }
 
     /**
@@ -139,36 +140,36 @@ public class Wallet {
         return tens;
     }
 
-    public int getFifties() {
-        return fifties;
-    }
-
-    public int getHundreds() {
-        return hundreds;
-    }
-
-    public int getFiveHundreds() {
-        return fiveHundreds;
-    }
-
-    public int getThousands() {
-        return thousands;
-    }
-
     public void setTens(int tens) {
         this.tens = tens;
+    }
+
+    public int getFifties() {
+        return fifties;
     }
 
     public void setFifties(int fifties) {
         this.fifties = fifties;
     }
 
+    public int getHundreds() {
+        return hundreds;
+    }
+
     public void setHundreds(int hundreds) {
         this.hundreds = hundreds;
     }
 
+    public int getFiveHundreds() {
+        return fiveHundreds;
+    }
+
     public void setFiveHundreds(int fiveHundreds) {
         this.fiveHundreds = fiveHundreds;
+    }
+
+    public int getThousands() {
+        return thousands;
     }
 
     public void setThousands(int thousands) {

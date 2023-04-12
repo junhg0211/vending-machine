@@ -13,10 +13,10 @@ import java.io.File;
  * 관리자 로그인을 위한 프롬프트
  */
 public class AdminPrompt {
+    public static final String PASSWORD_PATH = "res/password.txt";
     private final VendingMachine machine;
     private final JFrame parent;
     private JDialog dialog;
-    public static final String PASSWORD_PATH = "res/password.txt";
     private JPasswordField passwordField;
 
     public AdminPrompt(VendingMachine machine) {
@@ -65,6 +65,7 @@ public class AdminPrompt {
 
     /**
      * 비밀번호 입력과 로그인 버튼 등, 기본적인 로그인을 위한 부분을 구현합니다.
+     *
      * @param panel 로그인을 위한 엔트리를 구현할 <code>JPanel</code> 객체
      */
     private void makeEntry(JPanel panel) {
@@ -85,6 +86,7 @@ public class AdminPrompt {
 
     /**
      * 확인, 취소, 비밀번호 변경 등 메타 작업을 위한 부분
+     *
      * @param panel 메타 작업 부분을 추가할 <code>JPanel</code> 객체
      */
     private void makeConsole(JPanel panel) {
