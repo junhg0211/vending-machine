@@ -25,6 +25,7 @@ public class VendingMachine {
     private Inventory inventory;
     private final JLabel[] leftLabels = new JLabel[5];
     private final JButton[] buyButtons = new JButton[5];
+    private final JLabel[] nameLabels = new JLabel[5];
     private int cashThousands = 0;
 
     public VendingMachine() {
@@ -117,6 +118,7 @@ public class VendingMachine {
             JLabel nameLabel = new JLabel(name);
             nameLabel.setBorder(nameLabelBorder);
             menuPanel.add(nameLabel);
+            nameLabels[i] = nameLabel;
 
             // 메뉴 남은 수량
             leftLabels[i] = new JLabel(leftString);
@@ -296,6 +298,13 @@ public class VendingMachine {
         cash = amount;
         String text = numberFormat.format(cash);
         cashAmountLabel.setText(text);
+    }
+
+    public void updateProductName(int index, String name) {
+        Kind kind = inventory.getJuices().get(index).getKind();
+        kind.setName(name);
+        nameLabels[index].setText(name);
+        inventory.save();
     }
 
     public Wallet getWallet() {

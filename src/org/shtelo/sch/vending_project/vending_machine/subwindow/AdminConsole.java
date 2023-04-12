@@ -24,6 +24,7 @@ public class AdminConsole {
     private final VendingMachine machine;
     private JFrame frame;
     private final ArrayList<JSpinner> spinners = new ArrayList<>();
+    private final ArrayList<JTextField> names = new ArrayList<>();
 
     AdminConsole(VendingMachine machine) {
         this.machine = machine;
@@ -100,6 +101,15 @@ public class AdminConsole {
                             "%s의 재고를 %d개로 설정하였습니다", juices.get(i).getKind().getName(), amount);
                     Log.writeLog(Log.REFILL_PRODUCT, message);
                 }
+
+                String previousName = juices.get(i).getKind().getName();
+                String name = names.get(i).getText();
+                if (!previousName.equals(name)) {
+                    machine.updateProductName(i, name);
+
+                    String message = String.format("상품 '%s'의 이름을 '%s'로 변경했습니다.", previousName, name);
+                    Log.writeLog(Log.ADMIN_INFO, message);
+                }
             }
 
             saveButton.setEnabled(false);
@@ -134,6 +144,7 @@ public class AdminConsole {
             nameField.getDocument().addDocumentListener(documentListener);
             nameField.setText(name);
             table.add(nameField);
+            names.add(nameField);
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, null, 1);
             JSpinner countSpinner = new JSpinner(spinnerModel);
