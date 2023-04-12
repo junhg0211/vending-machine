@@ -15,6 +15,7 @@ public class Wallet {
     private int hundreds;
     private int fiveHundreds;
     private int thousands;
+    private int cash;
     private static final String WALLET_PATH = "res/wallet.json";
 
     Wallet() {
@@ -23,6 +24,7 @@ public class Wallet {
         this.hundreds = 5;
         this.fiveHundreds = 5;
         this.thousands = 5;
+        this.cash = 0;
     }
 
     /**
@@ -171,5 +173,13 @@ public class Wallet {
 
     public void setThousands(int thousands) {
         this.thousands = thousands;
+    }
+
+    public int getCash() {
+        return cash;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
     }
 }

@@ -20,7 +20,6 @@ public class VendingMachine {
     private JFrame frame;
     private final NumberFormat numberFormat;
     private final Wallet wallet;
-    private int cash;
     private JLabel cashAmountLabel;
     private Inventory inventory;
     private final JLabel[] leftLabels = new JLabel[5];
@@ -32,7 +31,6 @@ public class VendingMachine {
         numberFormat = NumberFormat.getInstance();
 
         wallet = Wallet.getWallet();
-        cash = 0;
 
         buildWindow(); // 화면 띄우기
     }
@@ -150,20 +148,20 @@ public class VendingMachine {
             return;
         }
 
-        if (cash < price) {
+        if (wallet.getCash() < price) {
             JOptionPane.showMessageDialog(frame, "잔액이 부족합니다.", "오류", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         cashThousands = 0;
-        updateCash(cash - price);
+        updateCash(wallet.getCash() - price);
         updateLeftProductAmount(juiceIndex, amount-1);
 
         inventory.save();
 
         String message;
 
-        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, cash);
+        message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount-1, wallet.getCash());
         Log.writeLog(Log.SOLD, message);
 
         message = String.format(
@@ -221,7 +219,8 @@ public class VendingMachine {
             JLabel cashLabel = new JLabel("투입금: ", SwingConstants.LEFT);
             cashPanel.add(cashLabel);
 
-            cashAmountLabel = new JLabel("0", SwingConstants.RIGHT);
+            String cashAmountText = numberFormat.format(wallet.getCash());
+            cashAmountLabel = new JLabel(cashAmountText, SwingConstants.RIGHT);
             cashPanel.add(cashAmountLabel);
 
             customerPanel.add(cashPanel, BorderLayout.PAGE_END);
@@ -252,7 +251,7 @@ public class VendingMachine {
      * 기계에 있는 거스름을 사용자에게 돌려주는 작업을 수행합니다.
      */
     private void changeCash() {
-        int[] result = wallet.change(cash);
+        int[] result = wallet.change(wallet.getCash());
 
         String message = String.format(
                 "거스름돈을 처리했습니다. " +
@@ -272,7 +271,7 @@ public class VendingMachine {
                 "거스르지 못한 돈: %s원%n" +
                 "거스른 돈: %s원",
                 result[4], result[3], result[2], result[1], result[0],
-                numberFormat.format(result[5]), numberFormat.format(cash - result[5]));
+                numberFormat.format(result[5]), numberFormat.format(wallet.getCash() - result[5]));
         JOptionPane.showMessageDialog(frame, text);
 
         updateCash(result[5]);
@@ -287,7 +286,7 @@ public class VendingMachine {
      * @param amount 투입할 현금의 액수
      */
     public void insertCash(int amount) {
-        updateCash(cash + amount);
+        updateCash(wallet.getCash() + amount);
     }
 
     /**
@@ -295,9 +294,10 @@ public class VendingMachine {
      * @param amount 투입된 금액으로 표시할 액수
      */
     private void updateCash(int amount) {
-        cash = amount;
-        String text = numberFormat.format(cash);
+        wallet.setCash(amount);
+        String text = numberFormat.format(wallet.getCash());
         cashAmountLabel.setText(text);
+        wallet.save();
     }
 
     public void updateProductName(int index, String name) {
@@ -309,10 +309,6 @@ public class VendingMachine {
 
     public Wallet getWallet() {
         return wallet;
-    }
-
-    public int getCash() {
-        return this.cash;
     }
 
     public int getCashThousands() {

@@ -99,7 +99,7 @@ public class CashInputPrompt {
             amount += cashKinds[i] * (int) spinners.get(i).getValue();
         }
 
-        if (machine.getCash() + amount > 5000) {
+        if (machine.getWallet().getCash() + amount > 5000) {
             JOptionPane.showMessageDialog(dialog, "현금은 5,000원을 초과하여 투입할 수 없습니다.");
             return;
         }
@@ -124,7 +124,7 @@ public class CashInputPrompt {
 
         Log.writeLog(Log.INSERT_CASH, String.format(
                 "%d원 투입. 거스름 버퍼에 %d원 남음 (10*%d, 50*%d, 100*%d, 500*%d, 1000*%d)",
-                amount, machine.getCash(),
+                amount, machine.getWallet().getCash(),
                 (int) spinners.get(0).getValue(),
                 (int) spinners.get(1).getValue(),
                 (int) spinners.get(2).getValue(),
