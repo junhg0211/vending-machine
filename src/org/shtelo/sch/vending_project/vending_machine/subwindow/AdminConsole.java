@@ -5,6 +5,7 @@ import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
+import org.shtelo.sch.vending_project.vending_machine.data_type.Wallet;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -25,6 +26,7 @@ public class AdminConsole {
     private JFrame frame;
     private final ArrayList<JSpinner> spinners = new ArrayList<>();
     private final ArrayList<JTextField> names = new ArrayList<>();
+    private final JLabel[] cashAmountLabels = new JLabel[5];
 
     AdminConsole(VendingMachine machine) {
         this.machine = machine;
@@ -167,9 +169,56 @@ public class AdminConsole {
      */
     private void makeCashInventoryManager(JTabbedPane pane) {
         JPanel panel = new JPanel();
+        panel.setBorder(new EmptyBorder(8, 8, 8, 8));
         panel.setLayout(new BorderLayout());
 
-        panel.add(new JLabel("현금"));
+        { // 화폐 현황 표
+            JPanel metaTable = new JPanel();
+            metaTable.setLayout(new BorderLayout());
+            JPanel table = new JPanel();
+            table.setLayout(new GridLayout(5, 3));
+
+            Wallet wallet = machine.getWallet();
+
+            // 표 내용 채우기
+            table.add(new JLabel("1000원권"));
+            cashAmountLabels[0] = new JLabel(String.valueOf(wallet.getThousands()), JLabel.RIGHT);
+            table.add(cashAmountLabels[0]);
+            table.add(new JLabel("장"));
+
+            table.add(new JLabel("500원권"));
+            cashAmountLabels[1] = new JLabel(String.valueOf(wallet.getFiveHundreds()), JLabel.RIGHT);
+            table.add(cashAmountLabels[1]);
+            table.add(new JLabel("개"));
+
+            table.add(new JLabel("100원권"));
+            cashAmountLabels[2] = new JLabel(String.valueOf(wallet.getHundreds()), JLabel.RIGHT);
+            table.add(cashAmountLabels[2]);
+            table.add(new JLabel("개"));
+
+            table.add(new JLabel("50원권"));
+            cashAmountLabels[3] = new JLabel(String.valueOf(wallet.getFifties()), JLabel.RIGHT);
+            table.add(cashAmountLabels[3]);
+            table.add(new JLabel("개"));
+
+            table.add(new JLabel("10원권"));
+            cashAmountLabels[4] = new JLabel(String.valueOf(wallet.getTens()), JLabel.RIGHT);
+            table.add(cashAmountLabels[4]);
+            table.add(new JLabel("개"));
+
+            // 수금 버튼
+            JPanel consolePanel = new JPanel();
+            consolePanel.setLayout(new BorderLayout());
+
+            JButton takeCashButton = new JButton("수금");
+            takeCashButton.addActionListener(e -> System.out.println("takeCash"));
+            consolePanel.add(takeCashButton, BorderLayout.EAST);
+
+            metaTable.add(consolePanel, BorderLayout.PAGE_END);
+
+            metaTable.add(table, BorderLayout.PAGE_START);
+            panel.add(metaTable);
+        }
 
         pane.addTab("현금", panel);
     }
