@@ -152,4 +152,24 @@ public class Wallet {
     public int getThousands() {
         return thousands;
     }
+
+    public void setTens(int tens) {
+        this.tens = tens;
+    }
+
+    public void setFifties(int fifties) {
+        this.fifties = fifties;
+    }
+
+    public void setHundreds(int hundreds) {
+        this.hundreds = hundreds;
+    }
+
+    public void setFiveHundreds(int fiveHundreds) {
+        this.fiveHundreds = fiveHundreds;
+    }
+
+    public void setThousands(int thousands) {
+        this.thousands = thousands;
+    }
 }

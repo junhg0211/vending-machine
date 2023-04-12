@@ -211,7 +211,70 @@ public class AdminConsole {
             consolePanel.setLayout(new BorderLayout());
 
             JButton takeCashButton = new JButton("수금");
-            takeCashButton.addActionListener(e -> System.out.println("takeCash"));
+            takeCashButton.addActionListener(e -> {
+                // 수금 구현
+                int[] takenCashes = new int[5];
+                int delta;
+                int now;
+
+                // 1000
+                delta = Math.max(wallet.getThousands() - 5, 0);
+                now = wallet.getThousands() - delta;
+                wallet.setThousands(now);
+                cashAmountLabels[0].setText(String.valueOf(now));
+                takenCashes[0] = delta;
+
+                // 500
+                delta = Math.max(wallet.getFiveHundreds() - 5, 0);
+                now = wallet.getFiveHundreds() - delta;
+                wallet.setFiveHundreds(now);
+                cashAmountLabels[1].setText(String.valueOf(now));
+                takenCashes[1] = delta;
+
+                // 100
+                delta = Math.max(wallet.getHundreds() - 5, 0);
+                now = wallet.getHundreds() - delta;
+                wallet.setHundreds(now);
+                cashAmountLabels[2].setText(String.valueOf(now));
+                takenCashes[2] = delta;
+
+                // 50
+                delta = Math.max(wallet.getFifties() - 5, 0);
+                now = wallet.getFifties() - delta;
+                wallet.setFifties(now);
+                cashAmountLabels[3].setText(String.valueOf(now));
+                takenCashes[3] = delta;
+
+                // 10
+                delta = Math.max(wallet.getTens() - 5, 0);
+                now = wallet.getTens() - delta;
+                wallet.setTens(now);
+                cashAmountLabels[4].setText(String.valueOf(now));
+                takenCashes[4] = delta;
+
+                int totalTaken = 0;
+                totalTaken += takenCashes[0] * 1000;
+                totalTaken += takenCashes[1] * 500;
+                totalTaken += takenCashes[2] * 100;
+                totalTaken += takenCashes[3] * 50;
+                totalTaken += takenCashes[4] * 10;
+
+                wallet.save();
+
+                String message = String.format("관리자가 현금(%d원)을 수금했습니다.", totalTaken);
+                Log.writeLog(Log.ADMIN_INFO, message);
+
+                JOptionPane.showMessageDialog(frame, String.format(
+                        "현금을 수금했습니다.%n" +
+                        "총 수금 금액: %d원%n" +
+                        "%n" +
+                        "1000원권 - %d장%n" +
+                        "500원권 - %d장%n" +
+                        "100원권 - %d장%n" +
+                        "50원권 - %d장%n" +
+                        "10원권 - %d장",
+                        totalTaken, takenCashes[0], takenCashes[1], takenCashes[2], takenCashes[3], takenCashes[4]));
+            });
             consolePanel.add(takeCashButton, BorderLayout.EAST);
 
             metaTable.add(consolePanel, BorderLayout.PAGE_END);
