@@ -306,7 +306,15 @@ public class AdminConsole {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        panel.add(new JLabel("로그"));
+        JTextArea textArea = new JTextArea();
+        textArea.setEnabled(false);
+        textArea.setDisabledTextColor(Color.BLACK);
+
+        textArea.append("HEllo, world\n");
+        textArea.append("This is String which is appended by code!\n");
+        textArea.append("uhm... which envoked after the textarea enable is set to false");
+
+        panel.add(textArea);
 
         pane.addTab("로그", panel);
     }
