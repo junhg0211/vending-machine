@@ -2,6 +2,7 @@ package org.shtelo.sch.vending_project.vending_machine.subwindow;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import org.shtelo.sch.vending_project.util.Log;
+import org.shtelo.sch.vending_project.util.LogFetcher;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
@@ -309,12 +310,20 @@ public class AdminConsole {
         JTextArea textArea = new JTextArea();
         textArea.setEnabled(false);
         textArea.setDisabledTextColor(Color.BLACK);
+        textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
-        textArea.append("HEllo, world\n");
-        textArea.append("This is String which is appended by code!\n");
-        textArea.append("uhm... which envoked after the textarea enable is set to false");
+        // to make disabled textarea scrollable.
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        panel.add(textArea);
+        LogFetcher fetcher = new LogFetcher();
+        for (int i = 0; i < 50 && !fetcher.isEnd(); i++, fetcher.updateLast()) {
+            textArea.append(fetcher.getCurrent() + "\n");
+        }
+        textArea.setCaretPosition(0);
+
+        panel.add(scrollPane);
 
         pane.addTab("로그", panel);
     }

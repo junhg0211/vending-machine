@@ -1,9 +1,6 @@
 package org.shtelo.sch.vending_project.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 
 /**
@@ -57,12 +54,17 @@ public class LogFetcher {
             return;
         }
 
-        int index = 0;
+        int index = -1;
         for (int i = 0; i < filenames.length; i++) {
             if (filenames[i].equals(this.lastDate)) {
                 index = i;
                 break;
             }
+        }
+
+        if (index == -1) {
+            updateLast();
+            return;
         }
 
         this.end = index == 1;
@@ -86,12 +88,17 @@ public class LogFetcher {
             return;
         }
 
-        int index = 0;
+        int index = -1;
         for (int i = 0; i < filenames.length; i++) {
             if (filenames[i].equals(this.lastTimestamp)) {
                 index = i;
                 break;
             }
+        }
+
+        if (index == -1) {
+            updateLast();
+            return;
         }
 
         this.firstTimestamp = index == 1;
@@ -125,6 +132,33 @@ public class LogFetcher {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getCurrent() {
+        if (this.lastDate == null || this.lastTimestamp == null || this.lastIndex == -1) {
+            updateLast();
+        }
+
+        String result;
+
+        File file = new File(String.format("res/log/%s/%s", this.lastDate, this.lastTimestamp));
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            for (int i = 0; i < this.lastIndex; i++)
+                reader.readLine();
+            result = reader.readLine();
+
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    public boolean isEnd() {
+        return this.end;
     }
 
     public static void main(String[] args) {
