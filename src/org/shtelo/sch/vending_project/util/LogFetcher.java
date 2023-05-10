@@ -96,7 +96,7 @@ public class LogFetcher {
             }
         }
 
-        if (index == -1) {
+        if (index <= 0) {
             updateLast();
             return;
         }
