@@ -97,7 +97,7 @@ public class LogFetcher {
         }
 
         if (index <= 0) {
-            updateLast();
+            updateLastDate();
             return;
         }
 
@@ -110,6 +110,9 @@ public class LogFetcher {
      * 이전 로그 확인해도록 변경하기
      */
     private void updateLastIndex() {
+        if (lastTimestamp == null)
+            return;
+
         File file = new File(String.format("res/log/%s/%s", lastDate, lastTimestamp));
 
         this.firstIndex = false;
