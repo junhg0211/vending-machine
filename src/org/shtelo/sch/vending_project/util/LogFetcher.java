@@ -67,6 +67,11 @@ public class LogFetcher {
             return;
         }
 
+        if (index == 0) {
+            this.end = true;
+            return;
+        }
+
         this.end = index == 1;
         this.lastDate = filenames[index - 1];
         this.lastTimestamp = null;
