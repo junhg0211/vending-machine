@@ -68,6 +68,10 @@ public class SellLogger {
         return log;
     }
 
+    public ArrayList<DailyLog> getDailyLogs() {
+        return dailyLogs;
+    }
+
     /**
      * 로거의 작동을 테스트 · 디버그하기 위한 <code>main</code> 함수
      */

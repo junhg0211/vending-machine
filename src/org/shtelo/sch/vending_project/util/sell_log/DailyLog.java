@@ -36,4 +36,7 @@ public class DailyLog {
         sells.put(product, amount);
     }
 
+    public HashMap<String, Integer> getSells() {
+        return sells;
+    }
 }

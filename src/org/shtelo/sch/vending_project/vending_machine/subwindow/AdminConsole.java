@@ -3,6 +3,8 @@ package org.shtelo.sch.vending_project.vending_machine.subwindow;
 import com.formdev.flatlaf.FlatClientProperties;
 import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.util.LogFetcher;
+import org.shtelo.sch.vending_project.util.sell_log.DailyLog;
+import org.shtelo.sch.vending_project.util.sell_log.SellLogger;
 import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
@@ -73,9 +75,32 @@ public class AdminConsole {
      */
     private void makeSalesInfo(JTabbedPane pane) {
         JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(new EmptyBorder(8, 8, 8, 8));
 
-        panel.add(new JLabel("매출 정보 패널"));
+        SellLogger sellLogger = machine.getSellLogger();
+        for (DailyLog log : sellLogger.getDailyLogs()) {
+            JPanel subPanel = new JPanel();
+            subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+            subPanel.setBorder(new EmptyBorder(0, 0, 8, 0));
+
+            JLabel label = new JLabel(log.getDate());
+            label.setBorder(new EmptyBorder(0, 0, 0, 8));
+            label.putClientProperty(FlatClientProperties.STYLE_CLASS, "h4");
+            subPanel.add(label);
+
+            for (String key : log.getSells().keySet()) {
+                JLabel productLabel = new JLabel(String.format("%s: %d개", key, log.getSells(key)));
+                subPanel.add(productLabel);
+            }
+
+            JLabel amountLabel = new JLabel(String.format("%d원", log.getSales()));
+            subPanel.add(amountLabel);
+
+            panel.add(subPanel);
+        }
+
+        panel.add(Box.createVerticalGlue());
 
         pane.addTab("매출", panel);
     }

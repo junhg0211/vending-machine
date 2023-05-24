@@ -336,6 +336,10 @@ public class VendingMachine {
         this.cashThousands = cashThousands;
     }
 
+    public SellLogger getSellLogger() {
+        return sellLogger;
+    }
+
     public Inventory getInventory() {
         return this.inventory;
     }
