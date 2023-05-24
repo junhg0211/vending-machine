@@ -173,6 +173,11 @@ public class VendingMachine {
         message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount - 1, wallet.getCash());
         Log.writeLog(Log.SOLD, message);
 
+        if (amount - 1 == 0) {
+            message = String.format("%s 재고 소진됨", name);
+            Log.writeLog(Log.SOLD_OUT, message);
+        }
+
         DailyLog log = sellLogger.getLog(DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now()));
         log.setSells(name, log.getSells(name) + 1);
         log.setSales(log.getSales() + price);

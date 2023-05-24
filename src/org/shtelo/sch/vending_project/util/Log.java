@@ -12,6 +12,7 @@ public class Log {
     public static final String SOLD = "상품판매";
     public static final String INSERT_CASH = "현금투입";
     public static final String REFILL_PRODUCT = "재고보충";
+    public static final String SOLD_OUT = "재고소진";
     public static final String CHANGE_CASH = "잔돈반환";
     public static final String ADMIN_LOGIN = "관리접속";
     public static final String ADMIN_LOGOUT = "관리퇴장";
