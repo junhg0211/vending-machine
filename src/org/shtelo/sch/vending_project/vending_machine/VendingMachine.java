@@ -4,6 +4,8 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import org.shtelo.sch.vending_project.util.Josa;
 import org.shtelo.sch.vending_project.util.Log;
+import org.shtelo.sch.vending_project.util.sell_log.SellLogger;
+import org.shtelo.sch.vending_project.util.sell_log.DailyLog;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Inventory;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Kind;
 import org.shtelo.sch.vending_project.vending_machine.data_type.Product;
@@ -15,6 +17,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class VendingMachine {
     private final NumberFormat numberFormat;
@@ -26,11 +30,12 @@ public class VendingMachine {
     private JLabel cashAmountLabel;
     private Inventory inventory;
     private int cashThousands = 0;
+    private final SellLogger sellLogger;
 
     public VendingMachine() {
-        numberFormat = NumberFormat.getInstance();
-
-        wallet = Wallet.getWallet();
+        this.numberFormat = NumberFormat.getInstance();
+        this.wallet = Wallet.getWallet();
+        this.sellLogger = SellLogger.getLogger();
 
         buildWindow(); // 화면 띄우기
     }
@@ -167,6 +172,11 @@ public class VendingMachine {
 
         message = String.format("%s 판매 (%d개 남음), 남은 현금 %d원", name, amount - 1, wallet.getCash());
         Log.writeLog(Log.SOLD, message);
+
+        DailyLog log = sellLogger.getLog(DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now()));
+        log.setSells(name, log.getSells(name) + 1);
+        log.setSales(log.getSales() + price);
+        sellLogger.save();
 
         message = String.format(
                 "%s%c 1개 구매했습니다.%n가격: %s원",
