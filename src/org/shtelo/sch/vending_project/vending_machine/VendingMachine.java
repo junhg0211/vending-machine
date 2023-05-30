@@ -69,6 +69,12 @@ public class VendingMachine {
         makeConsole(panel);
 
         frame.add(panel);
+    }
+
+    /**
+     * 화면을 띄웁니다.
+     */
+    public void start() {
         frame.setVisible(true);
     }
 
