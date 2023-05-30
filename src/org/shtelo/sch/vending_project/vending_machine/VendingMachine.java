@@ -2,6 +2,7 @@ package org.shtelo.sch.vending_project.vending_machine;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import org.shtelo.sch.vending_project.server.Server;
 import org.shtelo.sch.vending_project.util.Josa;
 import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.util.sell_log.SellLogger;
@@ -16,6 +17,8 @@ import org.shtelo.sch.vending_project.vending_machine.subwindow.CashInputPrompt;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +34,7 @@ public class VendingMachine {
     private Inventory inventory;
     private int cashThousands = 0;
     private final SellLogger sellLogger;
+    private Server server;
 
     public VendingMachine() {
         this.numberFormat = NumberFormat.getInstance();
@@ -57,6 +61,12 @@ public class VendingMachine {
         frame.setSize(new Dimension(600, 400));
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setLocationRelativeTo(null);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                server.stopServer();
+            }
+        });
 
         // 페이지 프레임 여백
         JPanel panel = new JPanel();
@@ -353,5 +363,9 @@ public class VendingMachine {
 
     public Inventory getInventory() {
         return this.inventory;
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
     }
 }

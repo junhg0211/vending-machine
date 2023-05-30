@@ -54,8 +54,6 @@ public class ClientThread extends Thread {
         } catch (IOException e) {
             System.out.println("ClientThread interrupted");
         }
-
-        server.removeClient(this);
     }
 
     public void sendMessage(String message) {
