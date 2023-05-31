@@ -137,6 +137,11 @@ public class Util {
     public static String confirmLogin(JPasswordField passwordField) {
         String password;
         password = String.valueOf(passwordField.getPassword());
+
+        return confirmLogin(password);
+    }
+
+    public static String confirmLogin(String password) {
         password = Util.encrypt(password);
 
         File file = new File(PASSWORD_PATH);

@@ -27,6 +27,12 @@ public class Main {
 
             if (tokens[0].equalsIgnoreCase("4")) {
                 break;
+            } else if (tokens[0].equalsIgnoreCase("2")) {
+                int count = Integer.parseInt(tokens[1]);
+                for (int i = 0; i < count; i++) {
+                    System.out.print("SERVER >> ");
+                    System.out.println(reader.nextLine());
+                }
             }
         }
 

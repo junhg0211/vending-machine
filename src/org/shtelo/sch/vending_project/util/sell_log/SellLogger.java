@@ -53,6 +53,17 @@ public class SellLogger {
     }
 
     /**
+     * <code>date</code> 날짜의 로그가 있는지 확인합니다.
+     */
+    public boolean isLogOn(String date) {
+        for (DailyLog log : this.dailyLogs) {
+            if (log.getDate().equals(date))
+                return true;
+        }
+        return false;
+    }
+
+    /**
      * <code>date</code> 날짜의 로그를 불러옵니다.
      * @param date 로그의 날짜
      * @return <code>date</code> 날짜의 로그

@@ -5,15 +5,18 @@ import org.shtelo.sch.vending_project.vending_machine.VendingMachine;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server extends Thread {
     private final VendingMachine machine;
     private boolean running;
+    private final ArrayList<String> authorizeds;
 
     public Server(VendingMachine machine) {
         this.machine = machine;
 
         this.running = true;
+        this.authorizeds = new ArrayList<>();
     }
 
     @Override
@@ -39,5 +42,9 @@ public class Server extends Thread {
     public void stopServer() {
         this.running = false;
         System.out.println("Server stopped");
+    }
+
+    public ArrayList<String> getAuthorizeds() {
+        return authorizeds;
     }
 }
