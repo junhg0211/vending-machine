@@ -145,8 +145,8 @@ public class ClientThread extends Thread {
                     continue;
                 }
 
-                String[] tokens = message.substring(5).split(" ", 4);
-                if (tokens.length < 4) {
+                String[] tokens = message.substring(5).split(" ", 3);
+                if (tokens.length < 3) {
                     sendMessage("5 잘못된 명령어");
                     continue;
                 }
