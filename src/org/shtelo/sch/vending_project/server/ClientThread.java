@@ -139,7 +139,14 @@ public class ClientThread extends Thread {
             return;
         }
 
-        int preferredCount = Integer.parseInt(message.substring(5));
+        int preferredCount;
+        try {
+            preferredCount = Integer.parseInt(message.substring(5));
+        } catch (NumberFormatException e) {
+            sendMessage("5 잘못된 수 형식");
+            return;
+        }
+
         LogFetcher fetcher = new LogFetcher();
         ArrayList<String> logs = new ArrayList<>();
         for (int i = 0; i < preferredCount && !fetcher.isEnd(); i++) {
@@ -173,6 +180,11 @@ public class ClientThread extends Thread {
         int index = Integer.parseInt(tokens[0]);
         int amount = Integer.parseInt(tokens[1]);
         String name = tokens[2];
+
+        if (index < 0 || index >= 5) {
+            sendMessage("5 잘못된 인덱스 번호");
+            return;
+        }
 
         machine.updateProductName(index, name);
         machine.updateLeftProductAmount(index, amount);
