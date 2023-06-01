@@ -1,5 +1,6 @@
 package org.shtelo.sch.vending_project.server;
 
+import org.shtelo.sch.vending_project.util.Log;
 import org.shtelo.sch.vending_project.util.LogFetcher;
 import org.shtelo.sch.vending_project.util.Util;
 import org.shtelo.sch.vending_project.util.sell_log.DailyLog;
@@ -214,7 +215,8 @@ public class ClientThread extends Thread {
 
     public void sendMessage(String message) {
         writer.println(message);
-        System.out.printf("%s:%d << %s\n", socket.getInetAddress(), socket.getPort(), message);
+        String log = String.format("%s:%d << %s", socket.getInetAddress(), socket.getPort(), message);
+        Log.writeLog(Log.COMMUNICATION, log);
     }
 
     public String getMessage() {
@@ -226,7 +228,8 @@ public class ClientThread extends Thread {
             return null;
         }
 
-        System.out.printf("%s:%d >> %s\n", socket.getInetAddress().getHostAddress(), socket.getPort(), message);
+        String log = String.format("%s:%d >> %s", socket.getInetAddress(), socket.getPort(), message);
+        Log.writeLog(Log.COMMUNICATION, log);
 
         return message;
     }

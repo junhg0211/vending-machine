@@ -18,6 +18,7 @@ public class Log {
     public static final String ADMIN_LOGOUT = "관리퇴장";
     public static final String ADMIN_FAIL = "관리오류";
     public static final String ADMIN_INFO = "관리정보";
+    public static final String COMMUNICATION = "정보통신";
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmmssSSS");
     private static final DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
