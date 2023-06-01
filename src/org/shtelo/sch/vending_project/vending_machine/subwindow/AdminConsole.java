@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 관리자 콘솔
+ * 관리자 콘솔.
+ * 재고 확인, 재고 수정 등 관리자가 사용할 수 있는 기능을 제공합니다.
  */
 public class AdminConsole {
     private final VendingMachine machine;
@@ -37,6 +38,9 @@ public class AdminConsole {
         makeWindow();
     }
 
+    /**
+     * 관리자 콘솔 화면을 구성합니다.
+     */
     private void makeWindow() {
         frame = new JFrame();
         frame.setMinimumSize(new Dimension(500, 600));
@@ -70,7 +74,6 @@ public class AdminConsole {
 
     /**
      * 매출 정보 패널을 제작합니다.
-     *
      * @param pane 매출 정보 패널이 제작될 <code>JTabbedPane</code> 객체
      */
     private void makeSalesInfo(JTabbedPane pane) {
@@ -78,6 +81,7 @@ public class AdminConsole {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(new EmptyBorder(8, 8, 8, 8));
 
+        // 날마다 작성되는 매출 정보를 가져와 표시
         SellLogger sellLogger = machine.getSellLogger();
         for (DailyLog log : sellLogger.getDailyLogs()) {
             JPanel subPanel = new JPanel();
@@ -107,7 +111,6 @@ public class AdminConsole {
 
     /**
      * 재고·상품 관리 패널을 제작합니다.
-     *
      * @param pane 재고관리 패널이 제작될 <code>JTabbedPane</code> 객체
      */
     private void makeInventoryManager(JTabbedPane pane) {
@@ -153,18 +156,13 @@ public class AdminConsole {
         table.setLayout(new GridLayout(5, 3));
 
         DocumentListener documentListener = new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent documentEvent) {
+            @Override public void insertUpdate(DocumentEvent documentEvent) {
                 saveButton.setEnabled(true);
             }
-
-            @Override
-            public void removeUpdate(DocumentEvent documentEvent) {
+            @Override public void removeUpdate(DocumentEvent documentEvent) {
                 saveButton.setEnabled(true);
             }
-
-            @Override
-            public void changedUpdate(DocumentEvent documentEvent) {
+            @Override public void changedUpdate(DocumentEvent documentEvent) {
                 saveButton.setEnabled(true);
             }
         };
@@ -201,7 +199,6 @@ public class AdminConsole {
 
     /**
      * 현금 통 관리 패널을 제작합니다.
-     *
      * @param pane 현금 통 관리 패널이 만들어질 <code>JTabbedPane</code> 객체
      */
     private void makeCashInventoryManager(JTabbedPane pane) {
@@ -325,23 +322,24 @@ public class AdminConsole {
 
     /**
      * 관리자 로그를 확인하는 패널을 제작합니다.
-     *
      * @param pane 관리자 로그 패널이 만들어질 <code>JTabbedPane</code> 객체
      */
     private void makeLogInfo(JTabbedPane pane) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
+        // 로그를 표시할 텍스트 영역 제시
         JTextArea textArea = new JTextArea();
         textArea.setEnabled(false);
         textArea.setDisabledTextColor(Color.BLACK);
         textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
-        // to make disabled textarea scrollable.
+        // 비활성화된 텍스트 영역에 스크롤바를 추가
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
+        // 로그 텍스트 영역에 로그를 추가
         LogFetcher fetcher = new LogFetcher();
         for (int i = 0; i < 50 && !fetcher.isEnd(); i++, fetcher.updateLast()) {
             textArea.append(fetcher.getCurrent() + "\n");
@@ -355,7 +353,6 @@ public class AdminConsole {
 
     /**
      * 비밀번호 변경이나 서버 주소 변경 등 메타 관리적인 요소를 관리하는 조작판을 제작합니다.
-     *
      * @param panel 메타 관리 조작판을 제작할 <code>JPanel</code> 객체
      */
     private void makeMetaManager(JTabbedPane panel) {
@@ -381,7 +378,6 @@ public class AdminConsole {
 
     /**
      * 관리자 패널 메타 조작을 위한 조작판을 제작합니다.
-     *
      * @param panel 메타 조작 패널을 제작할 <code>JPanel</code> 객체
      */
     private void makeConsole(JPanel panel) {
@@ -398,33 +394,14 @@ public class AdminConsole {
     }
 
     private static class AdminCloseListener implements WindowListener {
-        @Override
-        public void windowOpened(WindowEvent windowEvent) {
-        }
-
-        @Override
-        public void windowClosing(WindowEvent windowEvent) {
+        @Override public void windowOpened(WindowEvent windowEvent) {}
+        @Override public void windowClosing(WindowEvent windowEvent) {
             Log.writeLog(Log.ADMIN_LOGOUT, "관리자가 콘솔을 닫았습니다.");
         }
-
-        @Override
-        public void windowClosed(WindowEvent windowEvent) {
-        }
-
-        @Override
-        public void windowIconified(WindowEvent windowEvent) {
-        }
-
-        @Override
-        public void windowDeiconified(WindowEvent windowEvent) {
-        }
-
-        @Override
-        public void windowActivated(WindowEvent windowEvent) {
-        }
-
-        @Override
-        public void windowDeactivated(WindowEvent windowEvent) {
-        }
+        @Override public void windowClosed(WindowEvent windowEvent) {}
+        @Override public void windowIconified(WindowEvent windowEvent) {}
+        @Override public void windowDeiconified(WindowEvent windowEvent) {}
+        @Override public void windowActivated(WindowEvent windowEvent) {}
+        @Override public void windowDeactivated(WindowEvent windowEvent) {}
     }
 }

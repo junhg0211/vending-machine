@@ -8,7 +8,6 @@ public class Josa {
 
     /**
      * 글자에 받침이 있는지 확인합니다.
-     *
      * @param letter 받침이 있는지 확인할 한글 글자
      * @return 받침 존재에 대한 여부
      */
@@ -19,7 +18,6 @@ public class Josa {
 
     /**
      * 단어에 대한 목적격 조사 을/를을 반환합니다.
-     *
      * @param string 목적격 조사가 붙을 단어
      * @return 목적격 조사
      */

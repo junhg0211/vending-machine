@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 /**
- * 하나의 상품 대한 인벤토리 슬롯
+ * 자판기에 있는 상품들의 목록을 저장하는 클래스
  */
 public class Inventory {
     private static final String INVENTORY_PATH = "res/inventory.json";
@@ -44,7 +44,6 @@ public class Inventory {
 
     /**
      * <code>Inventory</code>의 기본값을 생성합니다.
-     *
      * @return Inventory 기본값
      */
     public static Inventory getDefault() {

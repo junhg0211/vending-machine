@@ -20,6 +20,10 @@ public class SellLogger {
         this.dailyLogs = new ArrayList<>();
     }
 
+    /**
+     * 파일에 저장되어있는 로거를 불러옵니다.
+     * @return 파일에 저장되어있는 로거
+     */
     public static SellLogger getLogger() {
         SellLogger result;
 

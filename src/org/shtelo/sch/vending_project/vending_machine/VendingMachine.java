@@ -23,6 +23,9 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 가장 처음으로 보이는 자판기 화면입니다.
+ */
 public class VendingMachine {
     private final NumberFormat numberFormat;
     private final Wallet wallet;
@@ -90,7 +93,6 @@ public class VendingMachine {
 
     /**
      * 자판기 상단에 타이틀을 추가합니다.
-     *
      * @param panel 타이틀을 추가할 <code>JPanel</code> 객체
      */
     private void makeTitle(JPanel panel) {
@@ -101,7 +103,6 @@ public class VendingMachine {
 
     /**
      * 자판기의 메뉴 선택 부분을 추가합니다.
-     *
      * @param panel 메뉴 선택 부분을 추가할 <code>JPanel</code> 객체
      */
     @SuppressWarnings("SpellCheckingInspection")
@@ -158,7 +159,6 @@ public class VendingMachine {
 
     /**
      * 음료 구매를 처리합니다.
-     *
      * @param juiceIndex 구매할 음료수의 인덱스 번호
      */
     private void processBuy(int juiceIndex) {
@@ -208,7 +208,6 @@ public class VendingMachine {
     /**
      * 남은 상품 개수를 업데이트하도록 처리합니다.
      * <code>inventory</code>와 매대에 있는 남은 수량을 업데이트합니다.
-     *
      * @param index  업데이트할 상품의 인덱스
      * @param amount 업데이트된 상품의 남은 수량
      */
@@ -319,7 +318,6 @@ public class VendingMachine {
 
     /**
      * 현금을 자판기에 투입한 것으로 처리합니다.
-     *
      * @param amount 투입할 현금의 액수
      */
     public void insertCash(int amount) {
@@ -328,7 +326,6 @@ public class VendingMachine {
 
     /**
      * 투입한 금액의 표시 액수를 <code>cash</code> 변수에 따라서 변경합니다.
-     *
      * @param amount 투입된 금액으로 표시할 액수
      */
     private void updateCash(int amount) {

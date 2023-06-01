@@ -24,7 +24,7 @@ public class LogFetcher {
     }
 
     /**
-     * 현재 읽고 있는 로그 이전의 로그를 불러옵니다.
+     * 현재 읽고 있는 로그 이전의 로그를 읽도록 설정합니다.
      */
     public void updateLast() {
         if (end)
@@ -142,6 +142,10 @@ public class LogFetcher {
         }
     }
 
+    /**
+     * 현재 읽는 것으로 설정되어있는 로그를 반환합니다.
+     * @return 현재 읽는 것으로 설정되어있는 로그
+     */
     public String getCurrent() {
         if (this.lastDate == null || this.lastTimestamp == null || this.lastIndex == -1) {
             updateLast();
@@ -165,10 +169,17 @@ public class LogFetcher {
         return result;
     }
 
+    /**
+     * 로그가 더 이상 존재하지 않는지 확인합니다.
+     * @return 로그가 더 이상 존재하지 않는지에 대한 여부
+     */
     public boolean isEnd() {
         return this.end;
     }
 
+    /**
+     * 테스트용 메인 메소드입니다.
+     */
     public static void main(String[] args) {
         LogFetcher fetcher = new LogFetcher();
 

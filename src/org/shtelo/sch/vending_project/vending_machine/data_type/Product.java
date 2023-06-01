@@ -1,7 +1,8 @@
 package org.shtelo.sch.vending_project.vending_machine.data_type;
 
 /**
- * 상품에 대한 정보
+ * 상품에 대한 정보 dataclass.
+ * 상품의 이름과 수량을 저장합니다.
  */
 public class Product {
     private Kind kind;

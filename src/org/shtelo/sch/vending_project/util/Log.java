@@ -8,6 +8,9 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 자판기의 로그를 기록하는 클래스
+ */
 public class Log {
     public static final String SOLD = "상품판매";
     public static final String INSERT_CASH = "현금투입";
@@ -47,6 +50,10 @@ public class Log {
         return directory;
     }
 
+    /**
+     * 로그 파일명을 반환합니다.
+     * 만약 지정된 로그 파일명이 없다면, 새로운 로그 파일명을 생성합니다.
+     */
     private static String getLogFilename() {
         if (logFilename == null) {
             LocalDateTime date = LocalDateTime.now();
@@ -58,8 +65,8 @@ public class Log {
     }
 
     /**
-     * 로그를 작성합니다. 모든 로그에 대한 일반적인 로깅 솔루션을 제공합니다.
-     *
+     * 로그를 작성합니다.
+     * @param type 로그의 타입
      * @param message 로그로 남겨질 메시지
      */
     public static void writeLog(String type, String message) {

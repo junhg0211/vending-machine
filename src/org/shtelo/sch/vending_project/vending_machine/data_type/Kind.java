@@ -1,7 +1,8 @@
 package org.shtelo.sch.vending_project.vending_machine.data_type;
 
 /**
- * 상품 종류
+ * 상품 종류 dataclass.
+ * 상품의 이름과 가격을 저장합니다.
  */
 public class Kind {
     private String name;

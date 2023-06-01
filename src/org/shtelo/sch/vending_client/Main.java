@@ -5,22 +5,27 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * 자판기 관리 프로그램(클라이언트)의 메인 클래스
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            // 자판기 IP 입력
             System.out.println("접속할 서버의 주소를 입력하세요. 종료하려면 'exit' 또는 'quit'를 입력하세요.");
             System.out.println("만약 통신에서 사용할 포트 번호를 임의로 설정하려면 '주소:포트번호' 형식으로 입력하세요.");
             System.out.println("기본 포트 번호는 9832입니다.");
             System.out.print(">> ");
             String ip = scanner.nextLine().trim();
 
+            // 종료 조건
             if (ip.equalsIgnoreCase("exit") || ip.equalsIgnoreCase("quit")) {
                 break;
             }
 
-            // parse host and port
+            // host, port parsing
             String host;
             int port = 9832;
 
@@ -49,10 +54,12 @@ public class Main {
             socket = new Socket(host, port);
             System.out.println("서버에 접속했습니다.");
         } catch (IOException e) {
+            // exception handling for server not online
             System.err.println("자판기에 접속할 수 없습니다. 자판기가 켜져있는지 확인해주세요.");
             return;
         }
 
+        // server io ready
         Scanner reader;
         PrintStream writer;
 
@@ -64,8 +71,10 @@ public class Main {
             return;
         }
 
+        // server communication main loop
         boolean connected = true;
         while (connected) {
+            // print prompts
             System.out.println("다음에서 수행할 작업에 해당하는 수를 입력해주세요.\n\n" +
                     "1. 관리자 로그인\n" +
                     "2. 일 매출 확인\n" +
@@ -78,6 +87,7 @@ public class Main {
 
             String message = scanner.nextLine();
 
+            // branch for action selection
             if (message.equalsIgnoreCase("9")) {
                 System.out.println("서버와의 연결을 종료합니다.");
                 writer.println("QUIT");
@@ -102,6 +112,8 @@ public class Main {
                 writer.printf("GLOG %s\n", count);
             } else if (message.equalsIgnoreCase("5")) {
                 handleSetProduct(writer, reader, scanner);
+            } else {
+                continue;
             }
             justReceivePrint(reader);
         }
@@ -118,11 +130,19 @@ public class Main {
         }
     }
 
+    /**
+     * 자판기에게 SPRD 명령을 보내는 명령어 실행을 처리합니다.
+     * @param writer 자판기와의 통신을 위한 출력 스트림
+     * @param reader 자판기와의 통신을 위한 입력 스트림
+     * @param scanner 사용자 입력을 받는 스캐너
+     */
     private static void handleSetProduct(PrintStream writer, Scanner reader, Scanner scanner) {
+        // 음료 목록 표시
         System.out.println("현재 자판기 음료 목록은 다음과 같습니다.");
         writer.println("GINV");
         justReceivePrint(reader);
 
+        // 음료 인덱스와 재고 입력
         int index, count;
         try {
             System.out.print("정보를 변경할 음료의 번호를 입력해주세요 (번호는 1번부터 시작): ");
@@ -135,14 +155,23 @@ public class Main {
             return;
         }
 
+        // 음료 이름 입력
         System.out.print("정보를 변경할 음료의 이름을 입력해주세요: ");
         String name = scanner.nextLine().trim();
 
+        // 서버에 정보 전송
         writer.printf("SPRD %d %d %s\n", index, count, name);
     }
 
+    /**
+     * 서버에서 받은 응답을 출력합니다.
+     * @param reader 서버와의 통신을 위한 입력 스트림
+     */
     private static void justReceivePrint(Scanner reader) {
+        // 서버에서 응답 받기
         String response = reader.nextLine();
+
+        // 만약 서버에서 주는 응답이 여러개라면 여러번 응답 받아서 출력하기
         if (response.startsWith("2")) {
             String[] tokens = response.split(" ");
             int count = Integer.parseInt(tokens[1]);
@@ -150,6 +179,7 @@ public class Main {
                 System.out.print("SERVER >> ");
                 System.out.println(reader.nextLine());
             }
+        // 아님 말구
         } else {
             System.out.printf("SERVER >> %s\n", response);
         }

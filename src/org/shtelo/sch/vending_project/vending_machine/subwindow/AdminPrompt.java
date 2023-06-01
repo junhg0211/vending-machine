@@ -65,7 +65,6 @@ public class AdminPrompt {
 
     /**
      * 비밀번호 입력과 로그인 버튼 등, 기본적인 로그인을 위한 부분을 구현합니다.
-     *
      * @param panel 로그인을 위한 엔트리를 구현할 <code>JPanel</code> 객체
      */
     private void makeEntry(JPanel panel) {
@@ -86,7 +85,6 @@ public class AdminPrompt {
 
     /**
      * 확인, 취소, 비밀번호 변경 등 메타 작업을 위한 부분
-     *
      * @param panel 메타 작업 부분을 추가할 <code>JPanel</code> 객체
      */
     private void makeConsole(JPanel panel) {
@@ -107,6 +105,10 @@ public class AdminPrompt {
         panel.add(metaPanel, BorderLayout.PAGE_END);
     }
 
+    /**
+     * 로그인 버튼을 눌렀을 때, 비밀번호가 맞는지 확인하고
+     * 맞다면 관리자 콘솔을 엽니다.
+     */
     private void confirmLogin() {
         String message = Util.confirmLogin(passwordField);
 

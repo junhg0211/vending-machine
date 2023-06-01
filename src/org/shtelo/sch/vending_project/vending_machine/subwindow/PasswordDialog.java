@@ -52,18 +52,13 @@ public class PasswordDialog {
         fieldPanel.setLayout(new GridLayout(2, 2));
 
         @SuppressWarnings("DuplicatedCode") DocumentListener documentListener = new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
+            @Override public void insertUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
+            @Override public void removeUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
+            @Override public void changedUpdate(DocumentEvent e) {
                 Util.checkPasswordCondition(passwordField, rePasswordField, conditionLabel, confirmButton);
             }
         };
