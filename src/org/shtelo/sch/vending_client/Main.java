@@ -47,7 +47,7 @@ public class Main {
         Socket socket;
         try {
             socket = new Socket(host, port);
-            System.out.println("Connected to server");
+            System.out.println("서버에 접속했습니다.");
         } catch (IOException e) {
             System.err.println("자판기에 접속할 수 없습니다. 자판기가 켜져있는지 확인해주세요.");
             return;
@@ -66,11 +66,11 @@ public class Main {
 
         boolean connected = true;
         while (connected) {
-            System.out.print("SERVER << ");
+            System.out.print("서버 << ");
             String message = scanner.nextLine();
             writer.println(message);
 
-            System.out.print("SERVER >> ");
+            System.out.print("서버 >> ");
             String response = reader.nextLine();
             System.out.println(response);
 
@@ -87,7 +87,7 @@ public class Main {
             }
         }
 
-        System.out.println("Closing connection");
+        System.out.println("서버와 접속을 종료합니다.");
 
         reader.close();
         writer.close();
