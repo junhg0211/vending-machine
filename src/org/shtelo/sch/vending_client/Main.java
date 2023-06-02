@@ -172,7 +172,7 @@ public class Main {
         String response = reader.nextLine();
 
         // 만약 서버에서 주는 응답이 여러개라면 여러번 응답 받아서 출력하기
-        if (response.startsWith("2")) {
+        if (response.startsWith("3")) {
             String[] tokens = response.split(" ");
             int count = Integer.parseInt(tokens[1]);
             for (int i = 0; i < count; i++) {
