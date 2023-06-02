@@ -696,9 +696,43 @@ S: 0 OK
     \figref{fig:0321-admin-console}\와 같이 탭으로 창을 나누어 사용할 수 있도록 했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{0321-admin-console.png}
+        \includegraphics[width=0.5\textwidth]{0321-admin-console.png}
         \caption{3월 21일에 구현한 관리자 콘솔 프레임}
         \label{fig:0321-admin-console}
+    \end{figure}
+
+    \subsection{3월 22일}
+
+    3월 22일의 커밋 내역은 다음과 같다.
+
+    \begin{itemize}
+        \item Implement vacate password on wrong trial
+        \item Implement left product count set and log
+        \item Implement log on cash change
+        \item Implement log on admin login and logout
+        \item Implement log login fail
+        \item Make frame for meta panel on admin console
+        \item Change loggin method
+    \end{itemize}
+
+    3월 22일에는 여러가지 상황에서 로그를 작성하도록 업데이트했다.
+    이렇게 작성된 로그는 관리자 패널에서 확인할 수 있게 될 것이다.
+
+    이때 새로운 브랜치 \texttt{gui-editor}를 제시했다.
+
+    \begin{itemize}
+        \item Use form to build VendingMachine page
+    \end{itemize}
+
+    이 브랜치는 관리자 콘솔의 GUI를 Form을 사용하여 구현하는 브랜치이다.
+    하지만 담당 교수님께 문의한 결과 웬만하면 form을 사용하지 말라는 답변을 받았기에
+    이 브랜치는 더 이상 사용하지 않기로 했다.
+    \figref{fig:0322-vending-machine}\은 이 브랜치를 사용하여 구현한 자판기 프레임이다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{0322-vending-machine}
+        \caption{3월 22일에 Form으로 구현한 자판기 프레임}
+        \label{fig:0322-vending-machine}
     \end{figure}
 
 \end{document}
