@@ -425,6 +425,126 @@ C: IATH
 S: 0 OK
     \end{verbatim}
 
+    \section{실행 화면}
+
+    \subsection{메인 화면}
+
+    자판기를 실행하면 \figref{fig:vending-machine}\과 같은 화면이 나타난다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/vending-machine.png}
+        \caption{자판기의 실행 화면}
+        \label{fig:vending-machine}
+    \end{figure}
+
+    여기에서는 음료의 목록을 확인할 수 있다.
+    음료를 구매하거나, 현금을 투입하거나, 거스름돈을 반환하거나 관리자로 로그인할 수 있다.
+    종료 버튼을 누르면 바로 프로그램이 종료된다.
+
+    만약 재고가 없어서 음료를 구매할 수 없는 경우에는 \figref{fig:vending-machine}의 `물통' 구매 버튼과 같이
+    비활성화되어 클릭할 수 없게 된다.
+
+    음료를 구매할 때에 잔고가 부족하면 음료를 구매할 수 없다. 이 경우에는 \figref{fig:not-enough}\와 같은 오류 메시지가 표시되며,
+    성공적으로 음료가 구매된 경우에는 \figref{fig:bought-coffee}\와 같은 메시지가 표시된다.
+    \begin{figure}[h]
+        \centering
+        \begin{minipage}{.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/not-enough.png}
+            \caption{잔고 부족 오류 메시지}
+            \label{fig:not-enough}
+        \end{minipage}%
+        \begin{minipage}{.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/bought-coffee.png}
+            \caption{음료 구매 성공 메시지}
+            \label{fig:bought-coffee}
+        \end{minipage}
+    \end{figure}
+
+    현금 투입 버튼을 누르면 \figref{fig:cash-input}\와 같은 화면이 나타난다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/cash-input.png}
+        \caption{현금 투입 화면}
+        \label{fig:cash-input}
+    \end{figure}
+    여기서 투입할 금액을 입력하고 확인 버튼을 누르면 현금이 투입된다.
+
+    거스름 돈 반환 버튼을 누르면 \figref{fig:change}\와 같은 화면이 나타난다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/change.png}
+        \caption{거스름 돈 반환 화면}
+        \label{fig:change}
+    \end{figure}
+    거스를 돈이 없거나 성공적으로 거스름에 실패한 경우에도 똑같이 \figref{fig:change}\와 같은 화면이 나타난다.
+
+    관리자 콘솔 버튼을 누르면 \figref{fig:password}\과 같은 화면이 나타난다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/password.png}
+        \caption{관리자 콘솔 비밀번호 입력 화면}
+        \label{fig:password}
+    \end{figure}
+    만약 비밀번호가 이미 지정되어있지 않다면 \figref{fig:password-set-0}\와 같이 비밀번호를 설정하는 창이 나타난다.
+    비밀번호를 설정하는 창에서는 비밀번호 조건에 맞춰 비밀번호를 설정할 수 있도록 왼쪽 아래에 \figref{fig:password-set-1}\와 같은
+    메시지가 표시된다.
+    \begin{figure}[h]
+        \centering
+        \begin{minipage}{0.5\textwidth}
+            \includegraphics[width=0.5\textwidth]{images/snapshot/password-set-0}
+            \caption{관리자 콘솔 비밀번호 설정 화면}
+            \label{fig:password-set-0}
+        \end{minipage}
+        \begin{minipage}{0.5\tetxtwidth}
+            \includegraphics[width=0.5\textwidth]{images/snapshot/password-set-1}
+            \caption{관리자 콘솔 비밀번호 설정 화면}
+            \label{fig:password-set-1}
+        \end{minipage}
+    \end{figure}
+
+    성공적으로 비밀번호를 입력하면 관리자 콘솔 화면으로 이동할 수 있다.
+
+    \subsection{관리자 콘솔}
+
+    관리자 콘솔을 처음으로 시작하면 일단 \figref{fig:admin-daily-log}\와 같은 화면에서 일 매출을 확인할 수 있다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/admin-daily-log}
+        \caption{관리자 콘솔 일 매출 확인 화면}
+        \label{fig:admin-daily-log}
+    \end{figure}
+    각각의 매출은 판매한 음료의 이름과 개수, 그리고 매출액으로 구성되어 있다.
+
+    관리자 콘솔의 상단에는 매출, 상품, 현금, 로그, 메타 탭을 확인할 수 있는데,
+    각각은 일별 매출, 상품 관리, 현금 수금, 로그 확인, 메타적인 관리를 위한 탭이다.
+    상품 이하의 탭은 \figref{fig:admin-inventory}\와 같이 구성되어 있다.
+
+    \begin{figure}
+        \centering
+        \begin{minipage}{.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/admin-inventory}
+            \caption{관리자 콘솔 상품 관리 탭}
+            \label{fig:admin-inventory}
+        \end{minipage}%
+        \begin{minipage}{.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/admin-cash}
+            \caption{관리자 콘솔 현금 수금 탭}
+            \label{fig:admin-cash}
+        \end{minipage}
+        \begin{minipage}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/admin-log}
+            \caption{관리자 콘솔 로그 확인 탭}
+            \label{fig:admin-log}
+        \end{minipage}%
+        \begin{minipage}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/admin-meta}
+            \caption{관리자 콘솔 메타 탭}
+            \label{fig:admin-meta}
+        \end{minipage}
+    \end{figure}
+
+    \pagebreak
+
     \section{개발}
 
     자판기는 \texttt{org.shtelo.sch} 패키지 아래에서 \figref{fig:uml}\과 같은 클래스 구조를 가지고 있다.
