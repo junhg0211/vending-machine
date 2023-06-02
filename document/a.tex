@@ -1,14 +1,13 @@
 \documentclass{oblivoir}
 
-% figures
 \usepackage{graphicx}
+\usepackage{cleveref}
+
 \newcommand{\figref}[1]{\figurename~\ref{#1}}
 
-% section depth
 \maxtocdepth{subsubsection}
 \maxsecnumdepth{subsubsection}
 
-% metadata
 \title{JAVA프로그래밍실습(12746) 학기 과제 보고서}
 \author{순천향대학교 SW융합대학 컴퓨터소프트웨어공학과\\20223519 전한결}
 
@@ -432,7 +431,7 @@ S: 0 OK
     자판기를 실행하면 \figref{fig:vending-machine}\과 같은 화면이 나타난다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{images/snapshot/vending-machine.png}
+        \includegraphics[width=0.5\textwidth]{images/snapshot/vending-machine}
         \caption{자판기의 실행 화면}
         \label{fig:vending-machine}
     \end{figure}
@@ -449,39 +448,40 @@ S: 0 OK
     \begin{figure}[h]
         \centering
         \begin{minipage}{.5\textwidth}
-            \includegraphics[width=\textwidth]{images/snapshot/not-enough.png}
+            \includegraphics[width=\textwidth]{images/snapshot/not-enough}
             \caption{잔고 부족 오류 메시지}
             \label{fig:not-enough}
         \end{minipage}%
         \begin{minipage}{.5\textwidth}
-            \includegraphics[width=\textwidth]{images/snapshot/bought-coffee.png}
+            \includegraphics[width=\textwidth]{images/snapshot/bought-coffee}
             \caption{음료 구매 성공 메시지}
             \label{fig:bought-coffee}
         \end{minipage}
     \end{figure}
 
     현금 투입 버튼을 누르면 \figref{fig:cash-input}\와 같은 화면이 나타난다.
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.5\textwidth]{images/snapshot/cash-input.png}
-        \caption{현금 투입 화면}
-        \label{fig:cash-input}
-    \end{figure}
     여기서 투입할 금액을 입력하고 확인 버튼을 누르면 현금이 투입된다.
 
     거스름 돈 반환 버튼을 누르면 \figref{fig:change}\와 같은 화면이 나타난다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{images/snapshot/change.png}
-        \caption{거스름 돈 반환 화면}
-        \label{fig:change}
+        \begin{minipage}{.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/cash-input}
+            \caption{현금 투입 화면}
+            \label{fig:cash-input}
+        \end{minipage}%
+        \begin{minipage}{.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/change}
+            \caption{거스름 돈 반환 화면}
+            \label{fig:change}
+        \end{minipage}
     \end{figure}
     거스를 돈이 없거나 성공적으로 거스름에 실패한 경우에도 똑같이 \figref{fig:change}\와 같은 화면이 나타난다.
 
     관리자 콘솔 버튼을 누르면 \figref{fig:password}\과 같은 화면이 나타난다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{images/snapshot/password.png}
+        \includegraphics[width=0.5\textwidth]{images/snapshot/password}
         \caption{관리자 콘솔 비밀번호 입력 화면}
         \label{fig:password}
     \end{figure}
@@ -491,12 +491,12 @@ S: 0 OK
     \begin{figure}[h]
         \centering
         \begin{minipage}{0.5\textwidth}
-            \includegraphics[width=0.5\textwidth]{images/snapshot/password-set-0}
+            \includegraphics[width=\textwidth]{images/snapshot/password-set-0}
             \caption{관리자 콘솔 비밀번호 설정 화면}
             \label{fig:password-set-0}
-        \end{minipage}
-        \begin{minipage}{0.5\tetxtwidth}
-            \includegraphics[width=0.5\textwidth]{images/snapshot/password-set-1}
+        \end{minipage}%
+        \begin{minipage}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{images/snapshot/password-set-1}
             \caption{관리자 콘솔 비밀번호 설정 화면}
             \label{fig:password-set-1}
         \end{minipage}
@@ -517,7 +517,7 @@ S: 0 OK
 
     관리자 콘솔의 상단에는 매출, 상품, 현금, 로그, 메타 탭을 확인할 수 있는데,
     각각은 일별 매출, 상품 관리, 현금 수금, 로그 확인, 메타적인 관리를 위한 탭이다.
-    상품 이하의 탭은 \figref{fig:admin-inventory}\와 같이 구성되어 있다.
+    상품 이하의 탭은 \figref{fig:admin-inventory}부터 \figref{fig:admin-meta}\와 같이 구성되어 있다.
 
     \begin{figure}
         \centering
@@ -543,7 +543,64 @@ S: 0 OK
         \end{minipage}
     \end{figure}
 
-    \pagebreak
+    \figref{fig:admin-inventory}\는 상품 관리 탭으로,
+    자판기에 진열되어있는 상품의 이름과 재고를 확인하고 수정할 수 있다.
+    엔트리의 내용을 수정하고 창 오른쪽 아래의 저장 버튼을 누르면 실시간으로 자판기에 반영된다.
+
+    \figref{fig:admin-cash}\는 현금 수금 탭으로,
+    현재 자판기에 저장되어있는 현금의 종류별 개수를 확인할 수 있다.
+    창 오른쪽 아래에 있는 수금 버튼을 누르면 현금 수금을 할 수 있다.
+    이때, 수금을 한 후에도 자판기가 동작해야 하므로 각 화폐권은 5개를 남겨놓도록 수금된다.
+
+    \figref{fig:admin-log}\는 로그 확인 탭으로,
+    자판기의 동작 로그를 확인할 수 있다.
+    로그는 자판기가 동작할 때마다 자동으로 기록된다.
+
+    \figref{fig:admin-meta}\는 메타 탭으로,
+    메타적인 관리를 수행할 수 있다.
+    현재는 비밀번호를 바꾸는 기능만 제공되며, 메타 탭에서 ``비밀번호 변경\textellipsis'' 버튼을 누르면
+    \figref{fig:password-change}\와 같은 화면이 나타난다.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/password-change}
+        \caption{관리자 콘솔 비밀번호 변경 화면}
+        \label{fig:password-change}
+    \end{figure}
+
+    \subsection{TCP/IP 통신}
+
+    자판기는 기본적으로 \texttt{9832}를 포트 번호로 하는 TCP/IP 서버를 운영한다.
+    서버는 클라이언트의 요청을 받아들이고, 요청에 따라 응답을 보낸다.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/snapshot/client-start}
+        \caption{자판기 클라이언트 시작 화면}
+        \label{fig:client-start}
+    \end{figure}
+
+    \texttt{vending\_client.Main}을 실행하면 자판기가 설치되어있는 컴퓨터의 주소를 입력할 수 있다.
+    이곳에 자판기 서버가 설치되어있는 컴퓨터의 주소를 입력하고 엔터를 누르면 자판기에 연결된다.
+    \figref{fig:client-start}\는 자판기 클라이언트를 실행하고 주소를 입력해서 자판기에 접속한 모습이다.
+
+    이곳에서는 다음의 7가지 동작을 수행할 수 있다.
+
+    \begin{enumerate}
+        \item 관리자 로그인
+        \item 일 매출 확인
+        \item 재고 확인
+        \item 자판기 로그 확인
+        \item 음료 이름 변경
+        \setcounter{enumi}{7}
+        \item 관리자 로그인 확인
+        \item 연결 종료
+    \end{enumerate}
+
+    연결 종료를 제외한 모든 동작은 관리자 로그인을 선행해야 한다.
+
+    각각의 기능들은 프로토콜을 추상화하여 구현되어 있기 때문에,
+    관리자가 직접 서버에 전송될 패킷을 작성할 필요가 없다.
 
     \section{개발}
 
@@ -975,5 +1032,85 @@ S: 0 OK
         \caption{5월 29일에 구현한 자판기와 클라이언트의 통신}
         \label{fig:0529-client}
     \end{figure}
+
+    \section{설계, 요구사항과의 비교}
+
+    상세 설계에서 나타낸 설계와 실제로 만들어진 프로그램의 내용을 비교하여 추합하자면 다음과 같다.
+
+    화폐 보관함에는 원래 10,000원권까지를 보관할 수 있도록 할 예정이었으나,
+    이것이 문제에서 원하는 요구사항을 충족하지 않는 것으로 판단하여 1,000원권까지를 보관할 수 있도록 하였다.
+
+    설계에서는 자판기가 성공적으로 거스름을 수행하지 못했을 때에
+    로그를 남겨서 관리자가 직접 잔돈을 처리할 수 있도록 하는 것이 바람직하다고 여겼다.
+    하지만 실제로 자판기가 거스름을 성공적으로 처리하지 못했을 때에는
+    관리자가 출동하는 것이 아니라 다른 화폐를 투입하여 거스름이 가능한 집합을 만들거나
+    그대로 두고 자리를 뜨는 경우가 많다.
+    이것을 프로그램에도 반영하여,
+    로그를 남기지 않고 사용자가 잔돈 반환이 성공적으로 이루어지지 않았다는 것을
+    알 수 있도록 하는 것까지만 구현하였다.
+
+    돈을 넣기 전에 거스를 수 있는 돈이 일정 액수 이하임을 알리는 것을 구현하도록 설계하였으나,
+    실제로는 이것을 구현하지 않았다.
+    거스를 수 있는 돈이 어떤 종류에 있다는 것을 알아내기 위해서 거스름돈을 계산하는 것이 필요하고,
+    이 알고리즘을 구현하는 데에 실패했기 때문에 이 기능을 구현할 수 없었다.
+
+    음료 보관함에 음료가 없을 때에는 현금 투입 이전에 알리는 것을 설계하였으나,
+    음료 구매 버튼이 비활성화되어 구매할 수 없게 되는 것과
+    거스름 버튼이 구현되어있는 것으로 충분하다고 느껴, 이것을 구현하지 않았다.
+
+    관리자 화면에서는 자판기에 재고가 없을 때에 자판기 재고 목록을 초기화하도록 설계하였으나,
+    이것이 자판기 시뮬레이션에 있어 자연스럽지 않은 시나리오라고 판단했다.
+    따라서 이 기능을 구현하지 않고, 재고가 없을 때에는 재고가 없는 상태로
+    사용자가 음료를 구매할 수 없도록 하였다.
+    사용자 경험을 위해서 이러한 설계를 했다고 작성되어 있으나,
+    개발하는 시점에 와서 이것이 무엇을 의미하는지 알 수 없어 설계서의 내용을 자세히 기록해야 하겠다는
+    생각이 들었다.
+
+    원래는 로그를 json 방식으로 저장하여 서버에서 처리할 수 있도록 하는 것이 목표였으나,
+    Java에서 json을 다루는 방식이 익숙하지 않아서 로그를 일반적인 텍스트 파일로 저장하도록 했다.
+    물론 이 경우에도 로그 처리 편의를 위해서 로그를 일정한 방식으로 저장했지만,
+    시간 관계상 로그 확인 외의 기능을 구현하지 않았다.
+
+    설계서에는 작성되어있는 내용이 아니지만, 원래는 관리자용 서버가 따로 있고
+    자판기가 서버에 접속하여 정보를 저장하는 방식으로 프로그래밍을 진행하려고 했다.
+    하지만 서버가 언제나 켜져있는 것이 아니고, 서버를 구현하기 전에 먼저 자판기를 구현했기 때문에
+    자판기가 완성되어있는 시점에 서버가 존재하지 않았다.
+    자판기에서 발생하는 대부분의 상호작용 정보는 자판기 측에 저장되도록 되었고,
+    서버가 제시되었을 때에 이것을 서버에 전송하는 시나리오는
+    서버가 켜져있지 않은 경우에 대한 예외 처리를 해야 하는 것이 많아서
+    필요 이상의 피로를 유발한다고 판단했다.
+    따라서 자판기를 서버로 사용하고 관리자가 클라이언트를 사용하여
+    자판기에 접속하는 컨셉을 채택하여 네트워크 통신을 구현하였다.
+
+    \section{느낀 점}
+
+    이번 과제를 하면서 다음 몇 가지 느낀 점이 있었다.
+
+    첫째로, 자판기를 제작하는 것은 생각하는 것보다 복잡하다는 것이다.
+    사용자에게 자판기는 돈을 넣고 버튼을 누르면 음료가 나오는 것이 전부이지만,
+    실제로 자판기를 구현해보려고 하니 재고 관리나 돈의 투입, 거스름돈 등을 고려해야 하는 것이 많았다.
+    우리가 사용하는 자판기는 이것을 모두 고려하여 만들어졌다는 것을 알 수 있었다.
+
+    둘째로, 요구사항을 명확히 하여 알아볼 수 있고 실행 가능한 설계서를 만드는 것이 중요하다는 것이다.
+    대부분의 개발은 이렇게 만든 설계서를 바탕으로 이루어지는데,
+    설계서가 명확하지 않으면 개발자가 이해하기 어렵고, 개발자가 이해하기 어렵다면
+    개발자가 이해한 대로 개발을 하게 되고, 이는 요구사항과 다른 결과물을 만들어 낼 수 있다.
+    따라서 요구사항을 명확히 하고, 이를 바탕으로 실행 가능한 설계서를 만드는 것이 중요하다.
+
+    셋째로, 설계서를 완벽하게 따라서 프로그래밍하지 않아도 된다는 것이다.
+    설계서는 요구사항을 충족시키기 위해서 어떻게 프로그래밍해야 할지 알려주는 것이지,
+    그것이 프로젝트의 목적이 아니다.
+    결국 프로그래밍은 주어진 문제를 해결하기 위해서 하는 것이므로,
+    문제를 해결할 수 있다면 프로젝트 초반에 만들어놓은 설계서에 완벽히 따를 필요는 없다.
+    무엇보다, 설계서를 작성하는 과정에서 문제점이 발생했다면
+    그대로 설계서를 따르는 것은 오히려 문제를 더욱 심각하게 만들 수 있다.
+
+    \section{향후 계획}
+
+    일단 이 프로젝트는 과제 제출용으로 진행되었으므로, 과제를 제출하고 나면
+    더 이상 진행하지 않을 예정이다.
+
+    이 프로젝트는 내가 만든 프로그램 포트폴리오가 되므로
+    GitHub에 오픈소스로 공개하여 누구나 볼 수 있도록 할 예정이다.
 
 \end{document}
