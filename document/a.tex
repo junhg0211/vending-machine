@@ -55,10 +55,8 @@
     제출하는 것이 이번 과제의 요구 사항이다.
 
     \subsection{자세한 기능적 요구사항}
-    \ref{sec:requirements}
 
     아래는 기본적으로 요구되는 기능이다.
-
     \begin{itemize}
         \item 판매하는 음료의 개수는 기본적으로 5개로 하되,
         각각 450원(물), 500원(커피), 550원(이온음료), 700원(고급커피),
@@ -120,7 +118,6 @@
     \end{itemize}
 
     과제에서는 도전해볼 수 있는 추가적인 요구사항을 제공한다.
-
     \begin{itemize}
         \item 각 음료의 재고 수량은 Linked-List를 통해 구현되어야 한다.
         \item 본 프로그램의 작성 시 Stack과 Queue가 적절한 곳에
@@ -170,7 +167,6 @@
     자판기 화면에 있는 내용은 자판기를 실행하면 가장 처음으로 볼 수 있다.
 
     자판기 화면에서는 다음과 같은 작업을 수행할 수 있다.
-
     \begin{itemize}
         \item 돈 투입
         \item 음료 구매
@@ -184,7 +180,6 @@
     비밀번호를 입력하고 접속할 수 있다.
 
     관리자 화면에서는 다음과 같은 작업을 수행할 수 있다.
-
     \begin{itemize}
         \item 매출 산출
         \item 재고 보충
@@ -203,7 +198,6 @@
     CLI로 구현되어있다.
 
     서버 측 관리자 화면에서는 다음과 같은 작업을 수행할 수 있다.
-
     \begin{itemize}
         \item 각 자판기의 관리자 화면에서 수행할 수 있는 작업 수행
         \item 자판기에서 발생한 재고, 화폐 부족 등의 알림 확인
@@ -238,7 +232,7 @@
     적절하지 않은 경우로 나눌 수 있다.
     두 가지 경우 모두 자판기를 사용하는 사람으로 하여금 거스름돈을
     부족하게 받게 하므로,
-    이러한 경우에는 클라이언트–서버 통신을 통한 로그를 남겨 % TODO
+    이러한 경우에는 클라이언트–서버 통신을 통한 로그를 남겨
     추후에 관리자가 직접 잔돈을 처리할 수 있게 하는 것이 바람직하다.
 
     위와 같은 경우를 미연에 방지하는 것이
@@ -301,6 +295,7 @@
     확인할 수 있도록 한다.
 
     \section{프로토콜}
+    \label{sec:protocol}
 
     자판기의 경우 정보를 만들어내는 것이 자판기 쪽이고,
     언제나 하나의 관리자 클라이언트에 접속되지 않은 상태에서도
@@ -436,7 +431,6 @@ S: 0 OK
     \end{figure}
 
     각각의 클래스에서는 다음과 같은 역할을 수행한다.
-
     \begin{itemize}
         \item \texttt{vending\_client} -- 자판기 관리자용 클라이언트 패키지
         \item \texttt{vending\_client.Main} --
@@ -503,7 +497,6 @@ S: 0 OK
     개발을 할 때는 항상 버전관리를 하는 것이 좋다.
 
     3월 14일의 커밋 내역은 다음과 같다.
-
     \begin{itemize}
         \item Make main file: The initial commit
         \item Design main page
@@ -526,7 +519,6 @@ S: 0 OK
     이 테마를 사용하여 자판기의 GUI를 구현하였다.
 
     3월 14일 개발한 자판기의 초기 화면은 \figref{fig:0314-vending-machine}과 같다.
-
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.5\textwidth]{0314-vending-machine}
@@ -537,7 +529,6 @@ S: 0 OK
     \subsection{3월 15일}
 
     3월 15일의 커밋 내역은 다음과 같다.
-
     \begin{itemize}
         \item Implemented vending machine inventory file reading
         \item Implemented creating directory if there's no `res`
@@ -558,6 +549,13 @@ S: 0 OK
         \item Implement function for updating left product amount
     \end{itemize}
 
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{0315-vending-machine}
+        \caption{3월 15일에 구현한 자판기의 초기 화면}
+        \label{fig:0315-vending-machine}
+    \end{figure}
+
     자판기의 인벤토리를 파일에 입출력하는 부분을 구현했다.
     문제에서 주어진 기본값을 코드에서 제작하도록 하고,
     만약 이미 저장되어있는 파일이 없는 경우에, 프로그램에서 만든 기본값을 파일에 저장하여
@@ -567,7 +565,7 @@ S: 0 OK
     그리고 자판기에서 사용할 수 있는 현금 정보를 저장하는 \texttt{Wallet} 클래스를 구현했다.
     \texttt{Wallet} 클래스는 10원권부터 1,000원권까지를 각각 몇 개씩 가지고 있는지 변수로 저장하여 현금 정보를 관리한다.
     이때, 현금 정보 역시 자판기를 껐다가 켜도 그대로 사용할 수 있도록 파일 입출력으로 저장하도록 하였다.
-    현금 입력 서브윈도우는 \figref{fig:0315-cash-input-prompt}과 같다.
+    현금 입력 서브윈도우는 \figref{fig:0315-cash-input-prompt}\과 같다.
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.5\textwidth]{0315-cash-input-prompt}
@@ -601,7 +599,6 @@ S: 0 OK
     \subsection{3월 16일}
 
     3월 16일의 커밋 내역은 다음과 같다.
-
     \begin{itemize}
         \item Change CashInputPrompt to JDialog shown
         \item Update CashInputPrompt minimum size
@@ -631,7 +628,6 @@ S: 0 OK
     \subsection{3월 20일}
 
     3월 20일의 커밋 내역은 다음과 같다.
-
     \begin{itemize}
         \item Implement password creating dialog
         \item Implement AdminPromprt login
@@ -651,7 +647,6 @@ S: 0 OK
     비밀번호를 설정하도록 했다.
     만약 그렇게 비밀번호를 입력하지 않았다면 비밀번호 설정을 확인하지 못하도록 했고,
     재확인 비밀번호를 입력하여 비밀번호를 확인하도록 했다.
-
     \begin{figure}[h]
         \centering
         \begin{minipage}{.5\textwidth}
@@ -669,7 +664,6 @@ S: 0 OK
     \subsection{3월 21일}
 
     3월 21일의 커밋 내역은 다음과 같다.
-    
     \begin{itemize}
         \item Resize new password dialog
         \item Make frame for admin console
@@ -704,7 +698,6 @@ S: 0 OK
     \subsection{3월 22일}
 
     3월 22일의 커밋 내역은 다음과 같다.
-
     \begin{itemize}
         \item Implement vacate password on wrong trial
         \item Implement left product count set and log
@@ -733,6 +726,113 @@ S: 0 OK
         \includegraphics[width=0.5\textwidth]{0322-vending-machine}
         \caption{3월 22일에 Form으로 구현한 자판기 프레임}
         \label{fig:0322-vending-machine}
+    \end{figure}
+
+    \subsection{4월 5--22일}
+
+    4월 5일과 4월 22일의 커밋 내역은 다음과 같다.
+    \begin{itemize}
+        \item Implement change password
+        \item Implement product name change
+        \item Make frame of taking cashes on AdminConsole
+        \item Implement cash taking
+        \item Save cash buffer for the next machine session
+        \item Rearrange code
+    \end{itemize}
+
+    관리자가 원하는 경우 비밀번호를 변경할 수 있도록 \figref{fig:0405-password-change}\와 같이 비밀번호 변경 화면을 구현했다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{0405-password-change.png}
+        \caption{4월 5일에 구현한 비밀번호 변경 화면}
+        \label{fig:0405-password-change}
+    \end{figure}
+
+    그리고 관리자가 원하는 경우 현금을 수금할 수 있도록 \figref{fig:0405-cash-take}\와 같이 현금 수금 현황 확인표와 수금 버튼을 구현했다.
+    이 경우 과제에서 제시된 조건과 같이 5개 이상 화폐권이 남도록 수금 개수를 제한했다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{0405-cash-take.png}
+        \caption{4월 5일에 구현한 현금 수금 화면}
+        \label{fig:0405-cash-take}
+    \end{figure}
+
+    \subsection{4월 27일--5월 21일}
+
+    4월 27일과 5월 21일의 커밋 내역은 다음과 같다.
+    \begin{itemize}
+        \item Create frame of LogFetcher
+        \item Implemented Log Viewer
+        \item Handle logger exception
+        \item Catch exception to not enough logs
+        \item Handle LogFetcher exception
+    \end{itemize}
+
+    이 작업일들에는 관리자 콘솔에서 로그를 확인할 수 있도록 했다.
+    원래는 로그 확인 일자와 개수 등을 직접 설정하여 로그를 확인할 수 있도록 하는 것이 목표였으나,
+    로그를 작성한 방법이 이것을 하기가 번거로워 일단 최신 로그 순으로 몇 개만 확인할 수 있도록 로그 확인 화면을
+    \figref{fig:0427-log-console}\와 같이 구현했다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{0427-log-console.png}
+        \caption{4월 27일에 구현한 로그 확인 화면}
+        \label{fig:0427-log-console}
+    \end{figure}
+
+    \subsection{5월 24일}
+
+    5월 24일의 커밋 내역은 다음과 같다.
+    \begin{itemize}
+        \item Add daily logger
+        \item implement display logger on AdminConsole
+        \item implement sold out logging
+    \end{itemize}
+
+    5월 24일에는 일별 매출을 기록하여 관리자 콘솔에서 확인할 수 있도록 했다.
+    일별 매출은 판매되는 음료의 이름이 같으면 같은 것으로 취급하여 매출을 계산한다.
+    일별 매출 확인 화면은 \figref{fig:0524-daily-log}\와 같다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{0524-daily-log.png}
+        \caption{5월 24일에 구현한 일별 매출 확인 화면}
+        \label{fig:0524-daily-log}
+    \end{figure}
+
+    \subsection{5월 29일--6월 1일}
+
+    5월 29일과 6월 1일의 커밋 내역은 다음과 같다.
+    \begin{itemize}
+        \item prepare socket programming
+        \item implement basic frame of vending machine socket communication
+        \item close server on window turned off
+        \item implement protocols
+        \item debug sprd tokens exception handling
+        \item simplify ClientThread run()
+        \item make loop on client main
+        \item log every tcp/ip communication
+        \item koreanify client
+        \item upgrade client
+        \item attach comment everywhere
+    \end{itemize}
+
+    5월 29일에는 자판기와 관리자 콘솔이 통신할 수 있도록 TCP/IP 통신을 구현했다.
+    이 때 자판기와 관리자 콘솔이 통신할 수 있도록 프로토콜을 정의했는데,
+    이 프로토콜은 \ref{sec:protocol}절에서 나타낸 것과 같다.
+
+    따라서 관리자는 \texttt{vending\_client.Main}을 실행하여 관리자 콘솔을 실행할 수 있고,
+    자판기 주소를 입력하여 자판기와 통신할 수 있는데,
+    이때 자판기에 접속이 가능해야 하므로 자판기와 관리자 콘솔에 같은 네트워크에 있거나
+    포트 포워딩을 통해 접속할 수 있어야 한다.
+
+    이때 자판기와 서버가 통신한 내용은 모두 자판기의 로그로 기록되도록 하여
+    혹시 모를 오류를 확인할 수 있도록 했다.
+
+    \figref{fig:0529-client}\는 자판기와 자판기에 접속한 클라이언트가 통신하는 모습이다.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{0529-client.png}
+        \caption{5월 29일에 구현한 자판기와 클라이언트의 통신}
+        \label{fig:0529-client}
     \end{figure}
 
 \end{document}
