@@ -2,7 +2,6 @@
 
 % figures
 \usepackage{graphicx}
-\graphicspath{{./images/}}
 \newcommand{\figref}[1]{\figurename~\ref{#1}}
 
 % section depth
@@ -432,7 +431,7 @@ S: 0 OK
 
     \begin{figure}[h]
         \centering
-        \includegraphics[height=0.5\textheight]{class-tree}
+        \includegraphics[height=0.5\textheight]{images/class-tree}
         \caption{자판기의 패키지 구조}
         \label{fig:uml}
     \end{figure}
@@ -543,7 +542,7 @@ S: 0 OK
     3월 14일 개발한 자판기의 초기 화면은 \figref{fig:0314-vending-machine}과 같다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0314-vending-machine}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0314-vending-machine}
         \caption{3월 14일에 구현한 자판기의 초기 화면}
         \label{fig:0314-vending-machine}
     \end{figure}
@@ -573,7 +572,7 @@ S: 0 OK
 
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0315-vending-machine}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0315-vending-machine}
         \caption{3월 15일에 구현한 자판기의 초기 화면}
     \end{figure}
 
@@ -589,7 +588,7 @@ S: 0 OK
     현금 입력 서브윈도우는 \figref{fig:0315-cash-input-prompt}\과 같다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0315-cash-input-prompt}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0315-cash-input-prompt}
         \caption{3월 15일에 구현한 현금 입력 서브윈도우}
         \label{fig:0315-cash-input-prompt}
     \end{figure}
@@ -601,7 +600,7 @@ S: 0 OK
     \figref{fig:0315-change-dialog}\은 거스름돈을 처리한 결과를 알려주는 다이얼로그이다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0315-change-dialog}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0315-change-dialog}
         \caption{3월 15일에 구현한 거스름돈 다이얼로그}
         \label{fig:0315-change-dialog}
     \end{figure}
@@ -641,7 +640,7 @@ S: 0 OK
     \texttt{JDialog}로 구현했으며, 비밀번호를 입력하고 엔터 키를 누르면 비밀번호를 확인하도록 했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0316-password-dialog}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0316-password-dialog}
         \caption{3월 16일에 구현한 관리자 콘솔 로그인 다이얼로그}
         \label{fig:0316-password-dialog}
     \end{figure}
@@ -660,7 +659,7 @@ S: 0 OK
     비밀번호를 설정하는 창을 띄우도록 했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0320-password-not-set}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0320-password-not-set}
         \caption{3월 20일에 구현한 비밀번호 미설정 다이얼로그}
         \label{fig:0320-password-not-set}
     \end{figure}
@@ -672,12 +671,12 @@ S: 0 OK
     \begin{figure}[h]
         \centering
         \begin{minipage}{.5\textwidth}
-            \includegraphics[width=\textwidth]{0320-password-dialog-1}
+            \includegraphics[width=\textwidth]{images/dev-snapshop/0320-password-dialog-1}
             \caption{3월 20일에 구현한 비밀번호 다이얼로그 조건 불만족}
             \label{fig:0320-password-dialog-1}
         \end{minipage}%
         \begin{minipage}{.5\textwidth}
-            \includegraphics[width=\textwidth]{0320-password-dialog-2}
+            \includegraphics[width=\textwidth]{images/dev-snapshop/0320-password-dialog-2}
             \caption{3월 20일에 구현한 비밀번호 다이얼로그 조건 만족}
             \label{fig:0320-password-dialog-2}
         \end{minipage}
@@ -712,7 +711,7 @@ S: 0 OK
     \figref{fig:0321-admin-console}\와 같이 탭으로 창을 나누어 사용할 수 있도록 했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0321-admin-console}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0321-admin-console}
         \caption{3월 21일에 구현한 관리자 콘솔 프레임}
         \label{fig:0321-admin-console}
     \end{figure}
@@ -745,7 +744,7 @@ S: 0 OK
     \figref{fig:0322-vending-machine}\은 이 브랜치를 사용하여 구현한 자판기 프레임이다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0322-vending-machine}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0322-vending-machine}
         \caption{3월 22일에 Form으로 구현한 자판기 프레임}
         \label{fig:0322-vending-machine}
     \end{figure}
@@ -765,7 +764,7 @@ S: 0 OK
     관리자가 원하는 경우 비밀번호를 변경할 수 있도록 \figref{fig:0405-password-change}\와 같이 비밀번호 변경 화면을 구현했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0405-password-change}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0405-password-change}
         \caption{4월 5일에 구현한 비밀번호 변경 화면}
         \label{fig:0405-password-change}
     \end{figure}
@@ -774,7 +773,7 @@ S: 0 OK
     이 경우 과제에서 제시된 조건과 같이 5개 이상 화폐권이 남도록 수금 개수를 제한했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\textwidth]{0405-cash-take}
+        \includegraphics[width=0.5\textwidth]{images/dev-snapshop/0405-cash-take}
         \caption{4월 5일에 구현한 현금 수금 화면}
         \label{fig:0405-cash-take}
     \end{figure}
@@ -796,7 +795,7 @@ S: 0 OK
     \figref{fig:0427-log-console}\와 같이 구현했다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{0427-log-console}
+        \includegraphics[width=0.8\textwidth]{images/dev-snapshop/0427-log-console}
         \caption{4월 27일에 구현한 로그 확인 화면}
         \label{fig:0427-log-console}
     \end{figure}
@@ -815,7 +814,7 @@ S: 0 OK
     일별 매출 확인 화면은 \figref{fig:0524-daily-log}\와 같다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{0524-daily-log}
+        \includegraphics[width=0.8\textwidth]{images/dev-snapshop/0524-daily-log}
         \caption{5월 24일에 구현한 일별 매출 확인 화면}
         \label{fig:0524-daily-log}
     \end{figure}
@@ -852,7 +851,7 @@ S: 0 OK
     \figref{fig:0529-client}\는 자판기와 자판기에 접속한 클라이언트가 통신하는 모습이다.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{0529-client}
+        \includegraphics[width=\textwidth]{images/dev-snapshop/0529-client}
         \caption{5월 29일에 구현한 자판기와 클라이언트의 통신}
         \label{fig:0529-client}
     \end{figure}
