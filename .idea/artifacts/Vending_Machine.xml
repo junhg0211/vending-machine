@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Vending Machine">
+    <output-path>$PROJECT_DIR$/out/artifacts/Vending_Machine</output-path>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
+    <root id="archive" name="vending-machine.jar">
+      <element id="module-output" name="vending-machine" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/flatlaf-3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gson-2.10.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

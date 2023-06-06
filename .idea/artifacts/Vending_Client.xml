@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Vending Client">
+    <output-path>$PROJECT_DIR$/out/artifacts/Vending_Client</output-path>
+    <root id="archive" name="vending-client.jar">
+      <element id="module-output" name="vending-machine" />
+    </root>
+  </artifact>
+</component>
