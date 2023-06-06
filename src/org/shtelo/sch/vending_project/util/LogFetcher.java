@@ -174,8 +174,8 @@ public class LogFetcher {
      * 로그가 더 이상 존재하지 않는지 확인합니다.
      * @return 로그가 더 이상 존재하지 않는지에 대한 여부
      */
-    public boolean isEnd() {
-        return this.end;
+    public boolean isStill() {
+        return !this.end;
     }
 
     /**

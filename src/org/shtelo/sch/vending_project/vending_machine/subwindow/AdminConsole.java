@@ -341,7 +341,7 @@ public class AdminConsole {
 
         // 로그 텍스트 영역에 로그를 추가
         LogFetcher fetcher = new LogFetcher();
-        for (int i = 0; i < 50 && !fetcher.isEnd(); i++, fetcher.updateLast()) {
+        for (int i = 0; i < 50 && fetcher.isStill(); i++, fetcher.updateLast()) {
             textArea.append(fetcher.getCurrent() + "\n");
         }
         textArea.setCaretPosition(0);

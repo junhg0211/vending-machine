@@ -186,7 +186,7 @@ public class ClientThread extends Thread {
         // 요청받은 로그 개수에 따라 리스트에 로그 추가
         LogFetcher fetcher = new LogFetcher();
         ArrayList<String> logs = new ArrayList<>();
-        for (int i = 0; i < preferredCount && !fetcher.isEnd(); i++) {
+        for (int i = 0; i < preferredCount && fetcher.isStill(); i++) {
             logs.add(fetcher.getCurrent());
             fetcher.updateLast();
         }
