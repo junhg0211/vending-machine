@@ -332,8 +332,7 @@ S: 3 정보 부족
 C: AUTH qwerty
 S: 1 인증 실패
 C: AUTH >Oj1i38aB
-S: 0 OK
-    \end{verbatim}
+S: 0 OK\end{verbatim}
 
     \paragraph{GSEL}
     Get SELls.
@@ -343,8 +342,7 @@ S: 0 OK
 C: GSEL
 S: 2 2
 S: 물 450 3
-S: 탄산음료 750 2
-    \end{verbatim}
+S: 탄산음료 750 2\end{verbatim}
 
     \paragraph{GINV}
     Get INVentory.
@@ -357,8 +355,7 @@ S: 물 0
 S: 커피 3
 S: 이온음료 3
 S: 고급커피 3
-S: 탄산음료 1
-    \end{verbatim}
+S: 탄산음료 1\end{verbatim}
 
     \paragraph{GLOG}
     Get LOGs. 자판기의 로그 정보를 요청한다.
@@ -380,8 +377,7 @@ S: 2023-05-25 09:56:41.173 [잔돈반환] 거스름돈을 처리했습니다. 10
 S: 2023-05-25 09:56:45.435 [관리접속] 비밀번호를 사용하여 관리자 콘솔에 로그인하였습니다.
 S: 2023-05-25 09:58:32.489 [관리퇴장] 관리자가 콘솔을 닫았습니다.
 S: 2023-05-24 21:56:19.281 [관리접속] 비밀번호를 사용하여 관리자 콘솔에 로그인하였습니다.
-S: 2023-05-24 21:56:45.678 [관리퇴장] 관리자가 콘솔을 닫았습니다.
-    \end{verbatim}
+S: 2023-05-24 21:56:45.678 [관리퇴장] 관리자가 콘솔을 닫았습니다.\end{verbatim}
 
     \paragraph{SPRD}
     Set PRoDuct.
@@ -401,16 +397,14 @@ S: 탄산음료 1
 C: SPRD 3
 S: 3 정보 부족
 C: SPRD 2 3 사탕
-S: 0 OK
-    \end{verbatim}
+S: 0 OK\end{verbatim}
 
     \paragraph{QUIT}
     QUIT. 자판기 서버와의 접속을 종료한다.
 
     \begin{verbatim}
 C: QUIT
-S: 4 통신 종료
-    \end{verbatim}
+S: 4 통신 종료\end{verbatim}
 
     \paragraph{IATH}
     Is AuTHorized.
@@ -422,8 +416,7 @@ S: 1 인증 실패
 C: AUTH >Oj1i38aB
 S: 0 OK
 C: IATH
-S: 0 OK
-    \end{verbatim}
+S: 0 OK\end{verbatim}
 
     \section{실행 화면}
 
@@ -1038,6 +1031,30 @@ S: 0 OK
         \label{fig:0529-client}
     \end{figure}
 
+    \subsection{6월 6일}
+
+    6월 6일의 커밋 내역은 다음과 같다.
+
+    \begin{itemize}
+        \item make artifacts
+        \item set file reader charset utf-8
+        \item rename LogFetcher isEnd to isStill
+    \end{itemize}
+
+    프로젝트 제출을 위해서 프로젝트를 jar로 출력하여 여러가지 운영체제에서 테스트해보았다.
+    개발하는 환경이 MacOS였기 때문에 Linux Ubuntu, Windows 11, Windows 10 환경에서 테스트해보았는데,
+    Windows 11과 10에서 \figref{fig:0606-windows}와 같이 파일 한글 입출력 인코딩 관련 오류가 발생하여 메뉴에서 음료의 이름이
+    깨져서 보이는 오류가 발생했다.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/dev-snapshop/0606-windows}
+        \caption{6월 6일에 Windows 10에서 파일 한글 입출력 인코딩 오류}
+        \label{fig:0606-windows}
+    \end{figure}
+
+    이것을 해결하기 위해서 파일 입출력을 할 때 인코딩을 명시적으로 UTF-8로 지정하였다.
+
     \section{설계, 요구사항과의 비교}
 
     상세 설계에서 나타낸 설계와 실제로 만들어진 프로그램의 내용을 비교하여 추합하자면 다음과 같다.
@@ -1086,6 +1103,14 @@ S: 0 OK
     필요 이상의 피로를 유발한다고 판단했다.
     따라서 자판기를 서버로 사용하고 관리자가 클라이언트를 사용하여
     자판기에 접속하는 컨셉을 채택하여 네트워크 통신을 구현하였다.
+
+    추가로, 자판기에 접속하는 클라이언트는 CLI로만 구현되었기 때문에,
+    클라이언트를 실행하기 위해서는 명령 프롬프트에서 다음과 같은 명령어를 입력해주어야 한다.
+    \begin{verbatim}
+java -jar vending-client.jar\end{verbatim}
+    이것을 실행하지 않고 자판기를 실행하면 관리자 클라이언트가 정상적으로 작동하지 않거나 사용할 수 없게 된다.
+    이것을 해결하기 위해서 여러가지 방안을 알아봤지만, java의 jar 파일은 원래 CLI 프로그램을 위해서 만들어진 것이 아니기 때문에
+    직접 GUI를 만드는 것이 아니면 이 문제를 해결하는 방법이 없다고 알게 되었다.
 
     \section{느낀 점}
 
