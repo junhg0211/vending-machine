@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 
 /**
@@ -27,7 +28,7 @@ public class Inventory {
         Util.ensureResFolder();
 
         try {
-            FileReader reader = new FileReader(INVENTORY_PATH);
+            FileReader reader = new FileReader(INVENTORY_PATH, StandardCharsets.UTF_8);
             Gson gson = new Gson();
             inventory = gson.fromJson(reader, Inventory.class);
             reader.close();

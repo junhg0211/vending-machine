@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,7 @@ public class SellLogger {
         SellLogger result;
 
         try {
-            FileReader reader = new FileReader(SELL_LOG_PATH);
+            FileReader reader = new FileReader(SELL_LOG_PATH, StandardCharsets.UTF_8);
             Gson gson = new Gson();
             result = gson.fromJson(reader, SellLogger.class);
             reader.close();

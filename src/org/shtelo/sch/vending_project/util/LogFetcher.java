@@ -1,6 +1,7 @@
 package org.shtelo.sch.vending_project.util;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -129,7 +130,7 @@ public class LogFetcher {
 
         int count = 0;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
 
             while (reader.readLine() != null)
                 count++;
