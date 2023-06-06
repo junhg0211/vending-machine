@@ -1040,6 +1040,7 @@ S: 0 OK\end{verbatim}
         \item set file reader charset utf-8
         \item rename LogFetcher isEnd to isStill
         \item debug glog outs not proper output
+        \item handle exception of AUTH when password not set
     \end{itemize}
 
     프로젝트 제출을 위해서 프로젝트를 jar로 출력하여 여러가지 운영체제에서 테스트해보았다.
@@ -1056,7 +1057,7 @@ S: 0 OK\end{verbatim}
 
     이것을 해결하기 위해서 파일 입출력을 할 때 인코딩을 명시적으로 UTF-8로 지정하였다.
 
-    그리고 \texttt{GLOG} 요청이 잘못된 응답 코드를 출력하는 문제를 해결했다.
+    그리고 \texttt{GLOG}, \texttt{AUTH} 요청이 잘못된 응답 코드를 출력하는 문제를 해결했다.
 
     \section{설계, 요구사항과의 비교}
 
