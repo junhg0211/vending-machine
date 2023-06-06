@@ -309,7 +309,7 @@
     따라서 아래의 프로토콜은 관리자 클라이언트에서 자판기 서버로
     전송하는 프로토콜이다.
 
-    \subsection{오류 코드}
+    \subsection{응답 코드}
 
     \begin{itemize}
         \item 0: OK
@@ -1039,6 +1039,7 @@ S: 0 OK\end{verbatim}
         \item make artifacts
         \item set file reader charset utf-8
         \item rename LogFetcher isEnd to isStill
+        \item debug glog outs not proper output
     \end{itemize}
 
     프로젝트 제출을 위해서 프로젝트를 jar로 출력하여 여러가지 운영체제에서 테스트해보았다.
@@ -1054,6 +1055,8 @@ S: 0 OK\end{verbatim}
     \end{figure}
 
     이것을 해결하기 위해서 파일 입출력을 할 때 인코딩을 명시적으로 UTF-8로 지정하였다.
+
+    그리고 \texttt{GLOG} 요청이 잘못된 응답 코드를 출력하는 문제를 해결했다.
 
     \section{설계, 요구사항과의 비교}
 
