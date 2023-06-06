@@ -168,6 +168,11 @@ public class Util {
 
         // 파일에 저장되어있는 암호화 비밀번호를 불러옵니다.
         File file = new File(PASSWORD_PATH);
+
+        if (!file.exists()) {
+            return "관리자 비밀번호가 설정되어있지 않습니다.";
+        }
+
         String correct;
         try {
             FileReader fileReader = new FileReader(file);
