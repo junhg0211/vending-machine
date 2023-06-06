@@ -192,7 +192,7 @@ public class ClientThread extends Thread {
         }
 
         // 리스트에 추가한 로그를 모두 전송
-        sendMessage("2 " + logs.size());
+        sendMessage("3 " + logs.size());
         for (String log : logs) {
             sendMessage(log);
         }
